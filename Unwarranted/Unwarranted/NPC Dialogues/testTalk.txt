@@ -1,13 +1,22 @@
-hello
-this is a test
-this is line 2 even though its line 3 in the text file
-isnt that funny
-oh man we're writing more
-needa get to 10 lines
-well 11
-technically
-so here i go
-just writing junk
-wow look at all the junk
-is this enough yet
-i lost count- yeah its 12 (13)
+Hello!
+This is a test of the dialogue system and how far it's come.
+Remember to record all the lines you need before moving on.
+I'd be witty and make an actual interaction here but I'm so lazy.
+I just need to do something that takes no effort.
+
+[Inquire on lines 1, 2, 4]
+Yeah, I've been working on this for WAY too long. Please don't tell hi- oh.
+
+It's good practice to be in! You may not be able to un-say something.
+If someone is mad or scared enough, you may find something they've said changes.
+
+I overthink these so much haha.
+
+[After Inqury on line 2, remove line 0 from first chunk]
+
+[Present line 9]
+Ah, you caught I did just that huh? I'm really trying to think of everything.
+
+[Present line 17]
+Uh- I didn't mean that as in IM PUTTING EFFORT INTO A TEST CONVERSATION
+GDI

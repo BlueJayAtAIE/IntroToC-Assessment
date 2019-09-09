@@ -12,11 +12,20 @@ namespace Unwarranted
         static void Main(string[] args)
         {
             Tools tl = new Tools();
-            //WARNING: TESTING GARBAGE AHEAD
-            while (Tools.gameOn)
+            NPCDialogues dialogueHolder = new NPCDialogues();
+
+            // This is the main game loop
+            while (true)
             {
-                tl.InterrogationStart("NPC Dialogues/testTalk.txt", 0, 13);
-                //tl.EntryDisplay();
+                if (Tools.timeDays == 8)
+                {
+                    // Inform the player time is up; offer to load previous save or quit entirely.
+                    break;
+                }
+
+                dialogueHolder.TestCharacterInterrogation();
+
+                Console.WriteLine("End of Debug. Press the any key.");
                 Console.ReadKey();
                 break;
             }
@@ -26,8 +35,8 @@ namespace Unwarranted
 
 // Hello, these are some notes to myself to help understand where to go next.
 //
-// Now how do interrogations actually work? the StartInterrogation method will actually be used multiple times over the course of one interrogation. Another
-// method for the overall interaction will be made that loops the player through several times. There will be a switch on the userIntputInt and userIntputChar  
+// Now how do interrogations actually work? the InterrogationStart will start the encounter (duh). Another
+// method for the overall interaction will be made that loops the player through several times (InterrogationContinue). There will be a switch on the userIntputInt and userIntputChar  
 // variables which will direct the flow to the next part of the interrogation- basically just running StartInterrogation again with new parameters.
 // While this does mean making methods for all important interrogations with multiple branching paths, it also means we can store the NPC dialogue from
 // one character ALL in one document- as long as we keep track of where to start and end dialogue chunks.

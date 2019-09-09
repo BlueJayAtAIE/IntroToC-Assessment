@@ -9,8 +9,6 @@ namespace Unwarranted
 {
     public class Tools
     {
-        public static bool gameOn = true;
-
         public static Random rng = new Random();
 
         public string notebookPath = "Player/notebook.txt";
@@ -19,6 +17,9 @@ namespace Unwarranted
 
         public static int userInputInt;
         public static char userInputChar;
+
+        public static int interrogationLine;
+        public static string interrogationPresent;
 
         public static int timeDays = 1;
         public static int timeHours = 0;
@@ -45,22 +46,77 @@ namespace Unwarranted
         /// </summary>
         /// <param name="NPCDialoguePath">Directory path that leads to the file the dialogue is located in.</param>
         /// <param name="startingPoint">Line in the text file to begin the interrogation from.</param>
-        /// <param name="durration">How many lines to display the interrogation for.</param>
+        /// <param name="durration">How many lines to display from the text file.</param>
         public void InterrogationStart(string NPCDialoguePath, int startingPoint, int durration)
         {
-            for (int i = startingPoint; i < durration; i++)
+            for (int i = startingPoint; i < startingPoint + durration; i++)
             {
                 Console.WriteLine($"[{i}] {File.ReadLines(NPCDialoguePath).ElementAt(i)}");
             }
-            //begin a loop here- OOOOH MAKE THIS ENTIRE LOOP ITS OWN METHOD. split up "interrogationstart" and make a "interrogationcontinue" method- you'll see why
-            int.TryParse(Console.ReadLine(), out userInputInt); //TODO: Make a check to make sure the user inputs a currently displaying line (in the case some are hidden)
-            //!!ASK THE PLAYER TO INPUT A KEY CORRESPONDING TO SEVERAL COMMANDS!!
-            InterrogationInquire(NPCDialoguePath, userInputInt);//(command: inquire)
-            //stall for a turn- the opposing npc may say more to possibly record (command: stay silent)
-            InterrogationCopyEntry(NPCDialoguePath, userInputInt); //(command: record line)
-            InterrogationPresentItem(); //(command: present physical evidence)
-            InterrogationPresentWriting(); //(command: present written evidence)
-            //opens your Notebook, allows you to select two lines and compare them (command: jackpot) !!PRESENTED AT THE END OF INTERROGATION CYCLES!!
+            Console.WriteLine("\nChoose a command from below:");
+            Console.WriteLine("[R]ecord line");
+            Console.WriteLine("[I]nquire");
+            Console.WriteLine("[S]tay silent");
+            if (File.ReadLines(notebookPath).Count() > 0) Console.WriteLine("Present [W]ritten evidence");
+            Console.WriteLine("Present [P]hysical evidence\n");
+
+            bool okToGo = false;
+            while (!okToGo)
+            {
+            userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
+                switch (userInputChar)
+                {
+                    default:
+                        Console.WriteLine("Invalid command!");
+                        break;
+                    case 'r':
+                        Console.WriteLine("Enter the number of the line you wish to copy to your notebook.");
+                        int.TryParse(Console.ReadLine(), out userInputInt);
+                        if (userInputInt >= startingPoint && userInputInt < startingPoint + durration)
+                        {
+                            InterrogationCopyEntry(NPCDialoguePath, userInputInt);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input!");
+                        }
+                        break;
+                    case 'i':
+                        Console.WriteLine("Enter the number of the line you wish to inquire about.");
+                        int.TryParse(Console.ReadLine(), out userInputInt);
+                        if (userInputInt >= startingPoint && userInputInt < startingPoint + durration)
+                        {
+                            InterrogationInquire(NPCDialoguePath, userInputInt);
+                            interrogationPresent = "";
+                            okToGo = true;
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input!");
+                        }
+                        break;
+                    case 's':
+                        //stall for a turn- the opposing npc may say more to possibly record (command: stay silent)
+                        interrogationPresent = ",";
+                        break;
+                    case 'w':
+                        InterrogationPresentWriting();
+                        interrogationLine = 999;
+                        okToGo = true;
+                        break;
+                    case 'p':
+                        //Console.WriteLine("Enter the number of the item you wish to present.");
+                        //int.TryParse(Console.ReadLine(), out userInputInt);
+                        InterrogationPresentItem();
+                        interrogationLine = 999;
+                        okToGo = true;
+                        break;
+                    //case 'j':
+                        //opens your Notebook, allows you to select two lines and compare them (command: jackpot) !!NOT OFTEN PRESENTED TO THE PLAYERS AS AN OPTION!!
+                        //break;
+                }
+            }
         }
 
         /// <summary>
@@ -74,7 +130,8 @@ namespace Unwarranted
             {               
                 line = File.ReadLines(NPCDialoguePath).ElementAt(lineNumber);
                 Console.WriteLine($"\"Can you please elaborate on the statement: \"{line}\"?\"\n");
-                return lineNumber;
+                interrogationLine = lineNumber;
+                return interrogationLine;
             }
             catch
             {
@@ -96,7 +153,7 @@ namespace Unwarranted
                 bool alreadyCopied = false;
 
                 // Checks all of the Notebook against the line you selected to be copied. 
-                //If a match is found, change "alreadyCopied" and leave the loop.
+                // If a match is found, change "alreadyCopied" and leave the loop.
                 while (reader.EndOfStream == false)
                 {
                     if (reader.ReadLine().Equals(File.ReadLines(NPCDialoguePath).ElementAt(entryNumber)))
@@ -126,12 +183,14 @@ namespace Unwarranted
         }
 
         /// <summary>
-        /// Opens your inventory, allowing you to show items from your Key Items to the current NPC.
+        /// TODO: Opens your inventory, allowing you to show items from your Key Items to the current NPC.
         /// </summary>
         /// <returns></returns>
         public string InterrogationPresentItem()
-        {           
-            return "placeholder";
+        {
+            Console.WriteLine("Inventory machine [B]roke. Placeholder instead.");
+            interrogationPresent = "";
+            return interrogationPresent;
         }
 
         // I would love to expand this to check line against the NPC's dialogue file to see if they said it or someone else did.
@@ -143,17 +202,21 @@ namespace Unwarranted
         /// <returns></returns>
         public string InterrogationPresentWriting()
         {
+            Console.WriteLine("You open your notebook for reference first. Close it to continue on to your selection.");
             EntryDisplay();
+            Console.WriteLine("Enter the number of the line from your notebook to present.");
             int.TryParse(Console.ReadLine(), out userInputInt);
+
             try
             {
                 line = File.ReadLines(notebookPath).ElementAt(userInputInt);
-                Console.WriteLine(line); //placeholder
-                return line;
+                Console.WriteLine($"You present \"{line}\" forward as evidence."); //placeholder
+                interrogationPresent = line;
+                return interrogationPresent;
             }
             catch
             {
-                Console.WriteLine("Invalid input! Please type the number in the brackets to copy the corresponding line.\n");
+                Console.WriteLine("Invalid input!");
                 return "";
             }
         }
@@ -175,17 +238,12 @@ namespace Unwarranted
             {
                 timeHours = 0;
                 timeDays++;
-            }
-            if (timeDays == 8)
-            {
-                //oh nooooo the game is ooooooover ================================================================================================================================
-                gameOn = false;
-            }            
+            }                  
         }
 
         public void TimeDisplay()
         {
-            Console.WriteLine($"Day {Tools.timeDays}, {Tools.timeHours}:{Tools.timeMinutes}0");
+            Console.WriteLine($"Day {timeDays}, {timeHours}:{timeMinutes}0");
         }
 
         // Methods Pertaining to Notebook Operations -------------------------------------------------------------------------------------
@@ -236,7 +294,7 @@ namespace Unwarranted
                     }
                     // "Next Page" only displays with more than 0 entries left to show after the previous "pages" are factored in.
                     Console.WriteLine("\n[Any Key] Close Notebook");
-                    if ((File.ReadLines(notebookPath).Count() - l) > 0) Console.WriteLine("[N]ext Page\n");
+                    if ((File.ReadLines(notebookPath).Count() - l) > 0 && File.ReadLines(notebookPath).Count() > 10) Console.WriteLine("[N]ext Page\n");
 
                     // If no more pages remain, n will also close the Notebook.
                     userInputChar = char.ToLower(Console.ReadKey(true).KeyChar);
@@ -250,24 +308,25 @@ namespace Unwarranted
             Console.WriteLine();
         }
 
+        // FOR NOW IM GETTING RID OF THE CLEAR MECHANIC. It's way too destructive of an action, and may lead to some endings being unobtainable.
         /// <summary>
         /// Clears all entries in the player's Notebook.
         /// </summary>
-        public void EntryClearAll()
-        {
-            Console.WriteLine("Are you sure you want to clear your notebook? Type \"Y\" to continue, any other button to cancel.");
-            userInputChar = char.ToLower(Console.ReadKey(true).KeyChar);
-            if (userInputChar == 'y')
-            {
-                File.WriteAllText(notebookPath, "");
-                Console.WriteLine("Notebook cleared.");
-            }
-            else
-            {
-                Console.WriteLine("Operation Canceled.");
-            }
-            Console.WriteLine();
-        }
+        //public void EntryClearAll()
+        //{
+        //    Console.WriteLine("Are you sure you want to clear your notebook? Type \"Y\" to continue, any other button to cancel.");
+        //    userInputChar = char.ToLower(Console.ReadKey(true).KeyChar);
+        //    if (userInputChar == 'y')
+        //    {
+        //        File.WriteAllText(notebookPath, "");
+        //        Console.WriteLine("Notebook cleared.");
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("Operation Canceled.");
+        //    }
+        //    Console.WriteLine();
+        //}
 
         // Methods for Saving and Loading ------------------------------------------------------------------------------------------------
         /// <summary>
