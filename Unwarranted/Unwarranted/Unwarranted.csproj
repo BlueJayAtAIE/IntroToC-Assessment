@@ -54,6 +54,15 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="NPC Dialogues\libraryBooks.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NPC Dialogues\objectFlavortext.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NPC Dialogues\objectPickupList.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="NPC Dialogues\testTalk.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

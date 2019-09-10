@@ -13,9 +13,7 @@ namespace Unwarranted
     {
         static void Main(string[] args)
         {
-            NPCDialogues diaHolder = new NPCDialogues();
-
-            Console.WriteLine("               UNWARRANTED v0.0.0.0.4");
+            Console.WriteLine("                    UNWARRANTED");
             Console.WriteLine("\n[N]ew game                             [L]oad game");
             while (userInputChar != 'n' && userInputChar != 'l')
             userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
@@ -36,8 +34,9 @@ namespace Unwarranted
             }
 
             // This is the main game loop
-            while (!timeUp)
+            while (true)
             {
+                // Checks the time to see if the final day has hit. If it has, the game over state will start.
                 if (timeDays == 8 && !inBattle)
                 {
                     TimeUp();
@@ -47,8 +46,7 @@ namespace Unwarranted
                     }
                 }
 
-                //OpenInventory();
-
+                // Big scary switch for navigation.
                 switch (GetLocation())
                 {
                     default:
@@ -83,11 +81,7 @@ namespace Unwarranted
                     case MapLocations.Tavern:
                         Tavern();
                         TimeAdvance();
-                        break;
-                    case MapLocations.Sprocket:
-                        Sprocket();
-                        TimeAdvance();
-                        break;
+                        break;                    
                     case MapLocations.Kog:
                         Kog();
                         TimeAdvance();
@@ -112,22 +106,19 @@ namespace Unwarranted
                         Hideout();
                         TimeAdvance();
                         break;
+                    // Taking any of the trains actually doesn't take an action- they're faster than "walking" from place to place.
                     case MapLocations.TrainA:
                         TrainA();
-                        TimeAdvance();
                         break;
                     case MapLocations.TrainB:
                         TrainB();
-                        TimeAdvance();
                         break;
                     case MapLocations.TrainC:
                         TrainC();
-                        TimeAdvance();
                         break;
                 }
 
-                //diaHolder.TestCharacterInterrogation();
-
+                // PLEASE KEEP COMMENTED
                 //Console.WriteLine("End of Debug. Press the any key.");
                 //break;
             }
@@ -140,7 +131,7 @@ namespace Unwarranted
 //Console.WriteLine("THIS IS A UNICODE CHARACTER TEST. DELETE THIS LATER FUTURE SELF.");
 //Console.WriteLine("\nPIPES: ═ ║ ╒ ╓ ╔ ╕ ╖ ╗ ╘ ╙ ╚ ╛ ╜ ╝ ╞ ╟ ╠ ╡ ╢ ╣ ╤ ╥ ╦ ╧ ╨ ╩ ╪ ╫ ╬ \n\nBOXES: ▀ ▄ █ ▌ ▐ ░ ▒ ▓ ■");
 //
-//
+// TODO: find Seren a better name. I thought of one forever ago but forgot to write it down... It's to similar to Selene
 //
 //
 //

@@ -6,26 +6,27 @@ using System.Threading.Tasks;
 using System.IO;
 using static UnwarrantedTools.Tools;
 
-namespace Unwarranted
+namespace UnwarrantedTools
 {
-    public class NPCDialogues
+    public static class NPCDialogues
     {
-        string TestNPCPath = "NPC Dialogues/testTalk.txt";
+        private static bool okToGo = false;
+        private static bool firstLoop = true;
+        private static bool fear = false;
+        private static bool angry = false;
 
-        private bool okToGo = false;
-        private bool firstLoop = true;
-        private bool fear = false;
-        private bool angry = false;
+        private static string TestNPCPath = "NPC Dialogues/testTalk.txt";
 
         // Currently, interrogations go on for as long as until the player has discovered the right path to the end. They cannot
         // leave the interrogation loop until then, and once they do hit the end they have only the option to leave.
         // This is likely to change- I'll reformate some things as to not possibly trap the player in an encounter they
-        // cant possibly finish with the information they have.
+        // cant possibly finish with the information they have. So.... TODO
         /// <summary>
         /// Test conversation that most all interrogations will be based on. Reference txt file for conversation flow.
         /// </summary>
-        public void TestCharacterInterrogation()
+        public static void TestCharacterInterrogation()
         {
+            Console.Clear();
             okToGo = false;
             firstLoop = true;
             while (!okToGo)
@@ -49,30 +50,32 @@ namespace Unwarranted
                         InterrogationContinue(TestNPCPath, 17, 1);
                         ReplyCheck();
                     }
-                    if (interrogationPresent.Equals(File.ReadLines(TestNPCPath).ElementAt(17)))
+                    else if (interrogationPresent.Equals(File.ReadLines(TestNPCPath).ElementAt(17)))
                     {
                         InterrogationEnd(TestNPCPath, 20, 2);
                         Console.WriteLine("debug message: heckin gottem");
                         okToGo = true;
                     }
-                    if (interrogationPresent.Equals(","))
+                    else if (interrogationPresent.Equals(","))
                     {
                         Console.WriteLine("debug message: honk");
                         silent = true;
                     }
-                    if (interrogationPresent.Equals("")) ; // Purposefully blank- this prevents the else below from picking up blank as a reply option.
+                    else if (interrogationPresent.Equals("."))
+                    {
+                        // Purposefully empty statement. This is so else doesn't catch a non-presenting turn as an invalid present.
+                    }
                     else
                     {
-                        Console.WriteLine("This means nothing to me.");
+                        //In here goes spoken dialogue for when an NPC has no reply to a shown line/object. This phrase cannot be recorded- so it's just a writeline instead.
+                        Console.WriteLine("That means nothing to me.");
                     }
 
+                    // Checks if selected line has additional "inqury" text.
                     if (!silent)
                     {
                         switch (interrogationLine)
                         {
-                            default:
-                                Console.WriteLine("I can't explain anything more about that...");
-                                break;
                             case 1:
                                 InterrogationContinue(TestNPCPath, 7, 1);
                                 ReplyCheck();
@@ -86,6 +89,11 @@ namespace Unwarranted
                                 ReplyCheck();
                                 break;
                             case 999:
+                                //Purposefully empty statement. This is so default doesn't catch a non-inqury turn as an invalid inqury.
+                                break;
+                            default:
+                                //In here goes spoken dialogue for when an NPC has no inqury reply. This phrase cannot be recorded- so it's just a writeline instead.
+                                Console.WriteLine("I can't explain anything more about that...");
                                 break;
                         }
                     }
@@ -94,8 +102,14 @@ namespace Unwarranted
                 }
             }
         }
+
+        public static void H()
+        {
+            // Put some stuff in here. Make some more conversations.
+        }
     }
 }
 
 //When interrogationLine is 999 always treat it as being blank.
+//When interrogationPresent is "." always treat it as being blank.
 //When interrogationPresent is "," always treat it as being silent for one round.
