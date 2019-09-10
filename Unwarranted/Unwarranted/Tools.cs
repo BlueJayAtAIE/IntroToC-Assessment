@@ -5,49 +5,89 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace Unwarranted
+namespace UnwarrantedTools
 {
-    public class Tools
+    public static class Tools
     {
-        public static Random rng = new Random();
+        public enum MapLocations { Home, Center, Library, Shop, Alley, Docks, Square, Tavern, Sprocket, Kog, Feri, Rutherian, Seren, Market, Hideout, TrainA, TrainB, TrainC }
 
-        public string notebookPath = "Player/notebook.txt";
-        public string saveFilePath = "Player/save.txt";
-        public string inventoryPath = "Player/inventory.txt";
+        public static Random rng = new Random();
 
         public static int userInputInt;
         public static char userInputChar;
 
-        public static int interrogationLine;
+        public static int money = 50; //Player always starts a game with 50 Muns
+
+        public static int interrogationLine = 999;
         public static string interrogationPresent;
 
         public static int timeDays = 1;
         public static int timeHours = 0;
         public static int timeMinutes = 0;
+        public static bool timeUp = false;
 
-        private string line;
+        public static bool inBattle = false;
+
+        private static string notebookPath = "Player/notebook.txt";
+        private static string saveFilePath = "Player/save.txt";
+        private static string inventoryPath = "Player/inventory.txt";
+
+        private static string line;
 
         // Methods Involving NPC Dialogue and Interrogations -----------------------------------------------------------------------------
         /// <summary>
-        /// Begins the conversation loop with the specified NPC. WIP, displays all dialogue at once. 
-        /// Conversations do not allow for recording information.
-        /// </summary>
-        /// <param name="NPCDialoguePath">Directory path that leads to the file the dialogue is located in.</param>
-        public void ConversationStart(string NPCDialoguePath)
-        {
-            for (int i = 0; i < File.ReadLines(NPCDialoguePath).Count(); i++)
-            {
-                Console.WriteLine($"[{i}] {File.ReadLines(NPCDialoguePath).ElementAt(i)}");
-            }           
-        }
-
-        /// <summary>
-        /// Begins the intterogation loop with the specified NPC.
+        /// Starts an interrogation loop intended for objects and books which cannot reply. Only has 1 command (record) plus the added "leave".
         /// </summary>
         /// <param name="NPCDialoguePath">Directory path that leads to the file the dialogue is located in.</param>
         /// <param name="startingPoint">Line in the text file to begin the interrogation from.</param>
         /// <param name="durration">How many lines to display from the text file.</param>
-        public void InterrogationStart(string NPCDialoguePath, int startingPoint, int durration)
+        public static void InterrogationObject(string NPCDialoguePath, int startingPoint, int durration)
+        {
+            for (int i = startingPoint; i < startingPoint + durration; i++)
+            {
+                Console.WriteLine($"[{i}] {File.ReadLines(NPCDialoguePath).ElementAt(i)}");
+            }
+            Console.WriteLine("\nChoose a command from below:");
+            Console.WriteLine("[R]ecord line");
+            Console.WriteLine("[L]eave");
+
+            bool okToGo = false;
+            while (!okToGo)
+            {
+                userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
+                switch (userInputChar)
+                {
+                    default:
+                        Console.WriteLine("Invalid command!");
+                        break;
+                    case 'r':
+                        Console.WriteLine("Enter the number of the line you wish to copy to your notebook.");
+                        int.TryParse(Console.ReadLine(), out userInputInt);
+                        if (userInputInt >= startingPoint && userInputInt < startingPoint + durration)
+                        {
+                            InterrogationCopyEntry(NPCDialoguePath, userInputInt);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input!");
+                        }
+                        break;
+                    case 'l':
+                        Console.WriteLine("You've got everything you need from here.");
+                        okToGo = true;
+                        break;
+                }
+                Console.WriteLine();
+            }
+        }
+
+        /// <summary>
+        /// Begins the intterogation loop with the specified NPC. Has all of the interrogation commands (record, inquire, stall, present x2).
+        /// </summary>
+        /// <param name="NPCDialoguePath">Directory path that leads to the file the dialogue is located in.</param>
+        /// <param name="startingPoint">Line in the text file to begin the interrogation from.</param>
+        /// <param name="durration">How many lines to display from the text file.</param>
+        public static void InterrogationStart(string NPCDialoguePath, int startingPoint, int durration)
         {
             for (int i = startingPoint; i < startingPoint + durration; i++)
             {
@@ -63,12 +103,9 @@ namespace Unwarranted
             bool okToGo = false;
             while (!okToGo)
             {
-            userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
+                userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
                 switch (userInputChar)
                 {
-                    default:
-                        Console.WriteLine("Invalid command!");
-                        break;
                     case 'r':
                         Console.WriteLine("Enter the number of the line you wish to copy to your notebook.");
                         int.TryParse(Console.ReadLine(), out userInputInt);
@@ -97,8 +134,8 @@ namespace Unwarranted
                         }
                         break;
                     case 's':
-                        //stall for a turn- the opposing npc may say more to possibly record (command: stay silent)
                         interrogationPresent = ",";
+                        okToGo = true;
                         break;
                     case 'w':
                         InterrogationPresentWriting();
@@ -112,10 +149,119 @@ namespace Unwarranted
                         interrogationLine = 999;
                         okToGo = true;
                         break;
-                    //case 'j':
-                        //opens your Notebook, allows you to select two lines and compare them (command: jackpot) !!NOT OFTEN PRESENTED TO THE PLAYERS AS AN OPTION!!
-                        //break;
+                    default:
+                        Console.WriteLine("Invalid command!");
+                        break;
                 }
+            }
+        }
+
+        /// <summary>
+        /// To be used for replies to inquiries and presented information. Has only 3 of the commands (record, inquire, stall).
+        /// </summary>
+        /// <param name="NPCDialoguePath">Directory path that leads to the file the dialogue is located in.</param>
+        /// <param name="startingPoint">Line in the text file to begin the interrogation from.</param>
+        /// <param name="durration">How many lines to display from the text file.</param>
+        public static void InterrogationContinue(string NPCDialoguePath, int startingPoint, int durration)
+        {
+            for (int i = startingPoint; i < startingPoint + durration; i++)
+            {
+                Console.WriteLine($"[{i}] {File.ReadLines(NPCDialoguePath).ElementAt(i)}");
+            }
+            Console.WriteLine("\nChoose a command from below:");
+            Console.WriteLine("[R]ecord line");
+            Console.WriteLine("[I]nquire");
+            Console.WriteLine("[S]tay silent (back to main)");
+
+            bool okToGo = false;
+            while (!okToGo)
+            {
+                userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
+                switch (userInputChar)
+                {
+                    case 'r':
+                        Console.WriteLine("Enter the number of the line you wish to copy to your notebook.");
+                        int.TryParse(Console.ReadLine(), out userInputInt);
+                        if (userInputInt >= startingPoint && userInputInt < startingPoint + durration)
+                        {
+                            InterrogationCopyEntry(NPCDialoguePath, userInputInt);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input!");
+                        }
+                        break;
+                    case 'i':
+                        Console.WriteLine("Enter the number of the line you wish to inquire about.");
+                        int.TryParse(Console.ReadLine(), out userInputInt);
+                        if (userInputInt >= startingPoint && userInputInt < startingPoint + durration)
+                        {
+                            InterrogationInquire(NPCDialoguePath, userInputInt);
+                            interrogationPresent = "";
+                            okToGo = true;
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input!");
+                        }
+                        break;
+                    case 's':
+                        interrogationPresent = ",";
+                        okToGo = true;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid command!");
+                        break;
+                }
+                Console.WriteLine();
+            }
+        }
+
+        /// <summary>
+        /// For use at the end of interrogation interactions. Has only 1 of the commands (record) plus the added "leave".
+        /// </summary>
+        /// <param name="NPCDialoguePath">Directory path that leads to the file the dialogue is located in.</param>
+        /// <param name="startingPoint">Line in the text file to begin the interrogation from.</param>
+        /// <param name="durration">How many lines to display from the text file.</param>
+        public static void InterrogationEnd(string NPCDialoguePath, int startingPoint, int durration)
+        {
+            for (int i = startingPoint; i < startingPoint + durration; i++)
+            {
+                Console.WriteLine($"[{i}] {File.ReadLines(NPCDialoguePath).ElementAt(i)}");
+            }
+            Console.WriteLine("J a c k p o t");
+            Console.WriteLine("\nChoose a command from below:");
+            Console.WriteLine("[R]ecord line");
+            Console.WriteLine("[L]eave conversation");
+
+            bool okToGo = false;
+            while (!okToGo)
+            {
+                userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
+                switch (userInputChar)
+                {
+                    case 'r':
+                        Console.WriteLine("Enter the number of the line you wish to copy to your notebook.");
+                        int.TryParse(Console.ReadLine(), out userInputInt);
+                        if (userInputInt >= startingPoint && userInputInt < startingPoint + durration)
+                        {
+                            InterrogationCopyEntry(NPCDialoguePath, userInputInt);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input!");
+                        }
+                        break;
+                    case 'l':
+                        Console.WriteLine("You've got everything you need from here.");
+                        okToGo = true;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid command!");
+                        break;
+                }
+                Console.WriteLine();
             }
         }
 
@@ -124,10 +270,10 @@ namespace Unwarranted
         /// </summary>
         /// <param name="NPCDialoguePath">Directory path that leads to the file the dialogue is located in.</param>
         /// <param name="lineNumber">Line number of NPC Dialogue which is being inspected.</param>
-        public int InterrogationInquire(string NPCDialoguePath, int lineNumber)
+        public static int InterrogationInquire(string NPCDialoguePath, int lineNumber)
         {
             try
-            {               
+            {
                 line = File.ReadLines(NPCDialoguePath).ElementAt(lineNumber);
                 Console.WriteLine($"\"Can you please elaborate on the statement: \"{line}\"?\"\n");
                 interrogationLine = lineNumber;
@@ -145,7 +291,7 @@ namespace Unwarranted
         /// </summary>
         /// <param name="NPCDialoguePath">Directory path that leads to the file the dialogue is located in.</param>
         /// <param name="entryNumber">Line number of the NPC Dialogue txt file to copy over.</param>
-        public void InterrogationCopyEntry(string NPCDialoguePath, int entryNumber)
+        public static void InterrogationCopyEntry(string NPCDialoguePath, int entryNumber)
         {
             try
             {
@@ -186,21 +332,21 @@ namespace Unwarranted
         /// TODO: Opens your inventory, allowing you to show items from your Key Items to the current NPC.
         /// </summary>
         /// <returns></returns>
-        public string InterrogationPresentItem()
+        public static string InterrogationPresentItem()
         {
             Console.WriteLine("Inventory machine [B]roke. Placeholder instead.");
             interrogationPresent = "";
             return interrogationPresent;
         }
 
-        // I would love to expand this to check line against the NPC's dialogue file to see if they said it or someone else did.
+        // TODO: I would love to expand this to check line against the NPC's dialogue file to see if they said it or someone else did.
         // The only reason I'd do this is for flavortext- "Do you remember saying {thing}?" vs "We heard {thing} from someone else."
         // Tiny polish please consider.
         /// <summary>
         /// Opens your Notebook, allowing you to show recorded lines to the current NPC.
         /// </summary>
         /// <returns></returns>
-        public string InterrogationPresentWriting()
+        public static string InterrogationPresentWriting()
         {
             Console.WriteLine("You open your notebook for reference first. Close it to continue on to your selection.");
             EntryDisplay();
@@ -210,7 +356,7 @@ namespace Unwarranted
             try
             {
                 line = File.ReadLines(notebookPath).ElementAt(userInputInt);
-                Console.WriteLine($"You present \"{line}\" forward as evidence."); //placeholder
+                Console.WriteLine($"You present \"{line}\" forward as evidence."); // TODO? placeholder
                 interrogationPresent = line;
                 return interrogationPresent;
             }
@@ -226,7 +372,7 @@ namespace Unwarranted
         /// Advances the game-time forward by one increment. 
         /// To be used after player actions (aside from inventory management).
         /// </summary>
-        public void TimeAdvance()
+        public static void TimeAdvance()
         {
             timeMinutes += 3;
             if (timeMinutes == 6)
@@ -238,12 +384,41 @@ namespace Unwarranted
             {
                 timeHours = 0;
                 timeDays++;
-            }                  
+            }
         }
 
-        public void TimeDisplay()
+        public static void TimeDisplay()
         {
             Console.WriteLine($"Day {timeDays}, {timeHours}:{timeMinutes}0");
+        }
+
+        public static void TimeUp()
+        {
+            // Aw beans.
+            Console.WriteLine("\nThe top hour of the final day has commenced... your time is up.");
+            Console.WriteLine("You can [R]eload a previous save, [S]tart a new save, or [Q]uit.");
+            bool okToGo = false;
+            while (!okToGo)
+            {
+                okToGo = true;
+                userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
+                switch (userInputChar)
+                {
+                    case 's':
+                        NewSave();
+                        break;
+                    case 'r':
+                        Load();
+                        break;
+                    case 'q':
+                        timeUp = true;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid command!");
+                        okToGo = false;
+                        break;
+                }
+            }
         }
 
         // Methods Pertaining to Notebook Operations -------------------------------------------------------------------------------------
@@ -251,7 +426,7 @@ namespace Unwarranted
         /// Display 10 entries of the notebook at a time. 
         /// An additional input displays 10 more.
         /// </summary>
-        public void EntryDisplay()
+        public static void EntryDisplay()
         {
             Console.WriteLine();
             try
@@ -328,31 +503,100 @@ namespace Unwarranted
         //    Console.WriteLine();
         //}
 
+        // Methods for Inventory Management ----------------------------------------------------------------------------------------------
+
+        ///<summary>
+        /// TODO
+        /// </summary>
+        public static void OpenInventory()
+        {
+            Console.WriteLine("\n+++ OPENING INVENTORY +++");
+            TimeDisplay();
+            bool okToGo = false;
+            Console.WriteLine("\n[N]otebook\n[K]ey Items\n[S]pell Stones\n\n[B]ack to Game");
+            while (!okToGo)
+            {
+                userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
+                switch (userInputChar)
+                {
+                    case 'n':
+                        EntryDisplay();
+                        break;
+                    case 'k':
+                        //placeholder
+                        Console.WriteLine("Placeholder");
+                        break;
+                    case 's':
+                        //placeholder
+                        Console.WriteLine("Placeholder");
+                        break;
+                    case 'b':
+                        Console.WriteLine("+++ CLOSING INVENTORY +++\n");
+                        okToGo = true;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid input!");
+                        break;
+                }
+            }
+        }
+
         // Methods for Saving and Loading ------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Clears all save, notebook, and inventory data. TODO: sets location to your home and replays intro monologue (when thats actually written).
+        /// </summary>
+        public static void NewSave()
+        {
+            StreamWriter writer = new StreamWriter(saveFilePath);
+            writer.WriteLine(1);
+            writer.WriteLine(0);
+            writer.WriteLine(0);
+            writer.Close();
+            File.WriteAllText(notebookPath, "");
+            File.WriteAllText(inventoryPath, "");
+            Console.WriteLine("\nNew game monologue goes here.");
+            Console.WriteLine("[Any Key] Continue...");
+            Console.ReadKey();
+            Load();
+        }
+
         /// <summary>
         /// Save the current Day, Hour and Minute to the save file. 
         /// If no save is found, create a new one; if one is found, override it.
+        /// TODO: When you have free time further down the line, add more flavortext options for sleeping.
+        /// TODO: Some other things are going to need to be saved and loaded down the line, like endings
+        /// already obtained, bools denotating whether the Masked Market and Hideout have been found, and money.
         /// </summary>
-        public void Save()
+        public static void Save()
         {
-            File.WriteAllText(saveFilePath, "");
+            Console.WriteLine("\nYou sleep for a few restless hours. You wake up completely unprepared to face your day.");
+            for (int i = 0; i < 8; i++)
+            {
+                TimeAdvance();
+            }
             StreamWriter writer = new StreamWriter(saveFilePath);
             writer.WriteLine(timeDays);
             writer.WriteLine(timeHours);
             writer.WriteLine(timeMinutes);
             writer.Close();
+            Console.WriteLine("(Your game has been saved.)");
+            TimeDisplay();
+            Console.WriteLine();
         }
 
         /// <summary>
         /// Load the Day, Hour, and Minute from the save file.
         /// </summary>
-        public void Load()
+        public static void Load()
         {
             try
             {
                 int.TryParse(File.ReadLines(saveFilePath).ElementAt(0), out timeDays);
                 int.TryParse(File.ReadLines(saveFilePath).ElementAt(1), out timeHours);
                 int.TryParse(File.ReadLines(saveFilePath).ElementAt(2), out timeMinutes);
+                Console.Clear();
+                TimeDisplay();
+                Console.WriteLine();
             }
             catch
             {
