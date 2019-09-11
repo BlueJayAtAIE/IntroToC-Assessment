@@ -20,8 +20,8 @@ namespace UnwarrantedTools
 
         // For things reflecting gameplay (money, map progress, current state)
         public static int money = 50; //Player always starts a game with 50 Muns
-        public static bool discoveredMarket = false;
-        public static bool discoveredHideout = false;
+        public static bool discoveredMarket;
+        public static bool discoveredHideout;
         public static bool inBattle = false;
 
         // For interrogations; stores input that changes the flow of the conversation
@@ -55,22 +55,22 @@ namespace UnwarrantedTools
             {
                 Console.WriteLine($"[{i}] {File.ReadLines(NPCDialoguePath).ElementAt(i)}");
             }
-            Console.WriteLine("\nChoose a command from below:");
-            Console.WriteLine("[R]ecord line");
+            Console.WriteLine("\n[R]ecord line");
             if (canPickup) Console.WriteLine("[T]ake Item");
             if (!canPickup) Console.WriteLine("[L]eave");
 
             bool okToGo = false;
             while (!okToGo)
             {
-                userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
+                Console.Write("\nInput command> ");
+                userInputChar = Char.ToLower(Console.ReadKey().KeyChar);
                 switch (userInputChar)
                 {
                     default:
                         Console.WriteLine("Invalid command!");
                         break;
                     case 'r':
-                        Console.WriteLine("Enter the number of the line you wish to copy to your notebook.");
+                        Console.Write("Enter the number of the line you wish to copy to your notebook> ");
                         int.TryParse(Console.ReadLine(), out userInputInt);
                         if (userInputInt >= startingPoint && userInputInt < startingPoint + durration)
                         {
@@ -84,17 +84,17 @@ namespace UnwarrantedTools
                     case 't':
                         //TODO: add the capability to pick up items you find.
                         Console.WriteLine("You pickup the" + "thing");
-                        okToGo = true;
                         Console.WriteLine("[Any Key] Continue...");
                         Console.ReadKey();
                         Console.Clear();
+                        okToGo = true;
                         break;
                     case 'l':
                         Console.WriteLine("You've got everything you need from here.");
-                        okToGo = true;
                         Console.WriteLine("[Any Key] Continue...");
                         Console.ReadKey();
                         Console.Clear();
+                        okToGo = true;
                         break;
                 }
                 Console.WriteLine();
@@ -113,21 +113,22 @@ namespace UnwarrantedTools
             {
                 Console.WriteLine($"[{i}] {File.ReadLines(NPCDialoguePath).ElementAt(i)}");
             }
-            Console.WriteLine("\nChoose a command from below:");
-            Console.WriteLine("[R]ecord line");
+            Console.WriteLine("\n[R]ecord line");
             Console.WriteLine("[C]larify");
             Console.WriteLine("[S]tay silent");
             if (File.ReadLines(notebookPath).Count() > 0) Console.WriteLine("Present [W]ritten evidence");
-            Console.WriteLine("Present [P]hysical evidence\n");
+            Console.WriteLine("Present [P]hysical evidence");
+            Console.WriteLine("[L]eave conversation\n");
 
             bool okToGo = false;
             while (!okToGo)
             {
-                userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
+                Console.Write("\nInput command> ");
+                userInputChar = Char.ToLower(Console.ReadKey().KeyChar);
                 switch (userInputChar)
                 {
                     case 'r':
-                        Console.WriteLine("Enter the number of the line you wish to copy to your notebook.");
+                        Console.Write("\nEnter the number of the line you wish to copy to your notebook> ");
                         int.TryParse(Console.ReadLine(), out userInputInt);
                         if (userInputInt >= startingPoint && userInputInt < startingPoint + durration)
                         {
@@ -139,7 +140,7 @@ namespace UnwarrantedTools
                         }
                         break;
                     case 'c':
-                        Console.WriteLine("Enter the number of the line you wish to ask clarification about.");
+                        Console.Write("\nEnter the number of the line you wish to ask clarification about> ");
                         int.TryParse(Console.ReadLine(), out userInputInt);
                         if (userInputInt >= startingPoint && userInputInt < startingPoint + durration)
                         {
@@ -163,10 +164,21 @@ namespace UnwarrantedTools
                         okToGo = true;
                         break;
                     case 'p':
-                        //Console.WriteLine("Enter the number of the item you wish to present.");
+                        //Console.WriteLine("\nEnter the number of the item you wish to present.> ");
                         //int.TryParse(Console.ReadLine(), out userInputInt);
                         InterrogationPresentItem();
                         interrogationLine = 999;
+                        okToGo = true;
+                        break;
+                    case 'l':                        
+                        Console.WriteLine("\nAre you sure you want to leave? [Y]es || [Any Key] No");
+                        userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
+                        if (userInputChar == 'y')
+                        {
+                            interrogationLine = 998;
+                        }
+                        interrogationPresent = ".";
+                        Console.Clear();
                         okToGo = true;
                         break;
                     default:
@@ -188,19 +200,19 @@ namespace UnwarrantedTools
             {
                 Console.WriteLine($"[{i}] {File.ReadLines(NPCDialoguePath).ElementAt(i)}");
             }
-            Console.WriteLine("\nChoose a command from below:");
-            Console.WriteLine("[R]ecord line");
-            Console.WriteLine("[C]larify");
+            Console.WriteLine("\n[R]ecord line");
+            Console.WriteLine("[C]larify, then back to main");
             Console.WriteLine("[S]tay silent (back to main)");
 
             bool okToGo = false;
             while (!okToGo)
             {
-                userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
+                Console.Write("\nInput command> ");
+                userInputChar = Char.ToLower(Console.ReadKey().KeyChar);
                 switch (userInputChar)
                 {
                     case 'r':
-                        Console.WriteLine("Enter the number of the line you wish to copy to your notebook.");
+                        Console.Write("\nEnter the number of the line you wish to copy to your notebook> ");
                         int.TryParse(Console.ReadLine(), out userInputInt);
                         if (userInputInt >= startingPoint && userInputInt < startingPoint + durration)
                         {
@@ -212,7 +224,7 @@ namespace UnwarrantedTools
                         }
                         break;
                     case 'c':
-                        Console.WriteLine("Enter the number of the line you wish to ask clarification about.");
+                        Console.Write("\nEnter the number of the line you wish to ask clarification about> ");
                         int.TryParse(Console.ReadLine(), out userInputInt);
                         if (userInputInt >= startingPoint && userInputInt < startingPoint + durration)
                         {
@@ -250,19 +262,19 @@ namespace UnwarrantedTools
             {
                 Console.WriteLine($"[{i}] {File.ReadLines(NPCDialoguePath).ElementAt(i)}");
             }
-            Console.WriteLine("J a c k p o t");
-            Console.WriteLine("\nChoose a command from below:");
+            Console.WriteLine("\nJ a c k p o t");
             Console.WriteLine("[R]ecord line");
             Console.WriteLine("[L]eave conversation");
 
             bool okToGo = false;
             while (!okToGo)
             {
-                userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
+                Console.Write("\nInput command> ");
+                userInputChar = Char.ToLower(Console.ReadKey().KeyChar);
                 switch (userInputChar)
                 {
                     case 'r':
-                        Console.WriteLine("Enter the number of the line you wish to copy to your notebook.");
+                        Console.Write("\nEnter the number of the line you wish to copy to your notebook> ");
                         int.TryParse(Console.ReadLine(), out userInputInt);
                         if (userInputInt >= startingPoint && userInputInt < startingPoint + durration)
                         {
@@ -275,10 +287,10 @@ namespace UnwarrantedTools
                         break;
                     case 'l':
                         Console.WriteLine("You've got everything you need from here.");
-                        okToGo = true;
                         Console.WriteLine("[Any Key] Continue...");
                         Console.ReadKey();
                         Console.Clear();
+                        okToGo = true;
                         break;
                     default:
                         Console.WriteLine("Invalid command!");
@@ -357,7 +369,7 @@ namespace UnwarrantedTools
         /// <returns></returns>
         public static string InterrogationPresentItem()
         {
-            Console.WriteLine("Inventory machine [B]roke. Placeholder instead.");
+            Console.WriteLine("\nInventory machine [B]roke. Placeholder instead.");
             interrogationPresent = "";
             return interrogationPresent;
         }
@@ -371,23 +383,25 @@ namespace UnwarrantedTools
         /// <returns></returns>
         public static string InterrogationPresentWriting()
         {
-            Console.WriteLine("You open your notebook for reference first. Close it to continue on to your selection.");
+            Console.WriteLine("\nYou open your notebook for reference first. Close it to continue on to your selection.");
             EntryDisplay();
-            Console.WriteLine("Enter the number of the line from your notebook to present.");
-            int.TryParse(Console.ReadLine(), out userInputInt);
-
-            try
+            while (true)
             {
-                line = File.ReadLines(notebookPath).ElementAt(userInputInt);
-                Console.WriteLine($"You present \"{line}\" forward as evidence."); // TODO? placeholder
-                interrogationPresent = line;
-                return interrogationPresent;
-            }
-            catch
-            {
-                Console.WriteLine("Invalid input!");
-                return "";
-            }
+                Console.Write("\nEnter the number of the line from your notebook to present> ");
+                int.TryParse(Console.ReadLine(), out userInputInt);
+                try
+                {
+                    line = File.ReadLines(notebookPath).ElementAt(userInputInt);
+                    Console.WriteLine($"You present \"{line}\" forward as evidence.\n"); // TODO? placeholder?
+                    interrogationPresent = line;
+                    return interrogationPresent;
+                }
+                catch
+                {
+                    Console.WriteLine("Invalid input!");
+                    return "";
+                }
+            }            
         }
 
         // Methods Pertaining to In-Game Time Operations ---------------------------------------------------------------------------------
@@ -466,6 +480,11 @@ namespace UnwarrantedTools
 
                 while (true)
                 {
+                    if (File.ReadLines(notebookPath).Count() == 0)
+                    {
+                        Console.WriteLine("\nYour notebook is empty...");
+                        break;
+                    }
                     // This top block runs if the Notebook has 10 or less entries.
                     if (File.ReadLines(notebookPath).Count() <= 10)
                     {
@@ -547,7 +566,8 @@ namespace UnwarrantedTools
             Console.WriteLine("\n[N]otebook\n[K]ey Items\n[S]pell Stones\n\n[B]ack to Game");
             while (!okToGo)
             {
-                userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
+                Console.Write("\nInput command> ");
+                userInputChar = Char.ToLower(Console.ReadKey().KeyChar);
                 switch (userInputChar)
                 {
                     case 'n':
@@ -555,14 +575,14 @@ namespace UnwarrantedTools
                         break;
                     case 'k':
                         // Placeholder
-                        Console.WriteLine("Placeholder.... Key Items");
+                        Console.WriteLine("\nPlaceholder.... Key Items");
                         break;
                     case 's':
                         // Placeholder
-                        Console.WriteLine("Placeholder.... Battle Items");
+                        Console.WriteLine("\nPlaceholder.... Battle Items");
                         break;
                     case 'b':
-                        Console.WriteLine("+++ CLOSING INVENTORY +++\n");
+                        Console.WriteLine("\n+++ CLOSING INVENTORY +++\n");
                         okToGo = true;
                         break;
                     default:
@@ -573,6 +593,8 @@ namespace UnwarrantedTools
         }
 
         // Methods for Saving and Loading ------------------------------------------------------------------------------------------------
+        // Items saved to the save.txt should be in this order: Days, Hours, Minutes, Money, Masked Market found?, Hideout found?
+
         /// <summary>
         /// Clears all save, notebook, and inventory data. TODO: intro monologue (actually writte it).
         /// </summary>
@@ -582,10 +604,17 @@ namespace UnwarrantedTools
             writer.WriteLine(1);
             writer.WriteLine(0);
             writer.WriteLine(0);
+            writer.WriteLine(50);
+            writer.WriteLine(false);
+            writer.WriteLine(false);
             writer.Close();
-            File.WriteAllText(notebookPath, "");
+            File.WriteAllText(notebookPath, "To-do List: ????");
             File.WriteAllText(inventoryPath, "");
-            Console.WriteLine("\nNew game monologue goes here.");
+            Console.Clear();
+            Console.WriteLine("Your name is Jack Montenegro.\nYou were a highly respected detective in the city of Lux. But after someone you helped put away repayed the favor... ");
+            Console.WriteLine("\nYou let go of everything.");
+            Console.WriteLine("\nAll you have now is an invalid badge, meger funds consisting of pocket change,\n...and probably something nearing alchohol poisoning.");
+            Console.WriteLine("\nMaybe it's time to change something...");
             Console.WriteLine("[Any Key] Continue...");
             Console.ReadKey();
             Load();
@@ -595,8 +624,7 @@ namespace UnwarrantedTools
         /// Save the current Day, Hour and Minute to the save file. 
         /// If no save is found, create a new one; if one is found, override it.
         /// TODO: When you have free time further down the line, add more flavortext options for sleeping.
-        /// TODO: Some other things are going to need to be saved and loaded down the line, like endings
-        /// already obtained, bools denotating whether the Masked Market and Hideout have been found, and money.
+        /// TODO: Some other things are going to need to be saved and loaded down the line, like endings already obtained.
         /// </summary>
         public static void Save()
         {
@@ -609,6 +637,9 @@ namespace UnwarrantedTools
             writer.WriteLine(timeDays);
             writer.WriteLine(timeHours);
             writer.WriteLine(timeMinutes);
+            writer.WriteLine(money);
+            writer.WriteLine(discoveredMarket);
+            writer.WriteLine(discoveredHideout);
             writer.Close();
             Console.WriteLine("(Your game has been saved.)");
             TimeDisplay();
@@ -625,6 +656,9 @@ namespace UnwarrantedTools
                 int.TryParse(File.ReadLines(saveFilePath).ElementAt(0), out timeDays);
                 int.TryParse(File.ReadLines(saveFilePath).ElementAt(1), out timeHours);
                 int.TryParse(File.ReadLines(saveFilePath).ElementAt(2), out timeMinutes);
+                int.TryParse(File.ReadLines(saveFilePath).ElementAt(3), out money);
+                discoveredMarket = Convert.ToBoolean(File.ReadLines(saveFilePath).ElementAt(4));
+                discoveredHideout = Convert.ToBoolean(File.ReadLines(saveFilePath).ElementAt(5));
                 SetLocation(MapLocations.Home);
                 Console.Clear();
                 TimeDisplay();

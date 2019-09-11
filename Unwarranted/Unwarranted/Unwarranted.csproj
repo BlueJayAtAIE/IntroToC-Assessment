@@ -57,10 +57,10 @@
     <Content Include="NPC Dialogues\libraryBooks.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="NPC Dialogues\objectFlavortext.txt">
+    <Content Include="NPC Dialogues\MaridethTalk.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="NPC Dialogues\objectPickupList.txt">
+    <Content Include="NPC Dialogues\objectFlavortext.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="NPC Dialogues\testTalk.txt">

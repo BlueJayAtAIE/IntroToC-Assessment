@@ -16,6 +16,9 @@ namespace UnwarrantedTools
         private static bool angry = false;
 
         private static string TestNPCPath = "NPC Dialogues/testTalk.txt";
+        private static string MaridethPath = "NPC Dialogues/MaridethTalk.txt";
+
+        //TODO: all conversations with Prime Suspects.
 
         // Currently, interrogations go on for as long as until the player has discovered the right path to the end. They cannot
         // leave the interrogation loop until then, and once they do hit the end they have only the option to leave.
@@ -88,6 +91,9 @@ namespace UnwarrantedTools
                                 InterrogationContinue(TestNPCPath, 12, 1);
                                 ReplyCheck();
                                 break;
+                            case 998:
+                                okToGo = true;
+                                break;
                             case 999:
                                 //Purposefully empty statement. This is so default doesn't catch a non-inqury turn as an invalid inqury.
                                 break;
@@ -103,13 +109,21 @@ namespace UnwarrantedTools
             }
         }
 
-        public static void H()
+        public static void MaridethOpeningConvo()
         {
-            // Put some stuff in here. Make some more conversations.
+            Console.Clear();
+            okToGo = false;
+            firstLoop = true;
+            while (!okToGo)
+            {
+                InterrogationStart(MaridethPath, 0, 8);
+                //TODO: finish this interaction
+            }
         }
     }
 }
 
 //When interrogationLine is 999 always treat it as being blank.
+//When interrogationLine is 998 always treat it as leaving the conversation.
 //When interrogationPresent is "." always treat it as being blank.
 //When interrogationPresent is "," always treat it as being silent for one round.

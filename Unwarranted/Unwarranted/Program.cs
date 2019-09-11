@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using static UnwarrantedTools.Tools;
 using static UnwarrantedTools.Locations;
+using static UnwarrantedTools.NPCDialogues;
 
 namespace Unwarranted
 {
@@ -25,6 +26,7 @@ namespace Unwarranted
                         break;
                     case 'n':
                         NewSave();
+                        MaridethOpeningConvo();
                         break;
                     case 'l':
                         Load();
