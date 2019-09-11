@@ -33,3 +33,5 @@ Oh and if you don't know what to do from here- show me the item once you've pick
 [Present Placeholder Todo Text]
 That To-do list of yours is about to get a lot bigger.
 Anyways- stop messing around.
+
+[END OPENING CONVERSATION]

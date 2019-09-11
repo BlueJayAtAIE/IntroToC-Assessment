@@ -26,7 +26,7 @@ namespace Unwarranted
                         break;
                     case 'n':
                         NewSave();
-                        MaridethOpeningConvo();
+                        MaridethOpeningInterrogation();
                         break;
                     case 'l':
                         Load();
@@ -39,7 +39,7 @@ namespace Unwarranted
             while (true)
             {
                 // Checks the time to see if the final day has hit. If it has, the game over state will start.
-                if (timeDays == 8 && !inBattle)
+                if (timeDays >= 8 && !inBattle)
                 {
                     TimeUp();
                     if (timeUp)

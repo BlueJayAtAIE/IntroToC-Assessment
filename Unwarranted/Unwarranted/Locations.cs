@@ -34,8 +34,9 @@ namespace UnwarrantedTools
             Console.WriteLine("\nHome is home. It barely fits you and your company, but rent's cheap.\nPapers are scattered on tables and the floor. All your pegboards are filled with old cases.\nYou should clean up soon. Especially since Rat keeps coming over to trash the place even more.");
             Console.WriteLine("\nYou can sleep in your bed for a while, or you can talk to Marideth.\nFrom here you can walk to a few places relatively quickly, including a few of the busier parts of town.");
             Console.WriteLine("\nTRAVEL TO: [L]uxxian Great Library, [T]rain Station (Midday Station), [S]unrise Center, [B]right Sqaure");
-            Console.WriteLine("ACTION: [R]est (Save), Talk to [M]arideth");
-            Console.WriteLine("[X] Open Inventory");
+            Console.Write("ACTION: [R]est (Save), Talk to [M]arideth");
+            if (!ItemTaken("Missing Person Poster")) Console.Write(", [I]nspect Table");
+            Console.WriteLine("\n[X] Open Inventory");
             bool okToGo = false;
             while (!okToGo)
             {
@@ -62,6 +63,17 @@ namespace UnwarrantedTools
                         break;
                     case 'm':
                         TestCharacterInterrogation();
+                        break;
+                    case 'i':
+                        if (!ItemTaken("Missing Person Poster"))
+                        {
+                            MissingPosterInspect();
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nInvalid input!");
+                            okToGo = false;
+                        }
                         break;
                     case 'x':
                         OpenInventory();

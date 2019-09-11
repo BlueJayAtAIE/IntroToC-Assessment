@@ -15,6 +15,8 @@ namespace UnwarrantedTools
         private static bool fear = false;
         private static bool angry = false;
 
+        private static string ObjectTextPath = "NPC Dialogues/objectFlavortext.txt";
+
         private static string TestNPCPath = "NPC Dialogues/testTalk.txt";
         private static string MaridethPath = "NPC Dialogues/MaridethTalk.txt";
 
@@ -33,8 +35,8 @@ namespace UnwarrantedTools
                 // The firstLoop, fear, and angry bools all allow for the main information given to be changed.
                 // firstLoop is for greetings, while fear and angry are two general purpose ones that can be used anywhere.
                 // Not shown in this example, but theoretically you can even use them to change replies. Use where needed.
-                if (!firstLoop) Interrogation(TestNPCPath, 1, 4, 1);
-                if (firstLoop) Interrogation(TestNPCPath, 0, 5, 1);
+                if (!firstLoop) Interrogation(TestNPCPath, 1, 4, 1, "Mr.Test");
+                if (firstLoop) Interrogation(TestNPCPath, 0, 5, 1, "Mr.Test");
                 ReplyCheck();
             
                 // Reply check will run through the present and line variables, and depending on what they are, dialogue will
@@ -46,12 +48,12 @@ namespace UnwarrantedTools
                     // Checks presented line against whatever parameter. Can be NPC's own dialogue, someone else's, or even an object.
                     if (interrogationPresent.Equals(File.ReadLines(TestNPCPath).ElementAt(9)))
                     {
-                        Interrogation(TestNPCPath, 17, 1, 2);
+                        Interrogation(TestNPCPath, 17, 1, 2, "Mr.Test");
                         ReplyCheck();
                     }
                     else if (interrogationPresent.Equals(File.ReadLines(TestNPCPath).ElementAt(17)))
                     {
-                        Interrogation(TestNPCPath, 20, 2, 3);
+                        Interrogation(TestNPCPath, 20, 2, 3, "Mr.Test");
                         Console.WriteLine("debug message: heckin gottem");
                         okToGo = true;
                     }
@@ -76,15 +78,15 @@ namespace UnwarrantedTools
                         switch (interrogationLine)
                         {
                             case 1:
-                                Interrogation(TestNPCPath, 7, 1, 2);
+                                Interrogation(TestNPCPath, 7, 1, 2, "Mr.Test");
                                 ReplyCheck();
                                 break;
                             case 2:
-                                Interrogation(TestNPCPath, 9, 2, 2);
+                                Interrogation(TestNPCPath, 9, 2, 2, "Mr.Test");
                                 ReplyCheck();
                                 break;
                             case 4:
-                                Interrogation(TestNPCPath, 12, 1, 2);
+                                Interrogation(TestNPCPath, 12, 1, 2, "Mr.Test");
                                 ReplyCheck();
                                 break;
                             case 998:
@@ -105,14 +107,15 @@ namespace UnwarrantedTools
             }
         }
 
-        public static void MaridethOpeningConvo()
+        // Methods for Character interrogation ------------------------------------------------------------------------------------
+        public static void MaridethOpeningInterrogation()
         {
             Console.Clear();
             okToGo = false;
             firstLoop = true;
             while (!okToGo)
             {
-                Interrogation(MaridethPath, 0, 8, 1);
+                Interrogation(MaridethPath, 0, 8, 1, "Marideth");
                 ReplyCheck();
 
                 void ReplyCheck()
@@ -121,14 +124,13 @@ namespace UnwarrantedTools
 
                     if (interrogationPresent.Equals("To-do List: ????"))
                     {
-                        Interrogation(MaridethPath, 33, 2, 2);
+                        Interrogation(MaridethPath, 33, 2, 2, "Marideth");
                         ReplyCheck();
                     }
                     else if (interrogationPresent.Equals(File.ReadLines(MaridethPath).ElementAt(7)))
                     {
-                        Interrogation(MaridethPath, 28, 3, 3);
+                        Interrogation(MaridethPath, 28, 3, 3, "Marideth");
                         okToGo = true;
-                        silent = true;
                         Console.WriteLine("[Any Key] Continue...");
                         Console.ReadKey();
                     }
@@ -143,24 +145,24 @@ namespace UnwarrantedTools
                         Console.WriteLine("That doesn't really mean anything to me.");
                     }
 
-                    if (!silent)
+                    if (!silent && !okToGo)
                     {
                         switch (interrogationLine)
                         {
                             case 3:
-                                Interrogation(MaridethPath, 10, 3, 2);
+                                Interrogation(MaridethPath, 10, 3, 2, "Marideth");
                                 ReplyCheck();
                                 break;
                             case 4:
-                                Interrogation(MaridethPath, 14, 3, 2);
+                                Interrogation(MaridethPath, 14, 3, 2, "Marideth");
                                 ReplyCheck();
                                 break;
                             case 6:
-                                Interrogation(MaridethPath, 18, 2, 2);
+                                Interrogation(MaridethPath, 18, 2, 2, "Marideth");
                                 ReplyCheck();
                                 break;
                             case 7:
-                                Interrogation(MaridethPath, 21, 5, 2);
+                                Interrogation(MaridethPath, 21, 5, 2, "Marideth");
                                 ReplyCheck();
                                 break;
                             case 998:
@@ -182,7 +184,13 @@ namespace UnwarrantedTools
             Console.Clear();
         }
 
-
+        // Methods for Object interrogation ---------------------------------------------------------------------------------------
+        public static void MissingPosterInspect()
+        {
+            Console.Clear();
+            Console.WriteLine("On the table lies a Missing Persons flyer. You note a few important details:");
+            Interrogation(ObjectTextPath, 1, 3, true, "Missing Person Poster");
+        }
     }
 }
 
