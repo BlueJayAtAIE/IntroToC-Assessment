@@ -37,8 +37,8 @@ namespace UnwarrantedTools
                 // The firstLoop, fear, and angry bools all allow for the main information given to be changed.
                 // firstLoop is for greetings, while fear and angry are two general purpose ones that can be used anywhere.
                 // Not shown in this example, but theoretically you can even use them to change replies. Use where needed.
-                if (!firstLoop) InterrogationStart(TestNPCPath, 1, 4);
-                if (firstLoop) InterrogationStart(TestNPCPath, 0, 5);
+                if (!firstLoop) Interrogation(TestNPCPath, 1, 4, 1);
+                if (firstLoop) Interrogation(TestNPCPath, 0, 5, 1);
                 ReplyCheck();
             
                 // Reply check will run through the present and line variables, and depending on what they are, dialogue will
@@ -50,12 +50,12 @@ namespace UnwarrantedTools
                     // Checks presented line against whatever parameter. Can be NPC's own dialogue, someone else's, or even an object.
                     if (interrogationPresent.Equals(File.ReadLines(TestNPCPath).ElementAt(9)))
                     {
-                        InterrogationContinue(TestNPCPath, 17, 1);
+                        Interrogation(TestNPCPath, 17, 1, 2);
                         ReplyCheck();
                     }
                     else if (interrogationPresent.Equals(File.ReadLines(TestNPCPath).ElementAt(17)))
                     {
-                        InterrogationEnd(TestNPCPath, 20, 2);
+                        Interrogation(TestNPCPath, 20, 2, 3);
                         Console.WriteLine("debug message: heckin gottem");
                         okToGo = true;
                     }
@@ -80,15 +80,15 @@ namespace UnwarrantedTools
                         switch (interrogationLine)
                         {
                             case 1:
-                                InterrogationContinue(TestNPCPath, 7, 1);
+                                Interrogation(TestNPCPath, 7, 1, 2);
                                 ReplyCheck();
                                 break;
                             case 2:
-                                InterrogationContinue(TestNPCPath, 9, 2);
+                                Interrogation(TestNPCPath, 9, 2, 2);
                                 ReplyCheck();
                                 break;
                             case 4:
-                                InterrogationContinue(TestNPCPath, 12, 1);
+                                Interrogation(TestNPCPath, 12, 1, 2);
                                 ReplyCheck();
                                 break;
                             case 998:
@@ -116,10 +116,59 @@ namespace UnwarrantedTools
             firstLoop = true;
             while (!okToGo)
             {
-                InterrogationStart(MaridethPath, 0, 8);
-                //TODO: finish this interaction
+                Interrogation(MaridethPath, 0, 8, 1);
+                ReplyCheck();
+
+                void ReplyCheck()
+                {
+                    bool silent = false;
+
+                    if (interrogationPresent.Equals("To-do List: ????"))
+                    {
+                        Interrogation(MaridethPath, 0, 0, 2);
+                        ReplyCheck();
+                    }
+                    else if (interrogationPresent.Equals(File.ReadLines(MaridethPath).ElementAt(0)))
+                    {
+                        Interrogation(TestNPCPath, 0, 0, 3);
+                        okToGo = true;
+                    }
+                    else if (interrogationPresent.Equals(","))
+                    {
+                        Console.WriteLine("Come on Jack stop messing around.");
+                        silent = true;
+                    }
+                    else if (interrogationPresent.Equals("."))
+                    {
+                    }
+                    else
+                    {
+                        Console.WriteLine("That doesn't really mean anything to me.");
+                    }
+
+                    if (!silent)
+                    {
+                        switch (interrogationLine)
+                        {
+                            case 1:
+                                Interrogation(MaridethPath, 0, 0, 2);
+                                ReplyCheck();
+                                break;
+                            case 998:
+                                okToGo = true;
+                                break;
+                            case 999:
+                                break;
+                            default:
+                                Console.WriteLine("I have no idea what to tell you.");
+                                break;
+                        }
+                    }
+                    Console.WriteLine();
+                }
             }
         }
+
     }
 }
 

@@ -6,3 +6,4 @@ But first- I hope you still remember how to- you know- do your job?
 So I'm gonna give you a little quiz first before I let you go.
 See the commands below? Type the letter in the brackets [] to execute it.
 Try them all out, then repeat this line back to me.
+[Above: lines 0-7]

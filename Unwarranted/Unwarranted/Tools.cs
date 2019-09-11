@@ -48,16 +48,16 @@ namespace UnwarrantedTools
         /// <param name="NPCDialoguePath">Directory path that leads to the file the dialogue is located in.</param>
         /// <param name="startingPoint">Line in the text file to begin the interrogation from.</param>
         /// <param name="durration">How many lines to display from the text file.</param>
-        /// <param name="canPickup">Whether or not the item can be added into your inventory.</param>
-        public static void InterrogationObject(string NPCDialoguePath, int startingPoint, int durration, bool canPickup)
+        /// <param name="itemPickup">Whether or not the item can be added into your inventory.</param>
+        public static void Interrogation(string NPCDialoguePath, int startingPoint, int durration, bool itemPickup)
         {
             for (int i = startingPoint; i < startingPoint + durration; i++)
             {
                 Console.WriteLine($"[{i}] {File.ReadLines(NPCDialoguePath).ElementAt(i)}");
             }
             Console.WriteLine("\n[R]ecord line");
-            if (canPickup) Console.WriteLine("[T]ake Item");
-            if (!canPickup) Console.WriteLine("[L]eave");
+            if (itemPickup) Console.WriteLine("[T]ake Item");
+            if (!itemPickup) Console.WriteLine("[L]eave");
 
             bool okToGo = false;
             while (!okToGo)
@@ -82,12 +82,19 @@ namespace UnwarrantedTools
                         }
                         break;
                     case 't':
-                        //TODO: add the capability to pick up items you find.
-                        Console.WriteLine("You pickup the" + "thing");
-                        Console.WriteLine("[Any Key] Continue...");
-                        Console.ReadKey();
-                        Console.Clear();
-                        okToGo = true;
+                        if (itemPickup)
+                        {
+                            //TODO: add the capability to pick up items you find.
+                            Console.WriteLine("You pickup the" + "thing");
+                            Console.WriteLine("[Any Key] Continue...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            okToGo = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Input!");
+                        }
                         break;
                     case 'l':
                         Console.WriteLine("You've got everything you need from here.");
@@ -102,23 +109,31 @@ namespace UnwarrantedTools
         }
 
         /// <summary>
-        /// Begins the intterogation loop with the specified NPC. Has all of the interrogation commands (record, inquire, stall, present x2).
+        /// Begins the intterogation loop with the specified NPC. Has all of the interrogation commands.
         /// </summary>
         /// <param name="NPCDialoguePath">Directory path that leads to the file the dialogue is located in.</param>
         /// <param name="startingPoint">Line in the text file to begin the interrogation from.</param>
         /// <param name="durration">How many lines to display from the text file.</param>
-        public static void InterrogationStart(string NPCDialoguePath, int startingPoint, int durration)
+        /// <param name="convoState">Which state the interrogation is. 1 for start, 2 for continue, 3 for end.</param>
+        public static void Interrogation(string NPCDialoguePath, int startingPoint, int durration, int convoState)
         {
             for (int i = startingPoint; i < startingPoint + durration; i++)
             {
                 Console.WriteLine($"[{i}] {File.ReadLines(NPCDialoguePath).ElementAt(i)}");
             }
+            // Commands are needed as follows: 
+            // State 1: Record, Clarify, Silent, Present (x2), Leave
+            // State 2: Record, Clarify (+alt text), Silent (+alt text)
+            // State 3: (+alt text), Record, Leave
+            if (convoState == 3) Console.WriteLine("\nJ a c k p o t");
             Console.WriteLine("\n[R]ecord line");
-            Console.WriteLine("[C]larify");
-            Console.WriteLine("[S]tay silent");
-            if (File.ReadLines(notebookPath).Count() > 0) Console.WriteLine("Present [W]ritten evidence");
-            Console.WriteLine("Present [P]hysical evidence");
-            Console.WriteLine("[L]eave conversation\n");
+            if (convoState != 3) Console.Write("[C]larify");
+            if (convoState == 2) Console.Write(", then back to main");
+            if (convoState != 3) Console.Write("\n[S]tay silent");
+            if (convoState == 2) Console.Write(" (back to main)");
+            if (File.ReadLines(notebookPath).Count() > 0 && convoState == 1) Console.WriteLine("\nPresent [W]ritten evidence");
+            if (convoState == 1) Console.WriteLine("Present [P]hysical evidence");
+            if (convoState != 2) Console.WriteLine("[L]eave conversation\n");
 
             bool okToGo = false;
             while (!okToGo)
@@ -140,14 +155,21 @@ namespace UnwarrantedTools
                         }
                         break;
                     case 'c':
-                        Console.Write("\nEnter the number of the line you wish to ask clarification about> ");
-                        int.TryParse(Console.ReadLine(), out userInputInt);
-                        if (userInputInt >= startingPoint && userInputInt < startingPoint + durration)
+                        if (convoState != 3)
                         {
-                            InterrogationInquire(NPCDialoguePath, userInputInt);
-                            interrogationPresent = ".";
-                            okToGo = true;
-                            break;
+                            Console.Write("\nEnter the number of the line you wish to ask clarification about> ");
+                            int.TryParse(Console.ReadLine(), out userInputInt);
+                            if (userInputInt >= startingPoint && userInputInt < startingPoint + durration)
+                            {
+                                InterrogationInquire(NPCDialoguePath, userInputInt);
+                                interrogationPresent = ".";
+                                okToGo = true;
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input!");
+                            }
                         }
                         else
                         {
@@ -155,130 +177,37 @@ namespace UnwarrantedTools
                         }
                         break;
                     case 's':
-                        interrogationPresent = ",";
-                        okToGo = true;
+                        if (convoState != 3)
+                        {
+                            interrogationPresent = ",";
+                            okToGo = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Input!");
+                        }
                         break;
                     case 'w':
-                        InterrogationPresentWriting();
-                        interrogationLine = 999;
-                        okToGo = true;
+                        if (convoState == 1)
+                        {
+                            InterrogationPresentWriting();
+                            interrogationLine = 999;
+                            okToGo = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input!");
+                        }
                         break;
                     case 'p':
-                        //Console.WriteLine("\nEnter the number of the item you wish to present.> ");
-                        //int.TryParse(Console.ReadLine(), out userInputInt);
-                        InterrogationPresentItem();
-                        interrogationLine = 999;
-                        okToGo = true;
-                        break;
-                    case 'l':                        
-                        Console.WriteLine("\nAre you sure you want to leave? [Y]es || [Any Key] No");
-                        userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
-                        if (userInputChar == 'y')
+                        if (convoState == 1)
                         {
-                            interrogationLine = 998;
-                        }
-                        interrogationPresent = ".";
-                        Console.Clear();
-                        okToGo = true;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid command!");
-                        break;
-                }
-            }
-        }
-
-        /// <summary>
-        /// To be used for replies to inquiries and presented information. Has only 3 of the commands (record, inquire, stall).
-        /// </summary>
-        /// <param name="NPCDialoguePath">Directory path that leads to the file the dialogue is located in.</param>
-        /// <param name="startingPoint">Line in the text file to begin the interrogation from.</param>
-        /// <param name="durration">How many lines to display from the text file.</param>
-        public static void InterrogationContinue(string NPCDialoguePath, int startingPoint, int durration)
-        {
-            for (int i = startingPoint; i < startingPoint + durration; i++)
-            {
-                Console.WriteLine($"[{i}] {File.ReadLines(NPCDialoguePath).ElementAt(i)}");
-            }
-            Console.WriteLine("\n[R]ecord line");
-            Console.WriteLine("[C]larify, then back to main");
-            Console.WriteLine("[S]tay silent (back to main)");
-
-            bool okToGo = false;
-            while (!okToGo)
-            {
-                Console.Write("\nInput command> ");
-                userInputChar = Char.ToLower(Console.ReadKey().KeyChar);
-                switch (userInputChar)
-                {
-                    case 'r':
-                        Console.Write("\nEnter the number of the line you wish to copy to your notebook> ");
-                        int.TryParse(Console.ReadLine(), out userInputInt);
-                        if (userInputInt >= startingPoint && userInputInt < startingPoint + durration)
-                        {
-                            InterrogationCopyEntry(NPCDialoguePath, userInputInt);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid input!");
-                        }
-                        break;
-                    case 'c':
-                        Console.Write("\nEnter the number of the line you wish to ask clarification about> ");
-                        int.TryParse(Console.ReadLine(), out userInputInt);
-                        if (userInputInt >= startingPoint && userInputInt < startingPoint + durration)
-                        {
-                            InterrogationInquire(NPCDialoguePath, userInputInt);
-                            interrogationPresent = ".";
+                            //TODO
+                            //Console.WriteLine("\nEnter the number of the item you wish to present.> ");
+                            //int.TryParse(Console.ReadLine(), out userInputInt);
+                            InterrogationPresentItem();
+                            interrogationLine = 999;
                             okToGo = true;
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid input!");
-                        }
-                        break;
-                    case 's':
-                        interrogationPresent = ",";
-                        okToGo = true;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid command!");
-                        break;
-                }
-                Console.WriteLine();
-            }
-        }
-
-        /// <summary>
-        /// For use at the end of interrogation interactions. Has only 1 of the commands (record) plus the added "leave".
-        /// </summary>
-        /// <param name="NPCDialoguePath">Directory path that leads to the file the dialogue is located in.</param>
-        /// <param name="startingPoint">Line in the text file to begin the interrogation from.</param>
-        /// <param name="durration">How many lines to display from the text file.</param>
-        public static void InterrogationEnd(string NPCDialoguePath, int startingPoint, int durration)
-        {
-            for (int i = startingPoint; i < startingPoint + durration; i++)
-            {
-                Console.WriteLine($"[{i}] {File.ReadLines(NPCDialoguePath).ElementAt(i)}");
-            }
-            Console.WriteLine("\nJ a c k p o t");
-            Console.WriteLine("[R]ecord line");
-            Console.WriteLine("[L]eave conversation");
-
-            bool okToGo = false;
-            while (!okToGo)
-            {
-                Console.Write("\nInput command> ");
-                userInputChar = Char.ToLower(Console.ReadKey().KeyChar);
-                switch (userInputChar)
-                {
-                    case 'r':
-                        Console.Write("\nEnter the number of the line you wish to copy to your notebook> ");
-                        int.TryParse(Console.ReadLine(), out userInputInt);
-                        if (userInputInt >= startingPoint && userInputInt < startingPoint + durration)
-                        {
-                            InterrogationCopyEntry(NPCDialoguePath, userInputInt);
                         }
                         else
                         {
@@ -286,20 +215,30 @@ namespace UnwarrantedTools
                         }
                         break;
                     case 'l':
-                        Console.WriteLine("You've got everything you need from here.");
-                        Console.WriteLine("[Any Key] Continue...");
-                        Console.ReadKey();
-                        Console.Clear();
-                        okToGo = true;
+                        if (convoState == 1 || convoState == 3)
+                        {
+                            Console.WriteLine("\nAre you sure you want to leave? [Y]es || [Any Key] No");
+                            userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
+                            if (userInputChar == 'y')
+                            {
+                                interrogationLine = 998;
+                            }
+                            interrogationPresent = ".";
+                            Console.Clear();
+                            okToGo = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input!");
+                        }
                         break;
                     default:
                         Console.WriteLine("Invalid command!");
                         break;
                 }
-                Console.WriteLine();
             }
         }
-
+        
         /// <summary>
         /// Select a line spoken by the NPC to have them go into more detail.
         /// </summary>
@@ -608,7 +547,7 @@ namespace UnwarrantedTools
             writer.WriteLine(false);
             writer.WriteLine(false);
             writer.Close();
-            File.WriteAllText(notebookPath, "To-do List: ????");
+            File.WriteAllText(notebookPath, "To-do List: ????" + Environment.NewLine);
             File.WriteAllText(inventoryPath, "");
             Console.Clear();
             Console.WriteLine("Your name is Jack Montenegro.\nYou were a highly respected detective in the city of Lux. But after someone you helped put away repayed the favor... ");
