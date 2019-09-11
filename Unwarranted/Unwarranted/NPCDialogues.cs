@@ -20,10 +20,6 @@ namespace UnwarrantedTools
 
         //TODO: all conversations with Prime Suspects.
 
-        // Currently, interrogations go on for as long as until the player has discovered the right path to the end. They cannot
-        // leave the interrogation loop until then, and once they do hit the end they have only the option to leave.
-        // This is likely to change- I'll reformate some things as to not possibly trap the player in an encounter they
-        // cant possibly finish with the information they have. So.... TODO
         /// <summary>
         /// Test conversation that most all interrogations will be based on. Reference txt file for conversation flow.
         /// </summary>
@@ -125,22 +121,23 @@ namespace UnwarrantedTools
 
                     if (interrogationPresent.Equals("To-do List: ????"))
                     {
-                        Interrogation(MaridethPath, 0, 0, 2);
+                        Interrogation(MaridethPath, 33, 2, 2);
                         ReplyCheck();
                     }
-                    else if (interrogationPresent.Equals(File.ReadLines(MaridethPath).ElementAt(0)))
+                    else if (interrogationPresent.Equals(File.ReadLines(MaridethPath).ElementAt(7)))
                     {
-                        Interrogation(TestNPCPath, 0, 0, 3);
+                        Interrogation(MaridethPath, 28, 3, 3);
                         okToGo = true;
+                        silent = true;
+                        Console.WriteLine("[Any Key] Continue...");
+                        Console.ReadKey();
                     }
                     else if (interrogationPresent.Equals(","))
                     {
-                        Console.WriteLine("Come on Jack stop messing around.");
+                        Console.WriteLine("\n\nCome on Jack stop messing around.");
                         silent = true;
                     }
-                    else if (interrogationPresent.Equals("."))
-                    {
-                    }
+                    else if (interrogationPresent.Equals(".")) ;
                     else
                     {
                         Console.WriteLine("That doesn't really mean anything to me.");
@@ -150,11 +147,26 @@ namespace UnwarrantedTools
                     {
                         switch (interrogationLine)
                         {
-                            case 1:
-                                Interrogation(MaridethPath, 0, 0, 2);
+                            case 3:
+                                Interrogation(MaridethPath, 10, 3, 2);
+                                ReplyCheck();
+                                break;
+                            case 4:
+                                Interrogation(MaridethPath, 14, 3, 2);
+                                ReplyCheck();
+                                break;
+                            case 6:
+                                Interrogation(MaridethPath, 18, 2, 2);
+                                ReplyCheck();
+                                break;
+                            case 7:
+                                Interrogation(MaridethPath, 21, 5, 2);
                                 ReplyCheck();
                                 break;
                             case 998:
+                                Console.WriteLine("\nWhere do you think you're going? You better know what you're doing Jack...");
+                                Console.WriteLine("[Any Key] Continue...");
+                                Console.ReadKey();
                                 okToGo = true;
                                 break;
                             case 999:
@@ -167,7 +179,9 @@ namespace UnwarrantedTools
                     Console.WriteLine();
                 }
             }
+            Console.Clear();
         }
+
 
     }
 }

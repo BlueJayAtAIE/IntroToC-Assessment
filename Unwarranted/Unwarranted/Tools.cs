@@ -224,7 +224,6 @@ namespace UnwarrantedTools
                                 interrogationLine = 998;
                             }
                             interrogationPresent = ".";
-                            Console.Clear();
                             okToGo = true;
                         }
                         else

@@ -6,4 +6,30 @@ But first- I hope you still remember how to- you know- do your job?
 So I'm gonna give you a little quiz first before I let you go.
 See the commands below? Type the letter in the brackets [] to execute it.
 Try them all out, then repeat this line back to me.
-[Above: lines 0-7]
+
+[Inquire line 3, 4, 6, 7]
+After you're wrapped up here just go over to the table and check it out.
+Be sure to pick it up before you leave too- you're gonna need it.
+If you have no idea what to do with it, show it to me once you have it.
+
+I think you'll get the hang of things again. You better.
+Rent's due in like 2 weeks Jack- and I bet if you crack this we'll be set.
+And also I guess... It'll help some people or whatever.
+
+Don't mind my first wall break.
+Also good job on following instructions.
+
+If you have no idea how to, go back (press [S]), then press [R] to enter record mode.
+While in this mode, enter the number to the left of the line- in this case 7.
+After you've recorded it, press [W]. You can only do this from the main conversation page.
+You'll open your notebook to see everything you've written.
+Once you close it, enter the number to the left of the entry you want to share to repeat it to me.
+
+[Present line 7]
+Perfect. Now don't forget to inspect and take the paper on the table.
+If you still want practice with the commands, come back to me any time.
+Oh and if you don't know what to do from here- show me the item once you've picked it up.
+
+[Present Placeholder Todo Text]
+That To-do list of yours is about to get a lot bigger.
+Anyways- stop messing around.
