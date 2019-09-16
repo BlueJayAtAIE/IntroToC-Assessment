@@ -1,1 +1,74 @@
-[General Game Info - Starts line 1, goes for x lines]
+[General Game Info - Starts line 1, goes for 9 lines]
+Hello! Thanks for checking out the game this far.
+If you've gotten this far you know to navigate the world by using the letters in brackets.
+A good start, but things are going to get much more complicated later.
+To start, seek out those who seem most suspicious- present the poster around and gauge reactions.
+People may be willing to share more, sometimes out of kindness- others need a bribe...
+You have a very strong power: information. Present the right facts to the right people.
+It may shock you to see how people react to you knowing so much.
+They may even fight you. In which case you better have gone to equip some Spellstones... or...
+I hope you've saved your game recently.
+
+[The Citadel of Lux - Starts line 11, goes for 5 lines]
+This book talks about the founding of the Citadel. How the Great Wall was built up around it.
+Several pages are dedicated to how wonderful the past kings of Lux have been.
+All the wonders the city has brought, yada yada.
+Theres a page in here graphiti'd with the drawing of a simple feather.
+Theres nothing else good in here.
+
+[Humans - Starts line 19, goes for 5 lines]
+It's a biology textbook on the Human race.
+You're fairly certain you know all there is to know in this book. Wink Wonk.
+No but seriously its also a comprehensive book on general anthropology and history.
+You put it back without thinking about it too much. Too boring.
+
+[Wildfolk - Starts line 25, goes for 6 lines]
+It's a book about the biology and history of the Wildfolk.
+Wildfolk are a race more in-tune with the natural world. 
+Supposedly one of the first of the races made by The First Four- the Wildfolk being Seh'novis' children.
+While fairly human-like, from their waist down their torsos are furred, and they either have
+cloven hooves or paws in place of where their feet should be.
+Their ears are also much larger, to hear the whispering of forests they came from.
+
+[Chimerics - Starts line 33, goes for 8 lines]
+It's a book about Chimerics- their history and biology.
+Written Chimeric history is fairly new despite them being one of the first of the races.
+Created by the god Neth'arum, the Chimerics were incomplete upon creation due to Neth 
+not having any true powers of creation himself.
+Being created inherently without some limbs or organs, Neth'arum instead used some of his
+power to infuse the Chimeric people with lesser animals- replacing the parts they had lost.
+As a result some Chimerics look like a jumble of human and animal features.
+Some to a more frightening effect than others. Such as "X class" Chimerics.
+
+[Terrians - S line 43, E in 7 lines]
+This book is about Terrian history and biology.
+Terrians were a race of insectiod like people thought to have gone extinct.
+Long before the First Flare that wiped out the planet's electromagnetic field, Terrians were
+tinkerers and scientists- some of the few able to read the now lost language of Machines.
+Durring the re-excavation of the Chimeric city of Dystor, a tunnel caved and lead to a
+stronghold dug out by Terrians that had been living underground for hundreds of years.
+Now they've rejoined surface dwellers, attempting to remaster Electricity.
+
+[Dragons - S line 52, E in 6 lines]
+This book is about the Dragonians and their origins.
+Or- you thought? This seems to be more of a critique on their ways of life.
+Harsh critique is thrown onto the concept of the Name Hierarchy.
+This is the concept that dragons block oppertunities off to each other depending on their names and lineage.
+The book is written by someone named Ceburn- of course a name low in the hierarchy.
+Almost sad to see... Wait this is still in the wrong section though.
+
+[Fuor - 60, for 6]
+It's a book about the god FuorO'for. Fuor has the most diverse interpretations of The First Four.
+In some views gentle and nurturing like a mother bird, in others savage and a trickster like a crow.
+Under the rule of Dysterox's Elemental, the Chimerics made an interesting interpretation of Fuor.
+This interpretation is called The King. The King is manipulating and spiteful.
+According to legend The King will return to the realm of morals and spare only his followers.
+Those who follow The King are not known- its thought to be a dying or dead religion, even amongst Chimerics
+
+[Seno - 68, for 6]
+It's a Book about the god Seh'Novis. Seno is the youngest of The First Four, and a gentle child-like god.
+Seno is often depicted as the protagonist of fables involving early life lessons, as small kids relate to her.
+Seno is said to be the one who had a hand in painting the night sky- purely by spilling ink across a canvas.
+Fuor and Seno have a contentious relationship through multiple religions.
+In some, Seno is the adoptive daughter of Fuor, and the two are inseperable.
+In others, Seno and Fuor share a time of birth, and are utmost rivals. This is seen more often in The King mythos.

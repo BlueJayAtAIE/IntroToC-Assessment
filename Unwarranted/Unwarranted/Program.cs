@@ -14,8 +14,14 @@ namespace Unwarranted
     {
         static void Main(string[] args)
         {
+            Load();
             Console.WriteLine("                    UNWARRANTED");
             Console.WriteLine("\n[N]ew game                             [L]oad game");
+            Console.WriteLine("\n\nAchievements: ");
+            if (endingsObtained[0]) Console.WriteLine("\tSquashed - Exposed Kog as the perpetrator.");
+            if (endingsObtained[1]) Console.WriteLine("\tLove to Hate You - Discovered Feri to be the culprit.");
+            if (endingsObtained[2]) Console.WriteLine("\tDragon Slayer - Proved Seren to be the transgressor.");
+            if (endingsObtained[3]) Console.WriteLine("\tUnder the Guise - Exposed Rutherian as the mastermind behind the kidnappings.");
             while (userInputChar != 'n' && userInputChar != 'l')
             userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
             {
@@ -29,11 +35,13 @@ namespace Unwarranted
                         MaridethOpeningInterrogation();
                         break;
                     case 'l':
-                        Load();
+                        Console.Clear();
                         break;
 
                 }
             }
+
+            TimeDisplay();
 
             // This is the main game loop
             while (true)
@@ -133,7 +141,7 @@ namespace Unwarranted
 //Console.WriteLine("THIS IS A UNICODE CHARACTER TEST. DELETE THIS LATER FUTURE SELF.");
 //Console.WriteLine("\nPIPES: ═ ║ ╒ ╓ ╔ ╕ ╖ ╗ ╘ ╙ ╚ ╛ ╜ ╝ ╞ ╟ ╠ ╡ ╢ ╣ ╤ ╥ ╦ ╧ ╨ ╩ ╪ ╫ ╬ \n\nBOXES: ▀ ▄ █ ▌ ▐ ░ ▒ ▓ ■");
 //
-// TODO: find Seren a better name. I thought of one forever ago but forgot to write it down... It's to similar to Selene
+// TODO: find Seren a better name. I thought of one forever ago but forgot to write it down... It's too similar to Selene
 //
 //
 //

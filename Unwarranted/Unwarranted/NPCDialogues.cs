@@ -139,7 +139,10 @@ namespace UnwarrantedTools
                         Console.WriteLine("\n\nCome on Jack stop messing around.");
                         silent = true;
                     }
-                    else if (interrogationPresent.Equals(".")) ;
+                    else if (interrogationPresent.Equals("."))
+                    {
+
+                    }
                     else
                     {
                         Console.WriteLine("That doesn't really mean anything to me.");
@@ -184,12 +187,75 @@ namespace UnwarrantedTools
             Console.Clear();
         }
 
+        public static void MaridethInterrogation()
+        {
+            Console.Clear();
+            okToGo = false;
+            firstLoop = true;
+            while (!okToGo)
+            {
+                Interrogation(MaridethPath, 38, 4, 1, "Marideth");
+                ReplyCheck();
+
+                void ReplyCheck()
+                {
+                    bool silent = false;
+
+                    if (interrogationPresent.Equals("To-do List: ????"))
+                    {
+                        Interrogation(MaridethPath, 33, 2, 2, "Marideth");
+                        ReplyCheck();
+                    }
+                    else if (interrogationPresent.Equals(keyItems[0].name))
+                    {
+                        Interrogation(MaridethPath, 44, 4, 3, "Marideth");
+                        okToGo = true;
+                        Console.WriteLine("[Any Key] Continue...");
+                        Console.ReadKey();
+                    }
+                    else if (interrogationPresent.Equals(","))
+                    {
+                        Console.WriteLine("\n\nCome on Jack stop messing around.");
+                        silent = true;
+                    }
+                    else if (interrogationPresent.Equals("."))
+                    {
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("That doesn't really mean anything to me.");
+                    }
+
+                    if (!silent && !okToGo)
+                    {
+                        switch (interrogationLine)
+                        {
+                            case 998:
+                                Console.WriteLine("\nCya later Jack. I'm counting on you to finish this case. You owe me. Money. Rent's due in a week.");
+                                Console.WriteLine("[Any Key] Continue...");
+                                Console.ReadKey();
+                                okToGo = true;
+                                break;
+                            case 999:
+                                break;
+                            default:
+                                Console.WriteLine("I have no idea what to tell you.");
+                                break;
+                        }
+                    }
+                    Console.WriteLine();
+                }
+            }
+            Console.Clear();
+        }
+
         // Methods for Object interrogation ---------------------------------------------------------------------------------------
         public static void MissingPosterInspect()
         {
             Console.Clear();
             Console.WriteLine("On the table lies a Missing Persons flyer. You note a few important details:");
-            Interrogation(ObjectTextPath, 1, 3, true, "Missing Person Poster");
+            Interrogation(ObjectTextPath, ((KeyItem)keyItems[0]).textStart, ((KeyItem)keyItems[0]).textDurration, ((KeyItem)keyItems[0]).canPickup, ((KeyItem)keyItems[0]).name, 0);
         }
     }
 }
