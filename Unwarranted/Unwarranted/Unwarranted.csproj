@@ -64,6 +64,9 @@
     <Content Include="NPC Dialogues\MaridethTalk.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="NPC Dialogues\MinorNPCsTalk.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="NPC Dialogues\objectFlavortext.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

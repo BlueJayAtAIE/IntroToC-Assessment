@@ -21,11 +21,13 @@ namespace UnwarrantedTools
         public static char userInputChar;
 
         // For things reflecting gameplay (money, map progress, current state, HP)
-        public static int money = 50; //Player always starts a game with 50 Muns
+        public static int money = 50; // Player always starts a game with 50 Muns
         public static bool discoveredMarket;
         public static bool discoveredHideout;
+        public static bool givenFreeMoney = false;
+        public static bool stoleFreeMoney = false;
         public static bool inBattle = false;
-        public static int HP = 25;
+        public static int HP = 25; // Max HP is 25
         static bool chargeTurn = false;
         static AttackEffect playerStatus;
         static AttackEffect opponentStatus;
@@ -53,7 +55,8 @@ namespace UnwarrantedTools
 
         public static Item[] keyItems = new Item[]
         {
-            new KeyItem("Missing Person Poster", 0, 1, 3, true), new KeyItem("Dummy", 1, 0, 0, true), new KeyItem("Dummy2", 1, 0, 0, true)
+            new KeyItem("Missing Person Poster", 0, 1, 3, true), new KeyItem("Bird Mask", 1, 6, 3, true), new KeyItem("Pure Etheris Vial", 2, 11, 3, true),
+            new KeyItem("Stained Dagger", 3, 16, 3, true), new KeyItem("Free Sample of Cram", 4, 21, 3, true),  new KeyItem("Broken Bottle", 5, 0, 0, true)
         };
 
         // Endings: 1: Kog, 2: Feri, 3: Seren, 4: Rutherian
@@ -62,6 +65,7 @@ namespace UnwarrantedTools
         // For file paths
         private static string notebookPath = "Player/notebook.txt";
         private static string saveFilePath = "Player/save.txt";
+        public static string libraryBooksPath = "NPC Dialogues/libraryBooks.txt";
 
         private static string line;
 
@@ -87,16 +91,15 @@ namespace UnwarrantedTools
             Console.WriteLine("-------------------------------------------------------------------------------------------------------------");
             // Commands are needed as follows: 
             // State 1: Record, Clarify, Silent, Present (x2), Leave
-            // State 2: Record, Clarify (+alt text), Silent (+alt text)
+            // State 2: Record, Silent (+alt text)
             // State 3: (+alt text), Record, Leave
             if (convoState == 3) Console.WriteLine("+ J a c k p o t +\n");
             Console.WriteLine("[R]ecord line");
-            if (convoState != 3) Console.Write("[C]larify");
-            if (convoState == 2) Console.Write(", then back to main");
-            if (convoState != 3) Console.Write("\n[S]tay silent");
+            if (convoState == 1) Console.WriteLine("[C]larify");
+            if (convoState != 3) Console.Write("[S]tay silent");
             if (convoState == 2) Console.Write(" (back to main)");
             if (File.ReadLines(notebookPath).Count() > 0 && convoState == 1) Console.WriteLine("\nPresent [W]ritten evidence");
-            if (convoState == 1) Console.WriteLine("Present [P]hysical evidence");
+            if (convoState == 1 && KeyItemCheck()) Console.WriteLine("Present [P]hysical evidence");
             if (convoState != 2) Console.WriteLine("[L]eave conversation\n");
 
             bool okToGo = false;
@@ -115,11 +118,11 @@ namespace UnwarrantedTools
                         }
                         else
                         {
-                            Console.WriteLine("Invalid input!");
+                            Console.WriteLine("\nInvalid input!");
                         }
                         break;
                     case 'c':
-                        if (convoState != 3)
+                        if (convoState == 1)
                         {
                             Console.Write("\nEnter the number of the line you wish to ask clarification about> ");
                             int.TryParse(Console.ReadLine(), out userInputInt);
@@ -132,12 +135,12 @@ namespace UnwarrantedTools
                             }
                             else
                             {
-                                Console.WriteLine("Invalid input!");
+                                Console.WriteLine("\nInvalid input!");
                             }
                         }
                         else
                         {
-                            Console.WriteLine("Invalid input!");
+                            Console.WriteLine("\nInvalid input!");
                         }
                         break;
                     case 's':
@@ -148,7 +151,7 @@ namespace UnwarrantedTools
                         }
                         else
                         {
-                            Console.WriteLine("Invalid Input!");
+                            Console.WriteLine("\nInvalid Input!");
                         }
                         break;
                     case 'w':
@@ -160,11 +163,11 @@ namespace UnwarrantedTools
                         }
                         else
                         {
-                            Console.WriteLine("Invalid input!");
+                            Console.WriteLine("\nInvalid input!");
                         }
                         break;
                     case 'p':
-                        if (convoState == 1)
+                        if (convoState == 1 && KeyItemCheck())
                         {
                             InterrogationPresentItem();
                             interrogationLine = 999;
@@ -172,7 +175,7 @@ namespace UnwarrantedTools
                         }
                         else
                         {
-                            Console.WriteLine("Invalid input!");
+                            Console.WriteLine("\nInvalid input!");
                         }
                         break;
                     case 'l':
@@ -189,7 +192,7 @@ namespace UnwarrantedTools
                         }
                         else
                         {
-                            Console.WriteLine("Invalid input!");
+                            Console.WriteLine("\nInvalid input!");
                         }
                         break;
                     default:
@@ -234,7 +237,7 @@ namespace UnwarrantedTools
                         }
                         else
                         {
-                            Console.WriteLine("Invalid input!");
+                            Console.WriteLine("\nInvalid input!");
                         }
                         break;
                     case 't':
@@ -441,7 +444,6 @@ namespace UnwarrantedTools
         public static void TimeUp()
         {
             // Aw beans.
-            Console.WriteLine("\nThe top hour of the final day has commenced... your time is up.");
             Console.WriteLine("You can [R]eload a previous save, [S]tart a new save, or [Q]uit.");
             bool okToGo = false;
             while (!okToGo)
@@ -469,7 +471,7 @@ namespace UnwarrantedTools
 
         // Methods for Inventory Management ----------------------------------------------------------------------------------------------
         ///<summary>
-        /// TODO
+        /// Opens the player's inventory, allowing them to look through their notebook and item lists.
         /// </summary>
         public static void OpenInventory()
         {
@@ -590,6 +592,21 @@ namespace UnwarrantedTools
         }
 
         /// <summary>
+        ///  Check to see if the playee actually has any Key Items in their inventories.
+        /// </summary>
+        /// <returns></returns>
+        public static bool KeyItemCheck()
+        {
+            bool anyItems = false;
+            foreach (KeyItem k in keyItems)
+            {
+                if (k.playerObtained == true)
+                    anyItems = true;
+            }
+            return anyItems;
+        }
+
+        /// <summary>
         /// Displays the player's CURRENTLY EQUIPT attack runes.
         /// </summary>
         public static void AttackDisplay()
@@ -684,7 +701,11 @@ namespace UnwarrantedTools
 
         // Methods for BATTLE ------------------------------------------------------------------------------------------------------------
         /// <summary>
-        /// TODO: Begins a battle loop.
+        /// Begins a battle loop.
+        /// When the player's HP is 0, the battle ends kicking them back to their last save.
+        /// When the opponent's HP is 0, the battle ends with the player winning.
+        /// TODO: Right now, the battle ends restoring the player's HP. This should be done elsewhere, as after the 
+        /// battle concludes the location it's called in will check the hp to determine what happens next.
         /// </summary>
         /// <param name="battleName">Name of the battle to call. Reference Opponent.cs for opponent names.</param>
         public static void Battle(string battleName)
@@ -700,10 +721,11 @@ namespace UnwarrantedTools
             if (opponent.opponentHP <= 0)
             {
                 Console.WriteLine($"{opponent.opponentName} lies before you inpacacitated.");
-                if (opponent.opponentName == "The Thug")
+                if (opponent.opponentName == "The Thug" && !stoleFreeMoney)
                 {
                     Console.WriteLine("You quietly pickpocket the thug for 50 Muns. What? He stole it anyways...");
                     money += 50;
+                    stoleFreeMoney = true;
                 }
                 Console.WriteLine("[Any Key] Continue...");
                 Console.ReadKey();
@@ -939,7 +961,8 @@ namespace UnwarrantedTools
         }
 
         // Methods for Saving and Loading ------------------------------------------------------------------------------------------------
-        // Items saved to the save.txt should be in this order: Days, Hours, Minutes, Money, Masked Market found?, Hideout found?, Ending progress, Battle Item progress, Key Item progress
+        // Items saved to the save.txt should be in this order: 
+        // Days, Hours, Minutes, Money, Masked Market found?, Hideout found?, Ending progress, Battle Item progress, Key Item progress
         /// <summary>
         /// Clears all save, notebook, and inventory data.
         /// </summary>
@@ -952,6 +975,16 @@ namespace UnwarrantedTools
             money = 50;
             discoveredMarket = false;
             discoveredHideout = false;
+            givenFreeMoney = false;
+            stoleFreeMoney = false;
+            foreach (BattleItem b in battleRunes)
+            {
+                b.playerObtained = false;
+            }
+            foreach (KeyItem k in keyItems)
+            {
+                k.playerObtained = false;
+            }
             // Player always starts with Empty, Basic and Stun attacks
             battleRunes[0].playerObtained = true;
             ((BattleItem)battleRunes[0]).equipt = true;
@@ -984,6 +1017,8 @@ namespace UnwarrantedTools
             writer.WriteLine(money);
             writer.WriteLine(discoveredMarket);
             writer.WriteLine(discoveredHideout);
+            writer.WriteLine(givenFreeMoney);
+            writer.WriteLine(stoleFreeMoney);
             foreach (bool b in endingsObtained)
             {
                 writer.WriteLine(b);
@@ -1014,6 +1049,8 @@ namespace UnwarrantedTools
                 int.TryParse(reader.ReadLine(), out money);
                 discoveredMarket = Convert.ToBoolean(reader.ReadLine());
                 discoveredHideout = Convert.ToBoolean(reader.ReadLine());
+                givenFreeMoney = Convert.ToBoolean(reader.ReadLine());
+                stoleFreeMoney = Convert.ToBoolean(reader.ReadLine());
                 while (reader.EndOfStream == false)
                 {
                     for (int i = 0; i < 4; i++)

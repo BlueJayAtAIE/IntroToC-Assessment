@@ -49,6 +49,7 @@ namespace Unwarranted
                 // Checks the time to see if the final day has hit. If it has, the game over state will start.
                 if (timeDays >= 8 && !inBattle)
                 {
+                    Console.WriteLine("\nThe top hour of the final day has commenced... your time is up.");
                     TimeUp();
                     if (timeUp)
                     {

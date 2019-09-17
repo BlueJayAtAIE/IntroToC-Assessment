@@ -1,0 +1,185 @@
+CERIS [LINES 2 THROUGH 28] ----------------------------------------------------------------------------------------------------------------
+[Base Conversation]
+Ay Jack's back. Comin' in for another round?
+Oh yeah- Rat was here a while back. He was braggin' about having dirt on Kog. Go ask him about it.
+I can't really ever trust the guy. I think he knows I like gossip enough t'forget to be on 'is ass about his tab.
+Also, you seen Arthur around? I know it's hard to find him sometimes.
+
+[Inquire line 3]
+You don't know Kog? Are you drunk again? You haven't bought one thing and I need to cut ya off already.
+Kog is the Terrian who runs the workshop down by the docks.
+He makes Etheris powered machines to help with minin' new ores.
+I don't quite remember why Rat was goin' off about 'im. I stopped paying attention.
+
+[Inquire line 5]
+Hes been goofing off again somewhere- maybe not even in this plane.
+If you see him, tell him hey. And to get back over here. I'm bored. Day's slow.
+
+[Show Missing Persons Poster]
+Hm? I've seen this guy around before. Ya'know they're not the first Chimeric to just up and disappear?
+Nah this has been a regular thing. I chalk it up t'general stigma.
+I think this guy worked as onea the freight company workers.
+They work out of the docks, takin' stuff up to the Inner Ring an... stuff.
+Whats with the feather though?
+
+[Show lines 62, 63, 64, 65, or 73 from libraryBooks]
+Ah dude get that sh-stuff outta here.
+I hate hearing about The King- it's a gross stereotype that all Chimeric believe 'im.
+Although, truth be told- I did once.
+Now don't go twistin' my words Monty- I'm done with that life. Borderline cult.
+I'm sure there's still plennya suckers in there though. Good luck finding them- they hide in plain sight...
+
+ARTHUR [LINES 32 THROUGH 72] -----------------------------------------------------------------------------------------------------------------
+[Base conversation (Library)]
+Greetings inspector- or- Jack. Just Jack.
+How has life been treating you?
+I have been flitting between here and there so really I just keep losing track of your whereabouts.
+Have you started your next case yet? Have you concluded it? I hope you find the culprit is not me.
+Of course, I am not, but how amusing would that be?
+I am too busy Wandering the planes searching for tales to tell.
+
+[Inquire line 35]
+We both know I need to be constantly traveling for fuel for my lastest works.
+Being a world renouned author is an undertaking, but I am humble enough to manage~
+
+[Inquire line 38]
+Come on Jack- you must know this by now? Have you forgotten everything?
+Is this exposition just a plot device for a shoddy school assignment?
+I am in the unfortunately fortunate position of being in posession of enough magic to leave.
+As in- leave this reality. Into another. And trust me, there is plenty to see.
+Most of my work details everything I have seen in all my traveling.
+But don't tell that to the audience back on Terra... I do not think they could comprehend that.
+And while this has made me sucsessful- it also comes with one major drawback:
+Time itself flows differently for me- since I can be any where at any time.
+Maybe this doesn't sound bad... But it is so hard to keep track of! To prevent... spoilers.
+I may see you later today- to you- it could be any time for me. We shall see!
+
+[Present line 15 from minorNPCsTalk]
+Oh- I will be back soon. He knows I am always back before long.
+I bet he thinks I am much further than I am- truth be told I was too lazy to Wander today.
+
+[Present Missing Person Poster]
+I cannot tell you anything about this. As I have no way to know when I am.
+I cannot be giving you any kind of spoilers... especially after last time.
+Or has that not happened yet?
+
+[Base conversation (Square)]
+Greetings again Jack! Or maybe this is the first time we have spoken today? Hm.
+Oh yes that gets confusing. Reguardless, good luck in whatever case it is you are pursuing.
+Unless you are not doing that anymore? But then you resu- wait- spoilers.
+
+[Present Missing Person Poster]
+(Reference library dialogue).
+
+SELENE [LINES 74 THROUGH 95] -------------------------------------------------------------------------------------------------------------------------------------
+Morning Jack!! Or afternoon... or evening. I can't be bothered to check the time.
+Oh oh Marideth told me you're starting a new case!! How exciting~
+If you need ANYTHING I'll be here to try my best to help! If I know something anyways.
+Certainly I'd be more more help to you than Arthur...
+
+[Inquire line 77]
+I'm very mad at Arthur! To know he can just pop into the future and come back.
+He could be solving so many problems, all by telling us how to avoid them!!
+I know it's not nearly that simple... but I can't help but think he could be doing more.
+More than just profiting off the history of other worlds- marketing it as "fiction".
+
+[Present Missing Person Poster]
+Hmm... I've seen this Chimeric before... They work for the company that transports goods from the docks.
+I think that Chimeric helps manage the cargo going to and from the Inner Ring.
+Try some of the people there. I know those guys are hard to talk to but they've just gotta know something!!
+
+[Show line 15 from libraryBooks]
+AUGH- Thanks for bringing this to attention Jack...
+I'm so sick of people RUINING the books here!! Do they realize how old some of these are?
+I'm not even sure who could be doing it... But I've seen that feather around before.
+I don't think it means anything really?- Just a simple design people can replicate easily.
+
+SPROCKET [LINES 97 THROUGH 109] -------------------------------------------------------------------------------------------------------------------------------
+Heya Inspector Montenegro! On your way to the Pen & Dragon again?
+Or maybe you came to watch little old me play! No? Alright. That's fair.
+Hey hey hey have you been to Feri's Palace yet? It's pretty close to the Pen & Dragon.
+Iii knooow it's not really your thing- but! You should mix it up every now and again.
+Plus... maybe you could uh... help me sneak in so I can watch Feri preform. She's so cool...
+
+[Inquire lines 99 and 101]
+You don't know about Feri?! Shes a singer- no- an Artist~ So inspiring...
+Uhm- saddly the Palace is very restrictive of who gets let in...
+And uh- I guess Half Breeds like me aren't on the list- so I can't get in.
+I tried a disguise once but uh... I got too eager and at some point messed up and got caught.
+Chimerics are also on the non-entry list, which is really unfair! They get pushed around enough as is...
+If I could enter, I'd try to appeal to management- I bet it's not Feri who asked for this!
+
+RAT [LINES 112 THROUGH 130] -------------------------------------------------------------------------------------------------------------------------------------------
+Jackyyyy boyy... what're you doin around here in this place?
+The folk in this place'll eat you up- you need someone awesome and couragous like me to help you.
+Oh also- you got any Muns on you? I need some change for uh... a friend.
+Or we could talk about something else... wanna take a stab at what I found out?~
+
+[Inquire line 115]
+Noo I'm not gonna just TELL YOU thats no fuuun...
+I'm sure I've blabbed about it to someone- go ask them and come back to me when you figured it out.
+
+[Present line 3 from minorNPCsTalk {Jackpot}]
+Ooooh you heard from Ceris huh?~
+Alright- ye'ver heard of the place people go to buy and sell... less savory items?
+Contraband- like exotic animals, Spellstones of a higher grade, organs and stuff.
+If you get into contact with Kog somehow- ask him about the Masked Market.
+Word is he's been selling some of his invovative tech to enemy countries for big bucks.
+Not only that but he's using filtered Pure Etheris in some of his stuff- y'know how they get that?
+Two ways- a looong boring distilling process with liquid Etheris...
+Or you extract it from magical creatures...
+ANYWAAAAYS I've said enough. Go find some stuff out on your own for a change. Freeloader.
+
+RUBINIA [LINES 133 THROUGH 144] -------------------------------------------------------------------------------------------------------------------------------------
+Good day inspector. Hope you're doing well enough.
+You're probably looking for my husband Rutherian, he's in the next room over.
+Unless theres something you want to ask me...?
+
+[Present Missing Person Poster]
+Oh dear... another one? It's so dangerous for Chimerics like us to live here in Lux.
+I feel more safe with everything here in the Inner Ring but... The Outter City?
+It's far too dangerous.
+
+[Present Pure Etheris Vial or Stained Dagger]
+Where did you find this?...
+This is gross... This better not be from a Chimeric.
+
+DOCKS WORKER [LINES 147 THROUGH 154] -------------------------------------------------------------------------------------------------------------------------------------
+Kinda busy here. Unless you have something worth my time, scram.
+
+[Resent Missing Person Poster]
+Woah- I can't believe it- its them.
+Okay look- I had nothing to do with it I just worked with the guy. 
+He worked the Inner Ring- He made deliveries to some Dragon named uuuh... started with.
+C? No thats not right- A dragon with a name like that wouldn't live in the Inner Ring.
+Anyways, just seek them out.
+
+BEAK-MASK [LINES 157 THROUGH 180] ---------------------------------------------------------------------------------------------------------------------------------------
+Greetings travler... Yes yes... Have you come to listen to me preach the ways of Our Lord, The King?
+Or maybe... You're here to view my wares? YOU WILL BUY MY WARES yes.
+
+[Inquire first line]
+I was once in the coven of The King yes... BUT THEY LEFT ME they kicked me out...
+I was cast aside- my use had expired. I gave them EVERYTHING (except my wares).
+Their motives- their ways- they have been evolving since the rise of our New Leader.
+He IMPOSSIBLY claims to be more powerful than The King himself. Yes yes this is BLASPHEMOUS.
+You will find him because you have found him... But do not provoke him.
+He is full of wrath and wishes to mess with the order of LIFE ITSELF. Or Death itself Yes.
+...To become an X Class Chimeric... one would first have to brave death after all.
+
+[Inquire last line]
+Yes yes I am selling CRAM. I am selling multiple Crams very different flavors. Yes yes.
+I have Raspberry, Berry, and VERY BERRY.
+(I reccomend the Very Berry it is like Berry, only VERY).
+ONLY 20 Gold Coins for ONE... BUCKET OF CRAM I sell them by the bucket.
+You will receive Cram for paying me 20 Gold Coins!
+PAY THE COIN you will receive the Raspberry, Berry or VERY BERRY Cram.
+WHAT is Cram you ask? What is it made of?
+...
+...
+...
+... The question confuses me...
+
+UNIVERSAL REACTIONS [LINES 184 THROUGH X] ------------------------------------------------------------------------------------------------------------------------------
+[Present Free Sample of Cram]
+What is that stuff? Get it out of here!

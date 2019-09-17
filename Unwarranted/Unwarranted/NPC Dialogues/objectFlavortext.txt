@@ -3,4 +3,22 @@ The person on the poster is a Chimeric, and they have horns above their ears.
 The poster is dated about 2 weeks ago.
 There is graphiti on the poster that looks like the simple outline of a feather.
 
-[Object - Starts line 5, goes on for x lines]
+[Bird Mask - Starts line 6, goes on for 3 lines]
+It's an inticately carved ivory beak mask.
+Black feathers adorn the edges of the mask, and small purple jewels are inset on the forehead.
+It fits your head a little snug, but not too bad.
+
+[Stained Dagger - Starts line 11, goes on for 3 lines]
+The dagger dropped by Feri after step used it to stab her attacker.
+Rather than blood the dagger is covered in liquid Etheris. Few racses bleed Etheris,
+Meaning Feri's Attacker was a Chimeric or a Dragonian.
+
+[Pure Etheris Vial - Starts line 16, goes on for 3 lines]
+A vial of Pure Etheris found in Seren's Lab.
+At this concentration, it's impossible to tell its its distilled or animal in origin.
+If it is animal in origin- it's certainly not from Seren himself considering the color.
+
+[Free Sample of Cram - Starts line 21, goes on for 3 lines]
+A mysterous substance obtained from the Beak-Mask in the Masked Market.
+It's dark redish-purple, jelly-like, and smells of berry. Very berry.
+You're not even sure what it's used for but you hate looking at it.
