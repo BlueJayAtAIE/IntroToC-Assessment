@@ -54,7 +54,6 @@ namespace Unwarranted
                 }
             }
 
-            TimeDisplay();
 
             // This is the main game loop.
             while (true)
@@ -71,6 +70,7 @@ namespace Unwarranted
                 }
 
                 Console.Clear();
+                TimeDisplay();
 
                 // Big scary switch for navigation.
                 switch (GetLocation())

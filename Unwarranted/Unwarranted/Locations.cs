@@ -375,6 +375,12 @@ namespace UnwarrantedTools
                             Console.WriteLine("[Any Key] Continue...");
                             Console.ReadKey(true);
                             Battle("Thug");
+                            if (HP > 0)
+                            {
+                                // If the player dies, run this bit.
+                                // This is part of a template for future battles.
+                            }
+                            HP = 25;
                         }
                         else
                         {

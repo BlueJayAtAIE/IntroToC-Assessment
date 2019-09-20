@@ -718,7 +718,6 @@ namespace UnwarrantedTools
         /// Begins a battle loop.
         /// When the player's HP is 0, the battle ends kicking them back to their last save.
         /// When the opponent's HP is 0, the battle ends with the player winning.
-        /// TODO: Right now, the battle ends restoring the player's HP. This should be done elsewhere, as after the 
         /// battle concludes the location it's called in will check the hp to determine what happens next.
         /// </summary>
         /// <param name="battleName">Name of the battle to call. Reference Opponent.cs for opponent names.</param>
@@ -1117,7 +1116,6 @@ namespace UnwarrantedTools
 
                 reader.Close();
                 SetLocation(MapLocations.Home);
-                HP = 25;
                 Console.Clear();
             }
             catch
