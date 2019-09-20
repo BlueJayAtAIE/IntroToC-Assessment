@@ -28,7 +28,7 @@ namespace UnwarrantedTools
 
         public static void Home()
         {
-            Console.WriteLine("\n\n=======================================================================================================================");
+            Console.WriteLine("\n=======================================================================================================================");
             Console.WriteLine("\nHome is home. It barely fits you and your company, but rent's cheap.\nPapers are scattered on tables and the floor. All your pegboards are filled with old cases.\nYou should clean up soon. Especially since Rat keeps coming over to trash the place even more.");
             Console.WriteLine("\nYou can sleep in your bed for a while, or you can talk to Marideth.\nFrom here you can walk to a few places relatively quickly, including a few of the busier parts of town.");
             Console.WriteLine("\nTRAVEL TO: [L]uxxian Great Library, [T]rain Station (Midday Station), [S]unrise Center, [B]right Sqaure");
@@ -70,15 +70,19 @@ namespace UnwarrantedTools
                         okToGo = false;
                         break;
                     case 'l':
+                        MaridethWorry();
                         location = MapLocations.Library;
                         break;
                     case 't':
+                        MaridethWorry();
                         location = MapLocations.TrainB;
                         break;
                     case 's':
+                        MaridethWorry();
                         location = MapLocations.Center;
                         break;
                     case 'b':
+                        MaridethWorry();
                         location = MapLocations.Square;
                         break;
                     case 'm':
@@ -106,12 +110,26 @@ namespace UnwarrantedTools
                         okToGo = false;
                         break;
                 }
+
+                void MaridethWorry()
+                {
+                    Console.Write("\n\n[");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write("Marideth");
+                    Console.ResetColor();
+                    Console.WriteLine("]:");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("Oh- and Jack. Don't forget to equipt Spellstones before you get into a fight.\nIf you get hurt I don't get the money you owe me. Well- I probably will still- but I won't feel good about it.");
+                    Console.ResetColor();
+                    Console.WriteLine("[Any Key] Continue...");
+                    Console.ReadKey();
+                }
             }
         }
 
         public static void Center()
         {
-            Console.WriteLine("\n\n=======================================================================================================================");
+            Console.WriteLine("\n=======================================================================================================================");
             Console.WriteLine("\nYou step into Sunrise Center, and immediately feel overwhelmed by all the vendors shouting.\nThis center is the most well known shopping district in Orrim, known for outfitting adventurers for their travels.\nToo bad you're not really of the hero type.");
             Console.WriteLine("\nAlong with the appeal of shopping, the center is also an easy way to get to the docks.");
             Console.WriteLine("\nTRAVEL TO: [H]ome, [L]uxxian Great Library, [S]hop, Light [A]lley, [D]ocks");
@@ -154,7 +172,7 @@ namespace UnwarrantedTools
 
         public static void Library()
         {
-            Console.WriteLine("\n\n=======================================================================================================================");
+            Console.WriteLine("\n=======================================================================================================================");
             Console.WriteLine("\nEasily the biggest library in all of Orrim, here you can find texts on everything there is to know. Probably.\nSelene, the librarian, is sitting behind the desk. If you don't know where to start ask her for help.");
             Console.WriteLine("\nTRAVEL TO: [H]ome, [S]unrise Center");
             Console.WriteLine("ACTION: [R]ead book, [T]alk to Selene, Talk to [A]rthur");
@@ -244,7 +262,7 @@ namespace UnwarrantedTools
 
         public static void Shop()
         {
-            Console.WriteLine("\n\n=======================================================================================================================");
+            Console.WriteLine("\n=======================================================================================================================");
             Console.WriteLine("\nYou enter one of the few shops in the center of use to you. The only thing they sell here are Spellstones.\nSpellstones are used to augment your attacks, by either changing their strength or giving them additonal effects.");
             Console.WriteLine("\nTRAVEL TO: [S]unrise Center");
             Console.WriteLine("ACTION: [L]ook over wares");
@@ -305,7 +323,7 @@ namespace UnwarrantedTools
 
         public static void Alley()
         {
-            Console.WriteLine("\n\n=======================================================================================================================");
+            Console.WriteLine("\n=======================================================================================================================");
             Console.WriteLine("\nAn entirely ironic name, Light Alley is probably the darkest place in all of the citadel.\nA place for shifty creatures of all kind to do buissiness behind the back of the law.\nThis is the stomping grounds of one of your informants, Rat. Hes hardly a friend; more of a liability.");
             if (!discoveredMarket)
             {
@@ -317,8 +335,12 @@ namespace UnwarrantedTools
                 Console.WriteLine("\nFrom here, you can go back to Sunrise Center, or if you feel like walking into your death, stroll the Masked Market.");
                 Console.WriteLine("\nTRAVEL TO: [S]unrise Center, [M]asked Market");
             }
-            Console.WriteLine("ACTION: Talk to [R]at");
-            Console.WriteLine("[X] Open Inventory");
+            Console.Write("ACTION: Talk to [R]at");
+            if (!stoleFreeMoney)
+            {
+                Console.Write(", Talk to [G]entleman");
+            }
+            Console.WriteLine("\n[X] Open Inventory");
             bool okToGo = false;
             while (!okToGo)
             {
@@ -342,7 +364,23 @@ namespace UnwarrantedTools
                         }
                         break;
                     case 'r':
-                        // TODO
+                        RatInterrogation();
+                        break;
+                    case 'g':
+                        if (!stoleFreeMoney)
+                        {
+                            Console.WriteLine("\n\nHeh heh... heya \"inspector\" Jackylln. You don't think I forgot huh?");
+                            Console.WriteLine("That I forgot how you put away one of my buddies before retiring?- After your weak ass couldn't handle consequenses.");
+                            Console.WriteLine("So lemme teach you a thing or two about karma!");
+                            Console.WriteLine("[Any Key] Continue...");
+                            Console.ReadKey(true);
+                            Battle("Thug");
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nInvalid input!");
+                            okToGo = false;
+                        }
                         break;
                     case 'x':
                         OpenInventory();
@@ -358,7 +396,7 @@ namespace UnwarrantedTools
 
         public static void Docks()
         {
-            Console.WriteLine("\n\n=======================================================================================================================");
+            Console.WriteLine("\n=======================================================================================================================");
             Console.WriteLine("\nLux's only port, and one of only two entrances to the citadel.\nSecurity here is as tight as all other parts of the Wall...\nBut this enforcement only breeds more reason to smuggle in contraband items.");
             Console.WriteLine("\nWalking one way along the water will bring you to The Train Station, while the opposite way is Kog's workshop.\nYou can also make your way down to the Sunrise Center from here- a notable shopping district.");
             Console.WriteLine("\nTRAVEL TO: [T]rain Station (Dusk Station), [S]unrise Center, [K]og's Workshop");
@@ -382,7 +420,7 @@ namespace UnwarrantedTools
                         location = MapLocations.Kog;
                         break;
                     case 'w':
-                        // TODO
+                        DocksInterrogation();
                         break;
                     case 'x':
                         OpenInventory();
@@ -398,7 +436,7 @@ namespace UnwarrantedTools
 
         public static void Square()
         {
-            Console.WriteLine("\n\n=======================================================================================================================");
+            Console.WriteLine("\n=======================================================================================================================");
             Console.WriteLine("\nBright Square certainly lives up to it's name.\nSpellstone Lanterns of all colors illuminate the area- flashing advertisements for the surrounding establishments.");
             Console.WriteLine("\nLux's destination for entertainment, the surrounding area is filled with theatres, taverns, and casinos.\nStreet preformers also dot the way. A friend of yours, Sprocket, preforms here regularly.");
             Console.WriteLine("\nTRAVEL TO: [H]ome, [P]en & Dragon Tavern, [F]eri's Palace");
@@ -422,7 +460,7 @@ namespace UnwarrantedTools
                         location = MapLocations.Feri;
                         break;
                     case 's':
-                        // TODO
+                        SprocketInterrogation();
                         break;
                     case 'a':
                         ArthurInterrogation();
@@ -442,7 +480,7 @@ namespace UnwarrantedTools
 
         public static void Tavern()
         {
-            Console.WriteLine("\n\n=======================================================================================================================");
+            Console.WriteLine("\n=======================================================================================================================");
             Console.WriteLine("\nA run-down bar with the walls showing it's age and a bartender always in a sour mood. It's your second home.\nThe place hasn't been doing so well- being so close to Feri's Palace, an (arguably) better bar.");
             Console.WriteLine("\nThe bar-keep, Ceris, immediately perks up upon seeing you, his favorite regular.\nChat with him if you have the time, or you can exit back to the square.");
             Console.WriteLine("\nTRAVEL TO: [B]right Square, [F]eri's Palace");
@@ -480,9 +518,11 @@ namespace UnwarrantedTools
 
         public static void Kog()
         {
-            Console.WriteLine("\n\n=======================================================================================================================");
+            Console.WriteLine("\n=======================================================================================================================");
+            Console.WriteLine("\nYou step into Kog's Workshop and are greeted by all kinda of humming machines and strange looking contraptions.\nContainers of Etheris and piles of metal objects are strewn about haphazardly.\nYou are yelled at to not touch anything.");
+            Console.WriteLine("\nA Terrian known as Kog owns this workshop- as evident from the title of the place.\nSeeing as the cardo shippment company is so close, he may know something about the missing Chimeric.");
             Console.WriteLine("\nTRAVEL TO: [D]ocks, [M]asked Market");
-            Console.WriteLine("ACTION: ");
+            Console.WriteLine("ACTION: Talk to [K]og");
             Console.WriteLine("[X] Open Inventory");
             bool okToGo = false;
             while (!okToGo)
@@ -498,6 +538,9 @@ namespace UnwarrantedTools
                     case 'm':
                         location = MapLocations.Market;
                         break;
+                    case 'k':
+                        // TODO
+                        break;
                     case 'x':
                         OpenInventory();
                         okToGo = false;
@@ -512,9 +555,11 @@ namespace UnwarrantedTools
 
         public static void Feri()
         {
-            Console.WriteLine("\n\n=======================================================================================================================");
+            Console.WriteLine("\n=======================================================================================================================");
+            Console.WriteLine("As you enter past the bouncer all your senses are assulted at once- you haven't been in a casino this busy in forever.");
+            Console.WriteLine("While so much is going on, its easy to get overwhelemed, but you're only here to see Feri. Don't get side-tracked.");
             Console.WriteLine("\nTRAVEL TO: [B]right Square, [P]en & Dragon Tavern");
-            Console.WriteLine("ACTION: ");
+            Console.WriteLine("ACTION: Talk to [F]eri");
             Console.WriteLine("[X] Open Inventory");
             bool okToGo = false;
             while (!okToGo)
@@ -530,6 +575,9 @@ namespace UnwarrantedTools
                     case 'p':
                         location = MapLocations.Tavern;
                         break;
+                    case 'f':
+                        // TODO
+                        break;
                     case 'x':
                         OpenInventory();
                         okToGo = false;
@@ -544,9 +592,11 @@ namespace UnwarrantedTools
 
         public static void Rutherian()
         {
-            Console.WriteLine("\n\n=======================================================================================================================");
-            Console.WriteLine("\nTRAVEL TO: [T]rain Station (Dawn Station), [H]ideout");
-            Console.WriteLine("ACTION: ");
+            Console.WriteLine("\n=======================================================================================================================");
+            Console.WriteLine("\nOne of the most elaborate buildings in Lux, Rutherian is a wealthy Chimeric who climbed his way to aristocracy.\nHe now invests money into smaller ventures- maybe if you present your case to him he'll support you.");
+            Console.WriteLine("You're guided from the outter gates to the main parlor, where several other people wait to try to stake a claim.\nAfter a bit of waiting, you're allowed to go in and speak.");
+            Console.WriteLine("\nTRAVEL TO: [T]rain Station (Dawn Station)");
+            Console.WriteLine("ACTION: Talk to [R]ubinia, [S]peak with Rutherian");
             Console.WriteLine("[X] Open Inventory");
             bool okToGo = false;
             while (!okToGo)
@@ -559,8 +609,11 @@ namespace UnwarrantedTools
                     case 't':
                         location = MapLocations.TrainC;
                         break;
-                    case 'h':
-                        location = MapLocations.Hideout;
+                    case 'r':
+                        RubiniaInterrogation();
+                        break;
+                    case 's':
+                        // TODO
                         break;
                     case 'x':
                         OpenInventory();
@@ -576,10 +629,14 @@ namespace UnwarrantedTools
 
         public static void Seren()
         {
-            Console.WriteLine("\n\n=======================================================================================================================");
-            Console.WriteLine("\nTRAVEL TO: [T]rain Station (Dawn Station), [H]ideout");
-            Console.WriteLine("ACTION: ");
-            Console.WriteLine("[X] Open Inventory");
+            Console.WriteLine("\n=======================================================================================================================");
+            Console.WriteLine("\nYou walk into the lab, but you're only allowed to enter the lobby before being stopped.\nA receptionist asks for the purpose of your visit. You flash your expired badge long enough for her to think it's real.");
+            Console.WriteLine("\nThe receptionist presses a button, and moments later a Dragonian steps through a door.\nHe introduces himself as Seren, head scientist here at the lab.");
+            Console.WriteLine("\nTRAVEL TO: [T]rain Station (Dawn Station)");
+            Console.Write("ACTION: Talk to [S]eren");
+            if (!keyItems[3].playerObtained) Console.Write(", [I]nspect Area");
+            Console.Write("\n[X] Open Inventory");
+
             bool okToGo = false;
             while (!okToGo)
             {
@@ -591,8 +648,20 @@ namespace UnwarrantedTools
                     case 't':
                         location = MapLocations.TrainC;
                         break;
-                    case 'h':
-                        location = MapLocations.Hideout;
+                    case 's':
+                        // TODO
+                        break;
+                    case 'i':
+                        if (!keyItems[3].playerObtained)
+                        {
+                            ItemInspect(3);
+                            TimeAdvance();
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nInvalid input!");
+                            okToGo = false;
+                        }
                         break;
                     case 'x':
                         OpenInventory();
@@ -608,8 +677,8 @@ namespace UnwarrantedTools
 
         public static void Market()
         {
-            Console.WriteLine("\n\n=======================================================================================================================");
-            Console.WriteLine("\nA series of winding alleys all lead to this small square. Patrons and shopkeeps alike all have something on to conceal their identities.\nVendors display dubious items... you're really not sure if you should be buying anything.");
+            Console.WriteLine("\n=======================================================================================================================");
+            Console.WriteLine("\nA series of winding alleys all lead to this small square.\nPatrons and shopkeeps alike all have something on to conceal their identities.\nVendors display dubious items... you're really not sure if you should be buying anything.");
             Console.WriteLine("\nThere is a Beak-Mask here. With your face covered, you can probably get information from them.");
             Console.WriteLine("\nTRAVEL TO: [L]ight Alley, [K]og's Workshop");
             Console.WriteLine("ACTION: Talk to [B]eak-Mask");
@@ -629,7 +698,7 @@ namespace UnwarrantedTools
                         location = MapLocations.Kog;
                         break;
                     case 'b':
-                        // TODO
+                        BeakInterrogation();
                         break;
                     case 'x':
                         OpenInventory();
@@ -646,8 +715,8 @@ namespace UnwarrantedTools
         //This area wont follow the same rules as some others- since entering is via a story event and so is exiting. rework this- TODO
         public static void Hideout()
         {
-            Console.WriteLine("\n\n=======================================================================================================================");
-            Console.WriteLine("\n[R]utherian's Estate, [S]eren's Lab");
+            Console.WriteLine("\n=======================================================================================================================");
+            Console.WriteLine("\n ");
             bool okToGo = false;
             while (!okToGo)
             {
@@ -672,7 +741,7 @@ namespace UnwarrantedTools
 
         public static void TrainA()
         {
-            Console.WriteLine("\n\n=======================================================================================================================");
+            Console.WriteLine("\n=======================================================================================================================");
             Console.WriteLine("\nYou arrive at Dusk Station. This is the train station by the Docks.\nTaking the train to Midday Station puts you within walking distance of your house.");
             Console.WriteLine("\nThe majority of trains here are cargo trains rather than passenger trains.\nGoods delivered via ship are boarded and taken to all parts of the citadel from here.");
             Console.WriteLine("\nTRAVEL TO: [D]ocks, [T]ake Train to Midday Station");
@@ -705,7 +774,7 @@ namespace UnwarrantedTools
 
         public static void TrainB()
         {
-            Console.WriteLine("\n\n=======================================================================================================================");
+            Console.WriteLine("\n=======================================================================================================================");
             Console.WriteLine("\nYou arrive at Midday Station. This is the train station closest to your house.\nTaking the train to Dusk Station will bring you to the docks, while the Dawn Station train takes you to the Inner Ring.");
             Console.WriteLine("\nTRAVEL TO: [H]ome, [T]ake Train to Dusk Station, [R]ide Train to Dawn Station");
             Console.WriteLine("[X] Open Inventory");
@@ -740,7 +809,7 @@ namespace UnwarrantedTools
 
         public static void TrainC()
         {
-            Console.WriteLine("\n\n=======================================================================================================================");
+            Console.WriteLine("\n=======================================================================================================================");
             Console.WriteLine("\nYou arrive at Dawn Station. This is the train station in the Inner Ring.\nTaking the train to Midday Station will bring you back close to your house.");
             Console.WriteLine("\nThe Inner Ring is home to the aristocrats of Lux, seperated from the Outter Ring by a giant wall.\nFor common folk, theres practically nothing to do here but sight-see and talk to the locals.");
             Console.WriteLine("\nTRAVEL TO: [R]utherian's Estate, [S]eren's Lab, [T]ake Train to Midday Station");

@@ -58,6 +58,12 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="NPC Dialogues\FeriTalk.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NPC Dialogues\KogTalk.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="NPC Dialogues\libraryBooks.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -68,6 +74,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="NPC Dialogues\objectFlavortext.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NPC Dialogues\RutherianTalk.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NPC Dialogues\SerenTalk.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="NPC Dialogues\testTalk.txt">

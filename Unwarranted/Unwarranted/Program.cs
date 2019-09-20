@@ -14,14 +14,27 @@ namespace Unwarranted
     {
         static void Main(string[] args)
         {
+            // Game is preloaded to allow for checking for achievements
             Load();
-            Console.WriteLine("                    UNWARRANTED");
-            Console.WriteLine("\n[N]ew game                             [L]oad game");
-            Console.WriteLine("\n\nAchievements: ");
+            Console.WriteLine("                -= UNWARRANTED =-");
+            Console.WriteLine("\n[N]ew game                            [L]oad game");
+
+            // Achievements checking
+            int achievementCount = 0;
+            foreach (bool b in endingsObtained)
+            {
+                if (b == true)
+                {
+                    achievementCount++;
+                }
+            }
+            Console.WriteLine($"\n\nAchievements: {achievementCount}/{endingsObtained.Count()}");
             if (endingsObtained[0]) Console.WriteLine("\tSquashed - Exposed Kog as the perpetrator.");
             if (endingsObtained[1]) Console.WriteLine("\tLove to Hate You - Discovered Feri to be the culprit.");
             if (endingsObtained[2]) Console.WriteLine("\tDragon Slayer - Proved Seren to be the transgressor.");
             if (endingsObtained[3]) Console.WriteLine("\tUnder the Guise - Exposed Rutherian as the mastermind behind the kidnappings.");
+
+            // Check for user input.
             while (userInputChar != 'n' && userInputChar != 'l')
             userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
             {
@@ -43,19 +56,21 @@ namespace Unwarranted
 
             TimeDisplay();
 
-            // This is the main game loop
+            // This is the main game loop.
             while (true)
             {
                 // Checks the time to see if the final day has hit. If it has, the game over state will start.
                 if (timeDays >= 8 && !inBattle)
                 {
                     Console.WriteLine("\nThe top hour of the final day has commenced... your time is up.");
-                    TimeUp();
+                    GameEnd();
                     if (timeUp)
                     {
                         break;
                     }
                 }
+
+                Console.Clear();
 
                 // Big scary switch for navigation.
                 switch (GetLocation())
@@ -129,7 +144,7 @@ namespace Unwarranted
                         break;
                 }
 
-                // PLEASE KEEP COMMENTED
+                // PLEASE KEEP COMMENTED.
                 //Console.WriteLine("End of Debug. Press the any key.");
                 //break;
             }

@@ -31,7 +31,6 @@ namespace UnwarrantedTools
         static bool chargeTurn = false;
         static AttackEffect playerStatus;
         static AttackEffect opponentStatus;
-        
 
         // For interrogations; stores input that changes the flow of the conversation
         public static int interrogationLine = 999;
@@ -55,8 +54,8 @@ namespace UnwarrantedTools
 
         public static Item[] keyItems = new Item[]
         {
-            new KeyItem("Missing Person Poster", 0, 1, 3, true), new KeyItem("Bird Mask", 1, 6, 3, true), new KeyItem("Pure Etheris Vial", 2, 11, 3, true),
-            new KeyItem("Stained Dagger", 3, 16, 3, true), new KeyItem("Free Sample of Cram", 4, 21, 3, true),  new KeyItem("Broken Bottle", 5, 0, 0, true)
+            new KeyItem("Missing Person Poster", 0, 1, 3, true), new KeyItem("Bird Mask", 1, 6, 3, true), new KeyItem("Stained Dagger", 2, 11, 3, true),
+            new KeyItem("Pure Etheris Vial", 3, 16, 3, true), new KeyItem("Free Sample of Cram", 4, 21, 3, true),  new KeyItem("Broken Bottle", 5, 0, 0, true)
         };
 
         // Endings: 1: Kog, 2: Feri, 3: Seren, 4: Rutherian
@@ -81,13 +80,24 @@ namespace UnwarrantedTools
         /// <param name="durration">How many lines to display from the text file.</param>
         /// <param name="convoState">Which state the interrogation is. 1 for start, 2 for continue, 3 for end.</param>
         /// <param name="NPCName">Name of the NPC being interrogated.</param>
-        public static void Interrogation(string NPCDialoguePath, int startingPoint, int durration, int convoState, string NPCName)
+        /// <param name="textColor">Color the NPC uses for their dialogue.</param>
+        public static void Interrogation(string NPCDialoguePath, int startingPoint, int durration, int convoState, string NPCName, ConsoleColor textColor)
         {
-            Console.WriteLine($"{NPCName}:");
+            // Display's character's Name-Tag
+            Console.Write("[");
+            Console.ForegroundColor = textColor;
+            Console.Write(NPCName);
+            Console.ResetColor();
+            Console.WriteLine("]:");
+
+            // Loop through the dialogue
+            Console.ForegroundColor = textColor;
             for (int i = startingPoint; i < startingPoint + durration; i++)
             {
                 Console.WriteLine($"[{i}] {File.ReadLines(NPCDialoguePath).ElementAt(i)}");
             }
+            Console.ResetColor();
+
             Console.WriteLine("-------------------------------------------------------------------------------------------------------------");
             // Commands are needed as follows: 
             // State 1: Record, Clarify, Silent, Present (x2), Leave
@@ -210,6 +220,7 @@ namespace UnwarrantedTools
         /// <param name="durration">How many lines to display from the text file.</param>
         /// <param name="itemPickup">Whether or not the item can be added into your inventory.</param>
         /// <param name="itemName">Name of the item being interrogated.</param>
+        /// <param name="itemID">ID of the item from the keyItems array.</param>
         public static void Interrogation(string NPCDialoguePath, int startingPoint, int durration, bool itemPickup, string itemName, int itemID)
         {
             for (int i = startingPoint; i < startingPoint + durration; i++)
@@ -441,7 +452,7 @@ namespace UnwarrantedTools
         /// <summary>
         /// Game over sequence. Allows player to reload old save, start a new save, or quit.
         /// </summary>
-        public static void TimeUp()
+        public static void GameEnd()
         {
             // Aw beans.
             Console.WriteLine("You can [R]eload a previous save, [S]tart a new save, or [Q]uit.");
@@ -479,7 +490,7 @@ namespace UnwarrantedTools
             TimeDisplay();
             Console.WriteLine($"Money: {money} Muns");
             bool okToGo = false;
-            Console.WriteLine("\n[N]otebook\n[K]ey Items\n[S]pell Stones\n\n[B]ack to Game");
+            Console.WriteLine("\n[N]otebook\n[K]ey Items\n[S]pell Stones\n\n[X] Back to Game");
             while (!okToGo)
             {
                 Console.Write("\nInput command> ");
@@ -495,7 +506,7 @@ namespace UnwarrantedTools
                     case 's':
                         AttackRearrange();
                         break;
-                    case 'b':
+                    case 'x':
                         Console.WriteLine("\n+++ CLOSING INVENTORY +++\n");
                         okToGo = true;
                         break;
@@ -620,6 +631,9 @@ namespace UnwarrantedTools
             }
         }
 
+        /// <summary>
+        /// Allows the player to view and rearrange the attacks they bring into battle.
+        /// </summary>
         public static void AttackRearrange()
         {
             Console.WriteLine("\nCurrently equipt attcks:");
@@ -714,10 +728,31 @@ namespace UnwarrantedTools
             Opponent opponent = new Opponent(battleName);
             while (HP > 0 && opponent.opponentHP > 0)
             {
+                // Display health.
                 Console.WriteLine($"{opponent.opponentName}: {opponent.opponentHP} HP Remaining\t\tYou: {HP} HP Remaining");
-                PlayerAttack(opponent);
-                if (opponent.opponentHP > 0) OpponentAttack(opponent);
+
+                // Check to make sure the player actually has any attacks equipt.
+                bool hasEquipment = false;
+                foreach (BattleItem b in battleRunes)
+                {
+                    if (b.equipt)
+                    {
+                        hasEquipment = true;
+                    }
+                }
+                if (!hasEquipment)
+                {
+                    HP = 0;
+                    Console.WriteLine("\nYou have no attacks equipt!");
+                }
+
+                // Player's Turn.
+                if (HP > 0 && hasEquipment) PlayerAttack(opponent);
+
+                // If the opponent lives, it's their turn.
+                if (opponent.opponentHP > 0 && hasEquipment) OpponentAttack(opponent);
             }
+
             if (opponent.opponentHP <= 0)
             {
                 Console.WriteLine($"{opponent.opponentName} lies before you inpacacitated.");
@@ -730,6 +765,7 @@ namespace UnwarrantedTools
                 Console.WriteLine("[Any Key] Continue...");
                 Console.ReadKey();
             }
+
             if (HP <= 0)
             {
                 Console.WriteLine("\nThe world fades to black...");
@@ -740,7 +776,6 @@ namespace UnwarrantedTools
                 Load();
                 TimeDisplay();
             }
-            HP = 25;
         }
 
         /// <summary>
@@ -961,8 +996,10 @@ namespace UnwarrantedTools
         }
 
         // Methods for Saving and Loading ------------------------------------------------------------------------------------------------
+
         // Items saved to the save.txt should be in this order: 
-        // Days, Hours, Minutes, Money, Masked Market found?, Hideout found?, Ending progress, Battle Item progress, Key Item progress
+        // Days, Hours, Minutes, Money, Masked Market found, Hideout found, Money sources found, Ending progress, Battle Item progress, Key Item progress
+
         /// <summary>
         /// Clears all save, notebook, and inventory data.
         /// </summary>
@@ -985,6 +1022,7 @@ namespace UnwarrantedTools
             {
                 k.playerObtained = false;
             }
+
             // Player always starts with Empty, Basic and Stun attacks
             battleRunes[0].playerObtained = true;
             ((BattleItem)battleRunes[0]).equipt = true;
@@ -992,7 +1030,9 @@ namespace UnwarrantedTools
             ((BattleItem)battleRunes[1]).equipt = true;
             battleRunes[3].playerObtained = true;
             ((BattleItem)battleRunes[3]).equipt = true;
+
             Save();
+
             File.WriteAllText(notebookPath, "To-do List: ????" + Environment.NewLine);
             Console.Clear();
             Console.WriteLine("Your name is Jack Montenegro.\nYou were a highly respected detective in the citadel of Lux. But after someone you helped put away repayed the favor... ");
@@ -1001,6 +1041,7 @@ namespace UnwarrantedTools
             Console.WriteLine("\nMaybe it's time to change something...");
             Console.WriteLine("[Any Key] Continue...");
             Console.ReadKey(true);
+
             Load();
         }
 
@@ -1019,18 +1060,22 @@ namespace UnwarrantedTools
             writer.WriteLine(discoveredHideout);
             writer.WriteLine(givenFreeMoney);
             writer.WriteLine(stoleFreeMoney);
+
             foreach (bool b in endingsObtained)
             {
                 writer.WriteLine(b);
             }
+
             foreach (BattleItem b in battleRunes)
             {
                 writer.WriteLine(b.playerObtained);
             }
+
             foreach (KeyItem k in keyItems)
             {
                 writer.WriteLine(k.playerObtained);
             }
+
             writer.Close();
             Console.WriteLine();
         }
@@ -1051,6 +1096,7 @@ namespace UnwarrantedTools
                 discoveredHideout = Convert.ToBoolean(reader.ReadLine());
                 givenFreeMoney = Convert.ToBoolean(reader.ReadLine());
                 stoleFreeMoney = Convert.ToBoolean(reader.ReadLine());
+
                 while (reader.EndOfStream == false)
                 {
                     for (int i = 0; i < 4; i++)
@@ -1068,8 +1114,10 @@ namespace UnwarrantedTools
                         k.playerObtained = Convert.ToBoolean(reader.ReadLine());
                     }
                 }
+
                 reader.Close();
                 SetLocation(MapLocations.Home);
+                HP = 25;
                 Console.Clear();
             }
             catch

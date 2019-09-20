@@ -1,4 +1,4 @@
-CERIS [LINES 2 THROUGH 28] ----------------------------------------------------------------------------------------------------------------
+CERIS [LINES 2 THROUGH 28] ---------------------------------------------------------------------------------------------------------------- GREEN
 [Base Conversation]
 Ay Jack's back. Comin' in for another round?
 Oh yeah- Rat was here a while back. He was braggin' about having dirt on Kog. Go ask him about it.
@@ -29,7 +29,7 @@ Although, truth be told- I did once.
 Now don't go twistin' my words Monty- I'm done with that life. Borderline cult.
 I'm sure there's still plennya suckers in there though. Good luck finding them- they hide in plain sight...
 
-ARTHUR [LINES 32 THROUGH 72] -----------------------------------------------------------------------------------------------------------------
+ARTHUR [LINES 32 THROUGH 72] ----------------------------------------------------------------------------------------------------------------- DARKRED
 [Base conversation (Library)]
 Greetings inspector- or- Jack. Just Jack.
 How has life been treating you?
@@ -42,7 +42,7 @@ I am too busy Wandering the planes searching for tales to tell.
 We both know I need to be constantly traveling for fuel for my lastest works.
 Being a world renouned author is an undertaking, but I am humble enough to manage~
 
-[Inquire line 38]
+[Inquire line 38, or line 67]
 Come on Jack- you must know this by now? Have you forgotten everything?
 Is this exposition just a plot device for a shoddy school assignment?
 I am in the unfortunately fortunate position of being in posession of enough magic to leave.
@@ -52,7 +52,7 @@ But don't tell that to the audience back on Terra... I do not think they could c
 And while this has made me sucsessful- it also comes with one major drawback:
 Time itself flows differently for me- since I can be any where at any time.
 Maybe this doesn't sound bad... But it is so hard to keep track of! To prevent... spoilers.
-I may see you later today- to you- it could be any time for me. We shall see!
+I may see you later today- from your view- it could be any time for me. We shall see!
 
 [Present line 15 from minorNPCsTalk]
 Oh- I will be back soon. He knows I am always back before long.
@@ -71,7 +71,7 @@ Unless you are not doing that anymore? But then you resu- wait- spoilers.
 [Present Missing Person Poster]
 (Reference library dialogue).
 
-SELENE [LINES 74 THROUGH 95] -------------------------------------------------------------------------------------------------------------------------------------
+SELENE [LINES 74 THROUGH 95] ------------------------------------------------------------------------------------------------------------------------------------- CYAN
 Morning Jack!! Or afternoon... or evening. I can't be bothered to check the time.
 Oh oh Marideth told me you're starting a new case!! How exciting~
 If you need ANYTHING I'll be here to try my best to help! If I know something anyways.
@@ -94,7 +94,7 @@ I'm so sick of people RUINING the books here!! Do they realize how old some of t
 I'm not even sure who could be doing it... But I've seen that feather around before.
 I don't think it means anything really?- Just a simple design people can replicate easily.
 
-SPROCKET [LINES 97 THROUGH 109] -------------------------------------------------------------------------------------------------------------------------------
+SPROCKET [LINES 97 THROUGH 109] ------------------------------------------------------------------------------------------------------------------------------- YELLOW
 Heya Inspector Montenegro! On your way to the Pen & Dragon again?
 Or maybe you came to watch little old me play! No? Alright. That's fair.
 Hey hey hey have you been to Feri's Palace yet? It's pretty close to the Pen & Dragon.
@@ -109,7 +109,7 @@ I tried a disguise once but uh... I got too eager and at some point messed up an
 Chimerics are also on the non-entry list, which is really unfair! They get pushed around enough as is...
 If I could enter, I'd try to appeal to management- I bet it's not Feri who asked for this!
 
-RAT [LINES 112 THROUGH 130] -------------------------------------------------------------------------------------------------------------------------------------------
+RAT [LINES 112 THROUGH 130] ------------------------------------------------------------------------------------------------------------------------------------------- DARKMAGENTA
 Jackyyyy boyy... what're you doin around here in this place?
 The folk in this place'll eat you up- you need someone awesome and couragous like me to help you.
 Oh also- you got any Muns on you? I need some change for uh... a friend.
@@ -130,7 +130,7 @@ Two ways- a looong boring distilling process with liquid Etheris...
 Or you extract it from magical creatures...
 ANYWAAAAYS I've said enough. Go find some stuff out on your own for a change. Freeloader.
 
-RUBINIA [LINES 133 THROUGH 144] -------------------------------------------------------------------------------------------------------------------------------------
+RUBINIA [LINES 133 THROUGH 144] ------------------------------------------------------------------------------------------------------------------------------------- RED
 Good day inspector. Hope you're doing well enough.
 You're probably looking for my husband Rutherian, he's in the next room over.
 Unless theres something you want to ask me...?
@@ -150,11 +150,11 @@ Kinda busy here. Unless you have something worth my time, scram.
 [Resent Missing Person Poster]
 Woah- I can't believe it- its them.
 Okay look- I had nothing to do with it I just worked with the guy. 
-He worked the Inner Ring- He made deliveries to some Dragon named uuuh... started with.
+He worked the Inner Ring- He made deliveries to some Dragon named uuuh... started with...
 C? No thats not right- A dragon with a name like that wouldn't live in the Inner Ring.
 Anyways, just seek them out.
 
-BEAK-MASK [LINES 157 THROUGH 180] ---------------------------------------------------------------------------------------------------------------------------------------
+BEAK-MASK [LINES 157 THROUGH 180] https://www.youtube.com/watch?v=Ll82POMkb8g
 Greetings travler... Yes yes... Have you come to listen to me preach the ways of Our Lord, The King?
 Or maybe... You're here to view my wares? YOU WILL BUY MY WARES yes.
 
@@ -170,9 +170,9 @@ He is full of wrath and wishes to mess with the order of LIFE ITSELF. Or Death i
 [Inquire last line]
 Yes yes I am selling CRAM. I am selling multiple Crams very different flavors. Yes yes.
 I have Raspberry, Berry, and VERY BERRY.
-(I reccomend the Very Berry it is like Berry, only VERY).
+(I reccomend the Very Berry it is like Berry Cram, but VERY).
 ONLY 20 Gold Coins for ONE... BUCKET OF CRAM I sell them by the bucket.
-You will receive Cram for paying me 20 Gold Coins!
+You will receive Cram upon paying me 20 Gold Coins!
 PAY THE COIN you will receive the Raspberry, Berry or VERY BERRY Cram.
 WHAT is Cram you ask? What is it made of?
 ...

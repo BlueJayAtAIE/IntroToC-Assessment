@@ -106,13 +106,5 @@ namespace UnwarrantedTools
             secondaryAttack = (BattleItem)battleRunes[7]; //Smite
             tertiaryAttack = (BattleItem)battleRunes[9]; //Leech
         }
-
-        // >in tools
-        // function for calling this constructor
-        // define a turn
-        // use rng.next a lot
-        // check for Death
-        // advance if both are alive
-        // if You Perish, send back to last save
     }
 }
