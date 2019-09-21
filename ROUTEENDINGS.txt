@@ -1,0 +1,48 @@
+Kog and Seren's Routes overlap
+Feri's route is indipendant.
+The True Ending requires all other 3 endings to be obtained first.
+
+General tip:
+If you board the train to the Inner Ring and show one of the nobles there
+that you're going to take up the case somehow, they may sponsor you.
+
+KOG:
+Head from home to Bright Square and then to the Pen & Dragon.
+Talk to Ceris and record line 3 (About Rat having rumors about Kog), then leave.
+Navigate back home, then to Sunrise Center, then finally Light Alley.
+Present Rat the line for Ceris and he will text-dump.
+Record ANY line 125-129 and leave the conversation.
+Go back to the Sunrise Center, then to the Docks, then Kog's Workshop.
+Present Kog any of the above lines to get the Beak-Mask.
+Go to the Docks and then take the train to your house, then to the Inner Ring.
+Go to Seren's Lab and Talk to Seren.
+Present the mask to Seren and record line 21 (about Kog having stopped going).
+Leave the conversation and head back to Kog.
+Talk to and Present Kog with Seren's line and he will get angry.
+Defeat and arrest him.
+
+SEREN:
+Follow Kog's route up to entering Seren's Lab.
+Before speaking to him, inspect the place and obtain the Pure Etheris Vial.
+Talk to Seren, Showing him the vial.
+Record line 12 (about ethical sourcing) and then go silent for a round.
+Show Seren the Beak-Mask to make him nervous.
+If he is nervous and you present him his line about ethical sourcing he will crack.
+Defeat and arrest him.
+
+FERI:
+/!\ Feri's route is only possible to complete on Days 1 and 2 /!\
+Go to Bright Square and Talk to Sprocket.
+Clarify on line 99 or 101 (About Feri) and Record line 105, 108, or 109.
+Go to Feri's Palace and inspect the area for the Broken Bottle.
+Talk to Feri, Present her any of the above lines from Sprocket.
+Record line 15 (about how she sent out her guard on the Chimeric) and then go silent for a round.
+The following two steps can be done in any order:
+Present her own line about the guard to make her nervous, then go silent.
+OR
+Present the bottle to her to make her angry, then go silent.
+After both of those steps have been completed in any order, arrest her.
+
+TRUE ENDING:
+After getting the other 3 endings, explore town until Day 6.
+Complete the sequence.

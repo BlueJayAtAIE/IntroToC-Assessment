@@ -852,47 +852,51 @@ namespace UnwarrantedTools
                 okToGo = true;
                 Console.Write("\nChoose an attack> ");
                 int.TryParse(Console.ReadLine(), out userInputInt);
-                if (((BattleItem)battleRunes[userInputInt]).equipt)
+
+                if (userInputInt <= battleRunes.Count())
                 {
-                    Console.WriteLine();
-                    switch (userInputInt)
+                    if (((BattleItem)battleRunes[userInputInt]).equipt)
                     {
-                        default:
-                        case 0:
-                            Console.WriteLine("Invalid input!");
-                            okToGo = false;
-                            break;
-                        case 1:
-                            Console.WriteLine("You use your Basic attack, which deals 4 damage!");
-                            op.opponentHP -= 4;
-                            break;
-                        case 2:
-                            Console.WriteLine("You use a Flame attack, which deals 2 damage! The opponent is burned!");
-                            op.opponentHP -= 2;
-                            opponentStatus = AttackEffect.Burn;
-                            break;
-                        case 3:
-                            Console.WriteLine("You use a Stun attack! The opponent is stunned!");
-                            opponentStatus = AttackEffect.Static;
-                            break;
-                        case 4:
-                            Console.WriteLine("You use a Shock attack, which deals 3 damage! The opponent is stunned!");
-                            op.opponentHP -= 3;
-                            opponentStatus = AttackEffect.Static;
-                            break;
-                        case 5:
-                            Console.WriteLine("You use a Restoration spell, which heals 5 damage!");
-                            HP += 5;
-                            break;
-                        case 6:
-                            Console.WriteLine("You use a Draining spell, which deals 3 damage, and heals you for 2!");
-                            op.opponentHP -= 3;
-                            HP += 2;
-                            break;
-                        case 7:
-                            Console.WriteLine("You use a Smiting spell, which deals a massive 7 damage!");
-                            op.opponentHP -= 7;
-                            break;
+                        Console.WriteLine();
+                        switch (userInputInt)
+                        {
+                            default:
+                            case 0:
+                                Console.WriteLine("Invalid input!");
+                                okToGo = false;
+                                break;
+                            case 1:
+                                Console.WriteLine("You use your Basic attack, which deals 4 damage!");
+                                op.opponentHP -= 4;
+                                break;
+                            case 2:
+                                Console.WriteLine("You use a Flame attack, which deals 2 damage! The opponent is burned!");
+                                op.opponentHP -= 2;
+                                opponentStatus = AttackEffect.Burn;
+                                break;
+                            case 3:
+                                Console.WriteLine("You use a Stun attack! The opponent is stunned!");
+                                opponentStatus = AttackEffect.Static;
+                                break;
+                            case 4:
+                                Console.WriteLine("You use a Shock attack, which deals 3 damage! The opponent is stunned!");
+                                op.opponentHP -= 3;
+                                opponentStatus = AttackEffect.Static;
+                                break;
+                            case 5:
+                                Console.WriteLine("You use a Restoration spell, which heals 5 damage!");
+                                HP += 5;
+                                break;
+                            case 6:
+                                Console.WriteLine("You use a Draining spell, which deals 3 damage, and heals you for 2!");
+                                op.opponentHP -= 3;
+                                HP += 2;
+                                break;
+                            case 7:
+                                Console.WriteLine("You use a Smiting spell, which deals a massive 7 damage!");
+                                op.opponentHP -= 7;
+                                break;
+                        }
                     }
                 }
                 else

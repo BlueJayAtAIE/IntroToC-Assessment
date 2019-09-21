@@ -985,6 +985,8 @@ namespace UnwarrantedTools
                         switch (interrogationLine)
                         {
                             case 998:
+                                angry = false;
+                                fear = false;
                                 Console.ForegroundColor = textColor;
                                 Console.WriteLine("\nBye-bye inspector~.");
                                 Console.ResetColor();
@@ -1029,6 +1031,7 @@ namespace UnwarrantedTools
                         break;
                     }
 
+                    HP = 25;
                     Console.WriteLine("\nYou have a choice to make now... Arrest and Report Seren?");
                     Console.WriteLine("[Y]es || [Any Key] No");
                     userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
@@ -1124,6 +1127,8 @@ namespace UnwarrantedTools
                         switch (interrogationLine)
                         {
                             case 998:
+                                angry = false;
+                                fear = false;
                                 Console.ForegroundColor = textColor;
                                 Console.WriteLine("\nFarewell inspector!");
                                 Console.ResetColor();
@@ -1168,6 +1173,7 @@ namespace UnwarrantedTools
                         break;
                     }
 
+                    HP = 25;
                     Console.WriteLine("\nYou have a choice to make now... Arrest and Report Kog?");
                     Console.WriteLine("Hell [Y]es || [Any Key] No");
                     userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
@@ -1211,6 +1217,7 @@ namespace UnwarrantedTools
 
                         if (!keyItems[1].playerObtained)
                         {
+                            discoveredMarket = true;
                             ItemInspect(1);
                         }
 
@@ -1250,6 +1257,8 @@ namespace UnwarrantedTools
                         switch (interrogationLine)
                         {
                             case 998:
+                                angry = false;
+                                fear = false;
                                 Console.ForegroundColor = textColor;
                                 Console.WriteLine("\nGet outta my sight Monte.");
                                 Console.ResetColor();

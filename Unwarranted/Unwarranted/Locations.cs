@@ -526,8 +526,9 @@ namespace UnwarrantedTools
             Console.WriteLine("\n=======================================================================================================================");
             Console.WriteLine("\nYou step into Kog's Workshop and are greeted by all kinda of humming machines and strange looking contraptions.\nContainers of Etheris and piles of metal objects are strewn about haphazardly.\nYou are yelled at to not touch anything.");
             Console.WriteLine("\nA Terrian known as Kog owns this workshop- as evident from the title of the place.\nSeeing as the cardo shippment company is so close, he may know something about the missing Chimeric.");
-            Console.WriteLine("\nTRAVEL TO: [D]ocks, [M]asked Market");
-            Console.WriteLine("ACTION: Talk to [K]og");
+            Console.Write("\nTRAVEL TO: [D]ocks");
+            if (discoveredMarket) Console.WriteLine(", [M]asked Market"); 
+            Console.WriteLine("\nACTION: Talk to [K]og");
             Console.WriteLine("[X] Open Inventory");
             bool okToGo = false;
             while (!okToGo)
@@ -541,7 +542,15 @@ namespace UnwarrantedTools
                         location = MapLocations.Docks;
                         break;
                     case 'm':
-                        location = MapLocations.Market;
+                        if (discoveredMarket)
+                        {
+                            location = MapLocations.Market;
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nInvalid input!");
+                            okToGo = false;
+                        }
                         break;
                     case 'k':
                         KogInterrogation();
@@ -562,7 +571,8 @@ namespace UnwarrantedTools
         {
             Console.WriteLine("\n=======================================================================================================================");
             Console.WriteLine("\nAs you enter past the bouncer all your senses are assulted at once- you haven't been in a casino this busy in forever.");
-            Console.WriteLine("\nWhile so much is going on, its easy to get overwhelemed, but you're only here to see Feri. Don't get side-tracked.\nYou see an elaborately clothed Wildfolk, who you assume muct be Feri.");
+            Console.WriteLine("\nWhile so much is going on, its easy to get overwhelemed, but you're only here to see Feri. Don't get side-tracked.");
+            if (timeDays < 3) Console.WriteLine("You see an elaborately clothed Wildfolk, who you assume muct be Feri.");
             if (timeDays == 3) Console.WriteLine("\nThere are Beak-Masks running around everywhere! One espacially nicely dressed one is up on stage with Feri.");
             Console.WriteLine("\nTRAVEL TO: [B]right Square, [P]en & Dragon Tavern");
             if (timeDays < 3) Console.Write("ACTION: Talk to [F]eri");
@@ -613,10 +623,10 @@ namespace UnwarrantedTools
                             Console.WriteLine("\n\nThe mysterious figure starts to speak.");
                             Console.WriteLine("\"Hello Inspector... I see you've come to witness our ultimatum.\"");
                             Console.WriteLine("\"Taking Feri into our hands- such a popular figure to the public--\"");
-                            Console.WriteLine("Feri takes the oppertunity of the Spectre monologuing to pull a dagger out of her boot and stab them.");
-                            Console.WriteLine("\"AUGH!- REALLY? I can't even enjoy this? Brothers and Sisters- take this heathen away.\"");
+                            Console.WriteLine("\nFeri takes the oppertunity of the Spectre monologuing to pull a dagger out of her boot and stab them.");
+                            Console.WriteLine("\n\"AUGH!- REALLY? I can't even enjoy this? Brothers and Sisters- take this heathen away.\"");
                             Console.WriteLine("\"I'm going to deal with the inspector...\"");
-                            Console.WriteLine("[Any Key] Continue...");
+                            Console.WriteLine("\n[Any Key] Continue...");
                             Console.ReadKey();
                             location = MapLocations.Home;
                             Battle("Spectre1");
@@ -625,11 +635,13 @@ namespace UnwarrantedTools
                                 HP = 25;
                                 break;
                             }
-                            Console.WriteLine("\"Tch... This... He's stronger than I anticipated...\"");
-                            Console.WriteLine("\"Heh- it was nice to see you though Jack... I hope I never have to again! Hahahahaa\"");
-                            Console.WriteLine("You're surrounded on all sides by goons. You black out, then you wake up at home.\nA day has past...");
+                            Console.WriteLine("\n\"Tch... This... He's stronger than I anticipated...\"");
+                            Console.WriteLine("\"Heh- it was nice to see you though Jack... I hope I never have to again! Hahahahaa...\"");
+                            Console.WriteLine("\nYou're surrounded on all sides by goons.\n\nYou black out, then you wake up at home.\nA day has past...");
                             timeDays = 4;
-                            Console.WriteLine("[Any Key] Continue...");
+                            timeHours = 0;
+                            timeMinutes = 0;
+                            Console.WriteLine("\n[Any Key] Continue...");
                             Console.ReadKey();
                         }
                         else
@@ -751,7 +763,7 @@ namespace UnwarrantedTools
                 userInputChar = Char.ToLower(Console.ReadKey().KeyChar);
                 switch (userInputChar)
                 {
-                    case 'a':
+                    case 'l':
                         location = MapLocations.Alley;
                         break;
                     case 'k':
@@ -913,7 +925,7 @@ namespace UnwarrantedTools
                 Console.ForegroundColor = textColor;
                 Console.WriteLine("\nOh? You're back.\nInspector, I'm so sorry... last time I just exploded at you- that was very... unwarranted.\nYou have to understand though- I'm doing this not for personal gain, but the goodness of my heart.\nYou know Chimerics used to be the dominant race of Orrim? Before the humans hunted us like animals?\nI'm just making a way for us to fight back against them... X-Class Chimerics- they're our perfect and most pure form.");
                 Console.WriteLine("Thanks to machines from Kog, and samples from Seren, our own labs were able to figure out a way to transform normal chimerics...\nInto their more beautiful and pure counterparts.\nAnd finding test subjects was so much easier after we bribed Feri to kick Chimerics out of her establishment!\nSo many of my poor kin on the streets... during the night... so dangerous! So profitable~\nAnd now I think it's about time I ascend myself- I'll allow myself to be one of the first few to taste perfection...");
-                Console.WriteLine("AND I WILL LEAD ALL OTHERS TO IT.");
+                Console.WriteLine("AND I WILL LEA░D░▒ALL OT░HE▒RS▒ T▓O I▓T▓▓.");
                 Console.ResetColor();
 
                 Console.WriteLine("\n[Any Key] Continue to Battle...");
@@ -928,12 +940,13 @@ namespace UnwarrantedTools
 
                 if (continueSequence)
                 {
+                    HP = 25;
                     Console.Clear();
                     endingsObtained[3] = true;
                     Console.WriteLine("\n=======================================================================================================================");
                     textColor = ConsoleColor.Yellow;
                     Console.ForegroundColor = textColor;
-                    Console.WriteLine("\nNo... NO. HOW IS THIS EVEN POSSIBLE. I AM A GOD.\nYOU ARE WEAK. YOU ARE BELow me...");
+                    Console.WriteLine("\nNo.▓. NO▓ H▓OW IS▓▓THIS E▒VEN▒░POS░SIB░LE. I AM A G░OD.\nYOU░░ARE WEAK. YOU ARE BELo w   m e..  .");
                     Console.ResetColor();
                     Console.WriteLine("Rutherian collapses...");
                     Console.WriteLine("\n\nThe police come to the scene shortly. Rutherian is taken into custody, but the other Beak-Masks vanished.");
