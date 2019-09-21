@@ -1,0 +1,43 @@
+[Opening]
+H-hi! You're a detective huh? What- uh- can I help you with today?
+
+[Show poster]
+Oh... That's sad but I-I'm sorry I don't know this person.
+
+[Dock's worker lines about working with Seren (152), (153)]
+Uh- Th-that person must be mistaken- I've never seen that Chimeric before.
+I mean- he didn't even... get my name close to right. Haha...
+
+[Show vial]
+Hey! D-did you steal that? I won't ask you to give it back but you should know you can't use that against me.
+We ethically source all Etheris- we use the same trading line as Kog.
+Kog was actually the one who set me up with this dealer- Kog and I were pretty great friends...
+
+[Show line from ruth about it being chimeric blood]
+No! Th-that's not right- it's not! I don't think you understand... Rutherian has always had beef with me.
+Or- um- I mean he's always been against me. He's trying to find something to sully my reputation!
+There's so much more at play here inspector...
+
+[show beak-mask]
+Kog had this? He told me he stopped going to that shady place...
+That's what makes me and him different- er- him and I. I'd never resort to buying liquid Etheris from a place like that.
++fear
+
+[present line about ethical sourcing +has fear]
+Ah! I guess I... I did say Kog and I use the same source. Haha.
+Hahaha.
+HAHAHAHA.
+PLEASE LEAVE.
++anger
+
+[Opening with anger and fear]
+PLEASE GET OUT YOU HAVE NO IDEA WHAT IM GOING THROUGH.
+I'M LITERALLY JUST TRYING TO DO MY JOB.
+DO YOU HAVE ANY IDEA WHAT THE SPECTRE THREATENED ME WITH IF I DIDN'T DO HIS WORK?
+...
+Ha..... haaaaa.
+...I'm sorry Jack... you can't- I can't let you go.
+You have to understand... 
+
+Seren is the saddest boy to ever live and you Cannot Change My Mind.
+Also yes his real name is Ceren and he hides it. That plot point never came through but it's pretty big in like- the Actual Story.

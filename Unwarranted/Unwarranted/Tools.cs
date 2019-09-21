@@ -55,10 +55,10 @@ namespace UnwarrantedTools
         public static Item[] keyItems = new Item[]
         {
             new KeyItem("Missing Person Poster", 0, 1, 3, true), new KeyItem("Bird Mask", 1, 6, 3, true), new KeyItem("Stained Dagger", 2, 11, 3, true),
-            new KeyItem("Pure Etheris Vial", 3, 16, 3, true), new KeyItem("Free Sample of Cram", 4, 21, 3, true),  new KeyItem("Broken Bottle", 5, 0, 0, true)
+            new KeyItem("Pure Etheris Vial", 3, 16, 3, true), new KeyItem("Free Sample of Cram", 4, 21, 3, true),  new KeyItem("Broken Bottle", 5, 26, 3, true)
         };
 
-        // Endings: 1: Kog, 2: Feri, 3: Seren, 4: Rutherian
+        // Endings: 0: Kog, 1: Feri, 2: Seren, 3: Rutherian
         public static bool[] endingsObtained = new bool[4];
 
         // For file paths
@@ -412,7 +412,7 @@ namespace UnwarrantedTools
                     Console.WriteLine("Invalid input!");
                     interrogationPresent = ".";
                 }
-            }            
+            }
         }
 
         // Methods Pertaining to In-Game Time Operations ---------------------------------------------------------------------------------
@@ -486,19 +486,21 @@ namespace UnwarrantedTools
         /// </summary>
         public static void OpenInventory()
         {
-            Console.WriteLine("\n+++ OPENING INVENTORY +++");
-            TimeDisplay();
+            Console.WriteLine("\n+++++++ OPENING INVENTORY +++++++");
             Console.WriteLine($"Money: {money} Muns");
             bool okToGo = false;
-            Console.WriteLine("\n[N]otebook\n[K]ey Items\n[S]pell Stones\n\n[X] Back to Game");
+            Console.WriteLine("\n[N]otebook\n[R]emove Notebook Entry\n[K]ey Items\n[S]pell Stones\n\n[X] Back to Game");
             while (!okToGo)
             {
-                Console.Write("\nInput command> ");
+                Console.Write("\nInput inventory command> ");
                 userInputChar = Char.ToLower(Console.ReadKey().KeyChar);
                 switch (userInputChar)
                 {
                     case 'n':
                         EntryDisplay();
+                        break;
+                    case 'r':
+                        EntryRemove();
                         break;
                     case 'k':
                         ItemDisplay();
@@ -507,7 +509,7 @@ namespace UnwarrantedTools
                         AttackRearrange();
                         break;
                     case 'x':
-                        Console.WriteLine("\n+++ CLOSING INVENTORY +++\n");
+                        Console.WriteLine("\n+++++++ CLOSING INVENTORY +++++++\n");
                         okToGo = true;
                         break;
                     default:
@@ -585,6 +587,54 @@ namespace UnwarrantedTools
                 Console.WriteLine("Opperation failed!");
             }
             Console.WriteLine();
+        }
+
+        public static void EntryRemove()
+        {
+            Console.WriteLine("\nYou open your notebook for reference first. Close it to continue on to your selection.");
+            EntryDisplay();
+
+            List<string> tempNotebook = new List<string>();
+            using (StreamReader reader = new StreamReader(notebookPath))
+            {
+                while (!reader.EndOfStream)
+                {
+                    tempNotebook.Add(reader.ReadLine());
+                }
+            }
+
+            while (true)
+            {
+                Console.Write("\nEnter the number of the line from your notebook to remove> ");
+                int.TryParse(Console.ReadLine(), out userInputInt);
+                try
+                {
+                    Console.WriteLine($"\nAre you sure you want to delete \"{tempNotebook[userInputInt]}\"\n[Y]es || [Any Key] No");
+                    userInputChar = char.ToLower(Console.ReadKey(true).KeyChar);
+                    if (userInputChar == 'y')
+                    {
+                        tempNotebook.RemoveAt(userInputInt);
+                        File.WriteAllText(notebookPath, "");
+                        using (StreamWriter writer = new StreamWriter(notebookPath))
+                        {
+                            foreach (string s in tempNotebook)
+                            {
+                                writer.WriteLine(s);
+                            }
+                        }
+                        Console.WriteLine("Entry deleted.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Opperation canlced.");
+                    }
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Invalid input!");
+                }
+            }
         }
 
         /// <summary>

@@ -40,17 +40,17 @@ I am too busy Wandering the planes searching for tales to tell.
 
 [Inquire line 35]
 We both know I need to be constantly traveling for fuel for my lastest works.
-Being a world renouned author is an undertaking, but I am humble enough to manage~
+Being a world-renowned author is an undertaking, but I am humble enough to manage~
 
 [Inquire line 38, or line 67]
 Come on Jack- you must know this by now? Have you forgotten everything?
 Is this exposition just a plot device for a shoddy school assignment?
-I am in the unfortunately fortunate position of being in posession of enough magic to leave.
+I am in the unfortunately fortunate position of being in possession of enough magic to leave.
 As in- leave this reality. Into another. And trust me, there is plenty to see.
 Most of my work details everything I have seen in all my traveling.
 But don't tell that to the audience back on Terra... I do not think they could comprehend that.
-And while this has made me sucsessful- it also comes with one major drawback:
-Time itself flows differently for me- since I can be any where at any time.
+And while this has made me successful- it also comes with one major drawback:
+Time itself flows differently for me- since I can be anywhere at any time.
 Maybe this doesn't sound bad... But it is so hard to keep track of! To prevent... spoilers.
 I may see you later today- from your view- it could be any time for me. We shall see!
 
@@ -59,13 +59,13 @@ Oh- I will be back soon. He knows I am always back before long.
 I bet he thinks I am much further than I am- truth be told I was too lazy to Wander today.
 
 [Present Missing Person Poster]
-I cannot tell you anything about this. As I have no way to know when I am.
+I cannot tell you anything about this. I have no way to know when I am.
 I cannot be giving you any kind of spoilers... especially after last time.
 Or has that not happened yet?
 
 [Base conversation (Square)]
 Greetings again Jack! Or maybe this is the first time we have spoken today? Hm.
-Oh yes that gets confusing. Reguardless, good luck in whatever case it is you are pursuing.
+Oh yes, that gets confusing. Regardless, good luck in whatever case it is you are pursuing.
 Unless you are not doing that anymore? But then you resu- wait- spoilers.
 
 [Present Missing Person Poster]
@@ -75,7 +75,7 @@ SELENE [LINES 74 THROUGH 95] ---------------------------------------------------
 Morning Jack!! Or afternoon... or evening. I can't be bothered to check the time.
 Oh oh Marideth told me you're starting a new case!! How exciting~
 If you need ANYTHING I'll be here to try my best to help! If I know something anyways.
-Certainly I'd be more more help to you than Arthur...
+Certainly I'd be more than help to you than Arthur...
 
 [Inquire line 77]
 I'm very mad at Arthur! To know he can just pop into the future and come back.
@@ -103,7 +103,7 @@ Plus... maybe you could uh... help me sneak in so I can watch Feri preform. She'
 
 [Inquire lines 99 and 101]
 You don't know about Feri?! Shes a singer- no- an Artist~ So inspiring...
-Uhm- saddly the Palace is very restrictive of who gets let in...
+Uhm- sadly the Palace is very restrictive of who gets let in...
 And uh- I guess Half Breeds like me aren't on the list- so I can't get in.
 I tried a disguise once but uh... I got too eager and at some point messed up and got caught.
 Chimerics are also on the non-entry list, which is really unfair! They get pushed around enough as is...
@@ -111,7 +111,7 @@ If I could enter, I'd try to appeal to management- I bet it's not Feri who asked
 
 RAT [LINES 112 THROUGH 130] ------------------------------------------------------------------------------------------------------------------------------------------- DARKMAGENTA
 Jackyyyy boyy... what're you doin around here in this place?
-The folk in this place'll eat you up- you need someone awesome and couragous like me to help you.
+The folk in this place'll eat you up- you need someone awesome and courageous like me to help you.
 Oh also- you got any Muns on you? I need some change for uh... a friend.
 Or we could talk about something else... wanna take a stab at what I found out?~
 
@@ -124,20 +124,20 @@ Ooooh you heard from Ceris huh?~
 Alright- ye'ver heard of the place people go to buy and sell... less savory items?
 Contraband- like exotic animals, Spellstones of a higher grade, organs and stuff.
 If you get into contact with Kog somehow- ask him about the Masked Market.
-Word is he's been selling some of his invovative tech to enemy countries for big bucks.
+Word is he's been selling some of his innovative tech to enemy countries for big bucks.
 Not only that but he's using filtered Pure Etheris in some of his stuff- y'know how they get that?
 Two ways- a looong boring distilling process with liquid Etheris...
 Or you extract it from magical creatures...
 ANYWAAAAYS I've said enough. Go find some stuff out on your own for a change. Freeloader.
 
 RUBINIA [LINES 133 THROUGH 144] ------------------------------------------------------------------------------------------------------------------------------------- RED
-Good day inspector. Hope you're doing well enough.
+Good day inspector. I hope you're doing well enough.
 You're probably looking for my husband Rutherian, he's in the next room over.
 Unless theres something you want to ask me...?
 
 [Present Missing Person Poster]
 Oh dear... another one? It's so dangerous for Chimerics like us to live here in Lux.
-I feel more safe with everything here in the Inner Ring but... The Outter City?
+I feel safer with everything here in the Inner Ring but... The Outer City?
 It's far too dangerous.
 
 [Present Pure Etheris Vial or Stained Dagger]
@@ -148,14 +148,14 @@ DOCKS WORKER [LINES 147 THROUGH 154] -------------------------------------------
 Kinda busy here. Unless you have something worth my time, scram.
 
 [Resent Missing Person Poster]
-Woah- I can't believe it- its them.
+Woah- I can't believe it- it's them.
 Okay look- I had nothing to do with it I just worked with the guy. 
 He worked the Inner Ring- He made deliveries to some Dragon named uuuh... started with...
-C? No thats not right- A dragon with a name like that wouldn't live in the Inner Ring.
+C? No that's not right- A dragon with a name like that wouldn't live in the Inner Ring.
 Anyways, just seek them out.
 
-BEAK-MASK [LINES 157 THROUGH 180] https://www.youtube.com/watch?v=Ll82POMkb8g
-Greetings travler... Yes yes... Have you come to listen to me preach the ways of Our Lord, The King?
+BEAK-MASK [LINES 157 THROUGH 180] ------------------------------------------------ I'd link to the video this is referencing but I dont know if that'd get me in trouble.
+Greetings traveler... Yes yes... Have you come to listen to me preach the ways of Our Lord, The King?
 Or maybe... You're here to view my wares? YOU WILL BUY MY WARES yes.
 
 [Inquire first line]
@@ -170,7 +170,7 @@ He is full of wrath and wishes to mess with the order of LIFE ITSELF. Or Death i
 [Inquire last line]
 Yes yes I am selling CRAM. I am selling multiple Crams very different flavors. Yes yes.
 I have Raspberry, Berry, and VERY BERRY.
-(I reccomend the Very Berry it is like Berry Cram, but VERY).
+(I recommend the Very Berry it is like Berry Cram, but VERY).
 ONLY 20 Gold Coins for ONE... BUCKET OF CRAM I sell them by the bucket.
 You will receive Cram upon paying me 20 Gold Coins!
 PAY THE COIN you will receive the Raspberry, Berry or VERY BERRY Cram.
@@ -183,3 +183,5 @@ WHAT is Cram you ask? What is it made of?
 UNIVERSAL REACTIONS [LINES 184 THROUGH X] ------------------------------------------------------------------------------------------------------------------------------
 [Present Free Sample of Cram]
 What is that stuff? Get it out of here!
+
+If you could present NPCs to other people, upon seeing Rat, almost everyone would say "Uuuuugh. NO."

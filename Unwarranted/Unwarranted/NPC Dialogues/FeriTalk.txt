@@ -1,0 +1,35 @@
+[Opening]
+Hm? Jack was it? Listen, I don't have much time before I'm on, so make it snappy hun~
+
+[Show poster]
+Oh!! It's the sweet little Chimieric that used to come by!~ Well- they were once.
+Oh- something terrible happened to them? Almost serves them right...
+We had to- ah- change some policies around here. Chimerics are no longer allowed.
+We had some staff report being harassed and I will NOT stand for anyone harming my gals.
+Then, this cheeky little lad thinks they can just keep on entering by sneaking in? We had to. Kick. Them. Out.
+For LIFE.
+Maybe I felt a little bad... but not really.
+
+[Show lines from Sprocket (105, 108, 109)]
+Do you mean that gross little creature out there really thinks they should be let in?? GUH-ROHSS.
+In fact- I don't even want them on our street corner.
+Maybe I'll send the guards like how I sent them for that rowdy, dumb Chimeric...
+
+[Present her own line about the guard]
+Hwha?? No, I didn't mean it like that!
+Plus... you have no physical proof I'd do something like that!
++fear
+
+[Present broken bottle]
+Where did you find that?! In OUR establishment??
+Wait- you can't be trying to link me to this- you just can't do that. You got absolutely nothing on me, hun.
+You're missing a motive- or a means- or something I don't know how it works!
++anger
+
+[Opening with fear and anger {JACKPOT}]
+Alright, listen up buttercup.
+I'm getting WAY too worked up other this. The stress is gonna make me wrinkle...
+Maybe I didn't like that Chimeric's advances. MAYBE I told them to shove off. Maybe it got physical.
+But I swear I just hit them once! And they left! Well- my bodyguard went after them...
+You can't arrest me- that can't possibly be enough right? So... Don't even try!
+>Arrest choice sequence

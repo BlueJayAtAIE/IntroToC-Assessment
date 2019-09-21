@@ -1,0 +1,96 @@
+[Opening] Rutherian is the best character to write I spent way too long on this please don't be mad...
+Hello Inspector Montenegro!
+Are you surprised I recognized you? Your reputation is still fairly well known up here.
+Is there anything I can help you with today? I will do my absolute best to assist!
+
+[Show poster w/out having gotten money]
+Oh! Oh, I recognize this Chimeric...
+Inspector, are you actually going to take this case? I'd be so grateful if you do...
+I've been trying to implore that the city officials take this case but they keep shrugging me off.
+These disappearances have been happening for months and so they've just given up.
+I'll tell you what I know: This Chimeric worked with the transportation company.
+They helped transport goods all across the Citadel, all the way from the docks to up here.
+I know for a fact they delivered to Kog and Seren- if you've heard of those two people.
+Kog has a workshop down by the docks, Seren runs a lab here in the Inner Ring. They both work with Etheris based tech.
+That's all I have for now inspector. 
+Oh but first- take some pocket change- just don't spend it all at once.
+Anything for one of the few humans I've seen kind enough to want to help us...
+
+[Show poster after having gotten money]
+>repeat dialogue after “I'll tell you what I know” but before money giving.
+
+[Opening After Day 3]
+It's so unfortunate what happened to Feri... Jack... I know you can get to the bottom of this.
+This is so much better than just a handful of Chimerics now. 
+I'll tell you anything more I know- about the Beak-Masks, about the Spectre, just ask.
+
+[Inquire on the last line]
+The Beak-Masks... They work for the Spectre- you could have guessed that.
+The Spectre themselves- they've been haunting the Inner Ring for some time now. Raiding citizens and stealing money.
+They're preparing for something.
+The outfit they wear seems to be eluding to an incarnation of Fuoro'For. Maybe it's a religious gathering? But why would they be stealing...
+
+[Show vial]
+Where did you find this? It's liquid Etheris yes? Hand it to me for a second...
+Hm... it smells Chimeric in origin. They're one of the two races that bleed Etheris like this.
+Does the fact I can deduce this surprise you? Because of the amount of Etheris in my own body, all my senses are heightened.
+Wherever you found this... this may be the key to finding the missing Chimerics.
+
+[Show dagger]
+This is troubling... deeply unsettling.
+Only two races in Orrim bleed Etheris like this- and one of them being Chimerics.
+So surely... it wouldn't be? Why would a Chimeric be hurting their own kind?
+Our sense of kin runs deep inspector- please don't go and accuse my kind of such an act...
+
+[Any lines from the Beak-Mask about Rutherian (163, 164, 165, 166)]
+Hm? You met a Beak-Mask where? I suppose that doesn't matter WHY you were there...
+It sounds like the ramblings of a crazed lunatic. I wouldn't trust a word of it.
+
+[Line from the Beak-Mask about X-Class Chimerics (167)]
+Ah, so you've heard about X-Classes before? That's dangerous magic there Inspector.
+X-Class Chimerics have a dangerously high amount of Etheris in their bodies.
+It warps their minds and souls and physically transforms them into monsters.
+There was once an X-Class Chimeric who found out how to stop the negative impacts while retaining the inherent power though.
+They say all his research was stolen... You may know his son- he works at a run-down bar in the Outer Ring.
+
+
+
+inspector GET HIS ASS
+
+[Dialogue outside of interrogations- ie in the Hideout] ======================================================================================-
+Jack... Please... I come to you not as a sponsor but as a friend...
+They took Rubi... They took her and I don't know what to do...
+I know where they went- I can show you- just please hurry.
+
+I had no idea... All of this- under the citadel the whole time?
+This just can't be right...
+
+Oh... Oh! Rubi! I'm SO glad we finally found you! And unscathed...
+Hm- it's not as fun to keep the act up now that we've gone this far. Let's start over maybe? I was having so much fun...
+Don't look at me like that Inspector- we had SO many good times didn't we? Weren't you having fun thinking you were about to solve this case?
+The case of all the missing Chimerics? Of the messiah who was capturing them to make them perfect?
+I sure was- in fact it's the reason I decided to bring you here and out myself- because, and let's be real:
+Who would listen to you anyway?
+Poor little Jackllyn- a man who just crumbled and fell apart after losing his wife; doing his job.
+No... Unlike the cases you could have had with the others, you have no physical proof on me.
+So who's more trustworthy... a nobleman who's been supporting this city for years?
+...Or a lazy drunk who fled when the city needed him most?
+
+Auck, why don't you JUST GIVE UP? GIVE UP INSPECTOR.
+SURROUND HIM. I THOUGHT I'D END THIS MYSELF BUT I SEE NOW WHY THAT'S DIFFICULT.
+SQUIRM OUT OF THIS ONE YOU INSOLENT WORM.
+
+Oh? You're back.
+Inspector, I'm so sorry... last time I just exploded at you- that was very... unwarranted.
+You have to understand though- I'm doing this not for personal gain, but the goodness of my heart.
+You know Chimerics used to be the dominant race of Orrim? Before the humans hunted us like animals?
+I'm just making a way for us to fight back against them... X-Class Chimerics- they're our perfect and most pure form.
+Thanks to machines from Kog, and samples from Seren, our own labs were able to figure out a way to transform normal chimerics...
+Into their more beautiful and pure counterparts.
+And finding test subjects was so much easier after we bribed Feri to kick Chimerics out of her establishment!
+So many of my poor kin on the streets... during the night... so dangerous! So profitable~
+And now I think it's about time I ascend myself- I'll allow myself to be one of the first few to taste perfection...
+AND I WILL LEAD ALL OTHERS TO IT.
+
+[The Rutherian Is Evil Ending can only be obtained after the other 3 endings have been seen.]
+[But Ruth is evil still no matter what route you take- thats an important note.]

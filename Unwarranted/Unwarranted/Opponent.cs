@@ -80,7 +80,7 @@ namespace UnwarrantedTools
             primaryAttack = (BattleItem)battleRunes[0]; //Nothing
         }
 
-        void SpectreBattleRoundTwo()
+        void SpectreBattleRoundTwo() //Unused
         {
             opponentName = "The Spectre";
             opponentHP = 16;

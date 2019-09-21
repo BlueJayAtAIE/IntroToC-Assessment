@@ -887,8 +887,494 @@ namespace UnwarrantedTools
         }
 
         // Methods for Prime Suspect interrogation --------------------------------------------------------------------------------------
-        //TODO: all conversations with Prime Suspects.
 
+        public static void FeriInterrogation()
+        {
+            Console.Clear();
+            textColor = ConsoleColor.DarkCyan;
+            okToGo = false;
+            firstLoop = true;
+            while (!okToGo)
+            {
+                Console.WriteLine("-------------------------------------------------------------------------------------------------------------");
+                if (angry && fear)
+                {
+                    angry = false;
+                    fear = false;
+                    Interrogation(FeriPath, 29, 5, 3, "Feri", textColor);
+                    Console.WriteLine("\nYou have a choice to make now... Arrest and Report Feri?");
+                    Console.WriteLine("[Y]es || [Any Key] No");
+                    userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
+                    if (userInputChar == 'y')
+                    {
+                        endingsObtained[1] = true;
+                        Console.ForegroundColor = textColor;
+                        Console.WriteLine("\nOh hun this is SO far from over... you'll be hearing from ALL my lawyers!");
+                        Console.ResetColor();
+                        Console.WriteLine("\nBut you never did hear from those lawyers. After presenting the evidence to the police they started to look into Feri.");
+                        Console.WriteLine("The police found little ties to the missing Chimeric- but they did find the casino was a money laundering front.");
+                        Console.WriteLine("Feri went to jail for a very different reason. But you still can't help but wonder...");
+                        Console.WriteLine("\nWhatever did happen to those Chimerics?\n");
+                        Save();
+                        GameEnd();
+                        break;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = textColor;
+                        Console.WriteLine("You're doing the right thing hun... I like to know the killer isn't me~");
+                        Console.ResetColor();
+                        Console.WriteLine("[Any Key] Continue...");
+                        Console.ReadKey();
+                        break;
+                    }
+                }
+
+                Interrogation(FeriPath, 1, 1, 1, "Feri", textColor);
+
+                ReplyCheck();
+
+                void ReplyCheck()
+                {
+                    bool silent = false;
+                    Console.WriteLine("-------------------------------------------------------------------------------------------------------------");
+
+                    if (interrogationPresent.Equals(File.ReadLines(MinorNPCTalkPath).ElementAt(105)) || interrogationPresent.Equals(File.ReadLines(MinorNPCTalkPath).ElementAt(108)) || interrogationPresent.Equals(File.ReadLines(MinorNPCTalkPath).ElementAt(109)))
+                    {
+                        Interrogation(FeriPath, 13, 3, 2, "Feri", textColor);
+                        ReplyCheck();
+                    }
+                    else if (interrogationPresent.Equals(File.ReadLines(FeriPath).ElementAt(15)))
+                    {
+                        Interrogation(FeriPath, 18, 2, 2, "Feri", textColor);
+                        fear = true;
+                    }
+                    else if (interrogationPresent.Equals(keyItems[0].name))
+                    {
+                        Interrogation(FeriPath, 4, 7, 2, "Feri", textColor);
+                        Console.ReadKey();
+                    }
+                    else if (interrogationPresent.Equals(keyItems[5].name))
+                    {
+                        Interrogation(FeriPath, 23, 3, 2, "Feri", textColor);
+                        angry = true;
+                        Console.ReadKey();
+                    }
+                    else if (interrogationPresent.Equals(keyItems[4].name))
+                    {
+                        Interrogation(MinorNPCTalkPath, 184, 1, 2, "Feri", textColor);
+                        Console.ReadKey();
+                    }
+                    else if (interrogationPresent.Equals(","))
+                    {
+                        silent = true;
+                    }
+                    else if (interrogationPresent.Equals("."))
+                    {
+
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = textColor;
+                        Console.WriteLine("Hun you're making no sense right about now.");
+                        Console.ResetColor();
+                    }
+
+                    if (!silent && !okToGo)
+                    {
+                        switch (interrogationLine)
+                        {
+                            case 998:
+                                Console.ForegroundColor = textColor;
+                                Console.WriteLine("\nBye-bye inspector~.");
+                                Console.ResetColor();
+                                Console.WriteLine("[Any Key] Continue...");
+                                Console.ReadKey();
+                                okToGo = true;
+                                break;
+                            case 999:
+                                break;
+                            default:
+                                Console.ForegroundColor = textColor;
+                                Console.WriteLine("Not sure how to spin it more clear for ya buttercup.");
+                                Console.ResetColor();
+                                break;
+                        }
+                    }
+                    Console.WriteLine();
+                }
+            }
+            Console.Clear();
+        }
+
+        public static void SerenInterrogation()
+        {
+            Console.Clear();
+            textColor = ConsoleColor.DarkGreen;
+            okToGo = false;
+            firstLoop = true;
+            while (!okToGo)
+            {
+                Console.WriteLine("-------------------------------------------------------------------------------------------------------------");
+                if (angry && fear)
+                {
+                    angry = false;
+                    fear = false;
+                    Interrogation(SerenPath, 33, 7, 3, "Seren", textColor);
+
+                    Battle("Seren");
+                    if (HP <= 0)
+                    {
+                        HP = 25;
+                        break;
+                    }
+
+                    Console.WriteLine("\nYou have a choice to make now... Arrest and Report Seren?");
+                    Console.WriteLine("[Y]es || [Any Key] No");
+                    userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
+                    if (userInputChar == 'y')
+                    {
+                        endingsObtained[2] = true;
+                        Console.ForegroundColor = textColor;
+                        Console.WriteLine("\nYou're making a mistake Jack... It's him... it's.....");
+                        Console.ResetColor();
+                        Console.WriteLine("\nBut you never did hear who Seren was blaming it on.\nAfter presenting the evidence to the police they started to look into Seren.");
+                        Console.WriteLine("The police found little ties to the missing Chimeric-\nbut they did find Seren was hiding under a fake identity. A few actually.");
+                        Console.WriteLine("Seren went to jail for a very different reason. But you still can't help but wonder...");
+                        Console.WriteLine("\nWhatever did happen to those Chimerics?\n");
+                        Save();
+                        GameEnd();
+                        break;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = textColor;
+                        Console.WriteLine("Th... thank... you... please find the Spectre... it'll all make sense...");
+                        Console.ResetColor();
+                        Console.WriteLine("[Any Key] Continue...");
+                        Console.ReadKey();
+                        break;
+                    }
+                }
+
+                Interrogation(SerenPath, 1, 1, 1, "Seren", textColor);
+
+                ReplyCheck();
+
+                void ReplyCheck()
+                {
+                    bool silent = false;
+                    Console.WriteLine("-------------------------------------------------------------------------------------------------------------");
+
+                    if (interrogationPresent.Equals(File.ReadLines(MinorNPCTalkPath).ElementAt(152)) || interrogationPresent.Equals(File.ReadLines(MinorNPCTalkPath).ElementAt(153)))
+                    {
+                        Interrogation(SerenPath, 7, 2, 2, "Seren", textColor);
+                        ReplyCheck();
+                    }
+                    else if (interrogationPresent.Equals(File.ReadLines(RutherianPath).ElementAt(34)))
+                    {
+                        Interrogation(SerenPath, 16, 3, 2, "Seren", textColor);
+                    }
+                    else if (interrogationPresent.Equals(File.ReadLines(SerenPath).ElementAt(12)) && fear)
+                    {
+                        Interrogation(SerenPath, 27, 3, 2, "Seren", textColor);
+                        angry = true;
+                    }
+                    else if (interrogationPresent.Equals(keyItems[0].name))
+                    {
+                        Interrogation(SerenPath, 4, 1, 2, "Seren", textColor);
+                        Console.ReadKey();
+                    }
+                    else if (interrogationPresent.Equals(keyItems[1].name))
+                    {
+                        Interrogation(SerenPath, 21, 2, 2, "Seren", textColor);
+                        fear = true;
+                        Console.ReadKey();
+                    }
+                    else if (interrogationPresent.Equals(keyItems[3].name))
+                    {
+                        Interrogation(SerenPath, 11, 3, 2, "Seren", textColor);
+                        Console.ReadKey();
+                    }
+                    else if (interrogationPresent.Equals(keyItems[4].name))
+                    {
+                        Interrogation(MinorNPCTalkPath, 184, 1, 2, "Seren", textColor);
+                        Console.ReadKey();
+                    }
+                    else if (interrogationPresent.Equals(","))
+                    {
+                        Console.ForegroundColor = textColor;
+                        Console.WriteLine("\nP-please don't get quiet like that- it's freaking me out.");
+                        Console.ResetColor();
+                        silent = true;
+                    }
+                    else if (interrogationPresent.Equals("."))
+                    {
+
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = textColor;
+                        Console.WriteLine("I-I-I don't understand what this is supposed to mean.");
+                        Console.ResetColor();
+                    }
+
+                    if (!silent && !okToGo)
+                    {
+                        switch (interrogationLine)
+                        {
+                            case 998:
+                                Console.ForegroundColor = textColor;
+                                Console.WriteLine("\nFarewell inspector!");
+                                Console.ResetColor();
+                                Console.WriteLine("[Any Key] Continue...");
+                                Console.ReadKey();
+                                okToGo = true;
+                                break;
+                            case 999:
+                                break;
+                            default:
+                                Console.ForegroundColor = textColor;
+                                Console.WriteLine("Um... I'll do my best to help- we're reaaally busy though...");
+                                Console.ResetColor();
+                                break;
+                        }
+                    }
+                    Console.WriteLine();
+                }
+            }
+            Console.Clear();
+        }
+
+        public static void KogInterrogation()
+        {
+            Console.Clear();
+            textColor = ConsoleColor.Magenta;
+            okToGo = false;
+            firstLoop = true;
+            while (!okToGo)
+            {
+                Console.WriteLine("-------------------------------------------------------------------------------------------------------------");
+                if (angry)
+                {
+                    angry = false;
+                    fear = false;
+                    Interrogation(KogPath, 15, 4, 3, "Kog", textColor);
+
+                    Battle("Kog");
+                    if (HP <= 0)
+                    {
+                        HP = 25;
+                        break;
+                    }
+
+                    Console.WriteLine("\nYou have a choice to make now... Arrest and Report Kog?");
+                    Console.WriteLine("Hell [Y]es || [Any Key] No");
+                    userInputChar = Char.ToLower(Console.ReadKey(true).KeyChar);
+                    if (userInputChar == 'y')
+                    {
+                        endingsObtained[0] = true;
+                        Console.ForegroundColor = textColor;
+                        Console.WriteLine("\nEh it was a good run.");
+                        Console.ResetColor();
+                        Console.WriteLine("\nBut you never did think Kog was a redeemable person.\nAfter presenting the evidence to the police they started to look into Kog.");
+                        Console.WriteLine("The police found little ties to the missing Chimeric- but they did find literally everything else.");
+                        Console.WriteLine("Kog went to jail for a very different reason. A few. But you still can't help but wonder...");
+                        Console.WriteLine("\nWhatever did happen to those Chimerics?\n");
+                        Save();
+                        GameEnd();
+                        break;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = textColor;
+                        Console.WriteLine("Ha. Thats what I thought. Just keep your mouth shut Monte.");
+                        Console.ResetColor();
+                        Console.WriteLine("[Any Key] Continue...");
+                        Console.ReadKey();
+                        break;
+                    }
+                }
+
+                Interrogation(KogPath, 1, 2, 1, "Kog", textColor);
+
+                ReplyCheck();
+
+                void ReplyCheck()
+                {
+                    bool silent = false;
+                    Console.WriteLine("-------------------------------------------------------------------------------------------------------------");
+
+                    if (interrogationPresent.Equals(File.ReadLines(MinorNPCTalkPath).ElementAt(125)) || interrogationPresent.Equals(File.ReadLines(MinorNPCTalkPath).ElementAt(126)) || interrogationPresent.Equals(File.ReadLines(MinorNPCTalkPath).ElementAt(127)) || interrogationPresent.Equals(File.ReadLines(MinorNPCTalkPath).ElementAt(128)) || interrogationPresent.Equals(File.ReadLines(MinorNPCTalkPath).ElementAt(129)))
+                    {
+                        Interrogation(KogPath, 8, 5, 3, "Kog", textColor);
+
+                        if (!keyItems[1].playerObtained)
+                        {
+                            ItemInspect(1);
+                        }
+
+                        okToGo = true;
+                    }
+                    else if (interrogationPresent.Equals(File.ReadLines(SerenPath).ElementAt(21)) || interrogationPresent.Equals(File.ReadLines(SerenPath).ElementAt(22)))
+                    {
+                        angry = true;
+                    }
+                    else if (interrogationPresent.Equals(keyItems[0].name))
+                    {
+                        Interrogation(KogPath, 5, 1, 2, "Seren", textColor);
+                        Console.ReadKey();
+                    }
+                    else if (interrogationPresent.Equals(keyItems[4].name))
+                    {
+                        Interrogation(MinorNPCTalkPath, 184, 1, 2, "Seren", textColor);
+                        Console.ReadKey();
+                    }
+                    else if (interrogationPresent.Equals(","))
+                    {
+                        silent = true;
+                    }
+                    else if (interrogationPresent.Equals("."))
+                    {
+
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = textColor;
+                        Console.WriteLine("The hell is this?");
+                        Console.ResetColor();
+                    }
+
+                    if (!silent && !okToGo)
+                    {
+                        switch (interrogationLine)
+                        {
+                            case 998:
+                                Console.ForegroundColor = textColor;
+                                Console.WriteLine("\nGet outta my sight Monte.");
+                                Console.ResetColor();
+                                Console.WriteLine("[Any Key] Continue...");
+                                Console.ReadKey();
+                                okToGo = true;
+                                break;
+                            case 999:
+                                break;
+                            default:
+                                Console.ForegroundColor = textColor;
+                                Console.WriteLine("Eh? Are you deaf?");
+                                Console.ResetColor();
+                                break;
+                        }
+                    }
+                    Console.WriteLine();
+                }
+            }
+            Console.Clear();
+        }
+
+        public static void RutherianInterrogation()
+        {
+            Console.Clear();
+            textColor = ConsoleColor.DarkYellow;
+            okToGo = false;
+            firstLoop = true;
+            while (!okToGo)
+            {
+                Console.WriteLine("-------------------------------------------------------------------------------------------------------------");
+                if (timeDays <= 3) Interrogation(RutherianPath, 1, 3, 1, "Rutherian", textColor);
+                if (timeDays > 3) Interrogation(RutherianPath, 22, 3, 1, "Rutherian", textColor);
+                
+                ReplyCheck();
+
+                void ReplyCheck()
+                {
+                    bool silent = false;
+                    Console.WriteLine("-------------------------------------------------------------------------------------------------------------");
+
+                    if (interrogationPresent.Equals(File.ReadLines(MinorNPCTalkPath).ElementAt(163)) || interrogationPresent.Equals(File.ReadLines(MinorNPCTalkPath).ElementAt(164)) || interrogationPresent.Equals(File.ReadLines(MinorNPCTalkPath).ElementAt(165)) || interrogationPresent.Equals(File.ReadLines(MinorNPCTalkPath).ElementAt(166)))
+                    {
+                        Interrogation(RutherianPath, 45, 2, 2, "Rutherian", textColor);
+                        ReplyCheck();
+                    }
+                    else if (interrogationPresent.Equals(File.ReadLines(MinorNPCTalkPath).ElementAt(167)))
+                    {
+                        Interrogation(RutherianPath, 49, 5, 2, "Rutherian", textColor);
+                    }
+                    else if (interrogationPresent.Equals(keyItems[0].name))
+                    {
+                        if (!givenFreeMoney)
+                        {
+                            Interrogation(RutherianPath, 6, 11, 2, "Rutherian", textColor);
+                            givenFreeMoney = true;
+                            money += 150;
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            Interrogation(RutherianPath, 10, 5, 2, "Rutherian", textColor);
+                            Console.ReadKey();
+                        }
+                    }
+                    else if (interrogationPresent.Equals(keyItems[2].name))
+                    {
+                        Interrogation(RutherianPath, 39, 4, 2, "Rutherian", textColor);
+                        Console.ReadKey();
+                    }
+                    else if (interrogationPresent.Equals(keyItems[3].name))
+                    {
+                        Interrogation(RutherianPath, 33, 4, 2, "Rutherian", textColor);
+                        Console.ReadKey();
+                    }
+                    else if (interrogationPresent.Equals(keyItems[4].name))
+                    {
+                        Interrogation(MinorNPCTalkPath, 184, 1, 2, "Rutherian", textColor);
+                        Console.ReadKey();
+                    }
+                    else if (interrogationPresent.Equals(","))
+                    {
+                        silent = true;
+                    }
+                    else if (interrogationPresent.Equals("."))
+                    {
+
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = textColor;
+                        Console.WriteLine("I'm not sure what to say given this information.");
+                        Console.ResetColor();
+                    }
+
+                    if (!silent && !okToGo)
+                    {
+                        switch (interrogationLine)
+                        {
+                            case 24:
+                                Interrogation(RutherianPath, 27, 4, 2, "Rutherian", textColor);
+                                Console.ReadKey();
+                                break;
+                            case 998:
+                                Console.ForegroundColor = textColor;
+                                Console.WriteLine("\nPlease be safe inspector!");
+                                Console.ResetColor();
+                                Console.WriteLine("[Any Key] Continue...");
+                                Console.ReadKey();
+                                okToGo = true;
+                                break;
+                            case 999:
+                                break;
+                            default:
+                                Console.ForegroundColor = textColor;
+                                Console.WriteLine("I'm not certain how much more I can elaborate?");
+                                Console.ResetColor();
+                                break;
+                        }
+                    }
+                    Console.WriteLine();
+                }
+            }
+            Console.Clear();
+        }
 
         // Methods for Object interrogation ---------------------------------------------------------------------------------------------
         public static void ItemInspect(int itemID)
@@ -911,6 +1397,9 @@ namespace UnwarrantedTools
                 case 4:
                     Console.WriteLine("\"Wait WAIT Friend before you go... take this and advertize my wares...\"");
                     Console.WriteLine("The Beak-Mask attempts to hand you a can. The lid is hanging off so you can see whats inside.");
+                    break;
+                case 5:
+                    Console.WriteLine("You notice something tucked under the bar. You quickly grab it before any notices.");
                     break;
                 default:
                     Console.WriteLine("Error. The game is about to crash. You may not even see this text before it does.");

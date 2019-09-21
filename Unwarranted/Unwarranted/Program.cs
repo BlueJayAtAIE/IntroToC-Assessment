@@ -16,6 +16,7 @@ namespace Unwarranted
         {
             // Game is preloaded to allow for checking for achievements
             Load();
+
             Console.WriteLine("                -= UNWARRANTED =-");
             Console.WriteLine("\n[N]ew game                            [L]oad game");
 
@@ -56,7 +57,7 @@ namespace Unwarranted
 
 
             // This is the main game loop.
-            while (true)
+            while (!timeUp)
             {
                 // Checks the time to see if the final day has hit. If it has, the game over state will start.
                 if (timeDays >= 8 && !inBattle)
@@ -71,6 +72,12 @@ namespace Unwarranted
 
                 Console.Clear();
                 TimeDisplay();
+
+                // True ending time boys.
+                if (timeDays >= 6 && endingsObtained[0] && endingsObtained[1] && endingsObtained[2])
+                {
+                    SetLocation(MapLocations.Hideout);
+                }
 
                 // Big scary switch for navigation.
                 switch (GetLocation())
@@ -154,10 +161,10 @@ namespace Unwarranted
 
 // Hello, these are some notes to myself to help understand where to go next.
 //
-//Console.WriteLine("THIS IS A UNICODE CHARACTER TEST. DELETE THIS LATER FUTURE SELF.");
 //Console.WriteLine("\nPIPES: ═ ║ ╒ ╓ ╔ ╕ ╖ ╗ ╘ ╙ ╚ ╛ ╜ ╝ ╞ ╟ ╠ ╡ ╢ ╣ ╤ ╥ ╦ ╧ ╨ ╩ ╪ ╫ ╬ \n\nBOXES: ▀ ▄ █ ▌ ▐ ░ ▒ ▓ ■");
+//Console.WriteLine("THIS IS A UNICODE CHARACTER TEST. Should these ever be used in-game, note these are the only ones that work:.");
 //
-// TODO: find Seren a better name. I thought of one forever ago but forgot to write it down... It's too similar to Selene
+//
 //
 //
 //
